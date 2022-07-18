@@ -1,0 +1,54 @@
+.bx-secundary{
+    max-height: 450px;
+    max-width: 1000px;
+}
+
+.box1{
+    height: 200px;
+    width: 200px;
+    background-color: red;
+    align-self: center;
+}
+
+.box2{
+    height: 200px;
+    width: 100%;
+    background-color: blue;
+}
+
+.box3{
+    height: 100%;
+    width: 70%;
+    background-color: green;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.box-3a{
+    height: 70%;
+    width: 50%;
+    background-color: violet;
+    flex-grow: 1;
+}
+
+.box-3b{
+    height: 50%;
+    width: 50%;
+    background-color: yellow;
+    margin-top: 50px;
+    flex-grow: 1;
+}
+
+.box-3c{
+    height: 30%;
+    width: 100%;
+    background-color: white;
+    flex-grow: 2;
+}
+
+.bx-foto-descrp{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30%;
+}

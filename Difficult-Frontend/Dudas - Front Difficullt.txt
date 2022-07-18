@@ -1,0 +1,3 @@
+#Cosas para averiguar:
+
+1)Que es react router dom y como se agregan las rutas en el archivo de rutas (routes.js)

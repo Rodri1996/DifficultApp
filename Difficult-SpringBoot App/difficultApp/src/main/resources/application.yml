@@ -1,0 +1,16 @@
+spring:
+  #   base de datos posta
+  datasource:
+    url: jdbc:mysql://localhost/politics?createDatabaseIfNotExist=true
+    username: root
+    password: River015.
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        format_sql: true

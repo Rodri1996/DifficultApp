@@ -1,0 +1,29 @@
+.datos-usuario{
+    background-color: red;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+}
+
+.bx-secundary{
+    flex-direction: column;
+}
+
+.form{
+    width: 80%;
+}
+
+.img-perfil{
+    left: 0px;
+}
+
+.compras-realizadas{
+    background-color: rgb(161, 161, 207);
+    width: 100%;
+    max-width: 650px;
+    align-self: center;
+    padding: 15px 10px;
+    overflow-x: hidden;
+}
