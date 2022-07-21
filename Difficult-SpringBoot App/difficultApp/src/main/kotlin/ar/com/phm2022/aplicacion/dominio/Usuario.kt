@@ -36,12 +36,12 @@ class Usuario:Credencial() {
         return compraRealizada
     }
 
-    private fun calcularImporteTotal(): Double {
+    fun calcularImporteTotal(): Double {
         return carritoDeCompras.fold(0.00, { acum, item -> acum + precioTotalArticulo(item)})
     }
 
     private fun precioTotalArticulo(item: Item): Double {
-        return item.cantidad * item.articulo.precio()
+        return item.cantidad * item.precioArticulo()
     }
 
     private fun calcularCantidadArticulos(): Int {

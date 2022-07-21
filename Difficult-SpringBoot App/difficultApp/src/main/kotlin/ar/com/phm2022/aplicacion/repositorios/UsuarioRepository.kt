@@ -87,4 +87,9 @@ class UsuarioRepository {
     fun findUser(credenciales: Credencial): Usuario {
         return usuariosRegistrados.first { it.usuario == credenciales.usuario && it.contraseña==credenciales.contraseña}
     }
+
+    fun calcularTotalCarrito(idUsuario: Long): Double {
+        var usuario=getUsuario(idUsuario)
+        return usuario.calcularImporteTotal()
+    }
 }

@@ -60,5 +60,11 @@ class UsuarioController {
     fun getUsuarioRegistrado(@RequestBody credenciales: Credencial):UsuarioLogueadoDTO{
         return usuarioService.getUsuarioRegistrado(credenciales)
     }
+
+    @GetMapping("/totalCarrito/{idUsuario}")
+    @Operation(summary ="Se trae el precio total de la posible compra del carrito")
+    fun getTotalCarrito(@PathVariable idUsuario: Long):Double{
+        return usuarioService.getTotalCarrito(idUsuario)
+    }
 }
 

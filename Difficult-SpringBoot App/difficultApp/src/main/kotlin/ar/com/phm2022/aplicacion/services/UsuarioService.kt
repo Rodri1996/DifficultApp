@@ -2,6 +2,7 @@ package ar.com.phm2022.aplicacion.services
 
 import ar.com.phm2022.aplicacion.dominio.Compra
 import ar.com.phm2022.aplicacion.dominio.Item
+import ar.com.phm2022.aplicacion.repositorios.ArticuloRepository
 import ar.com.phm2022.aplicacion.repositorios.UsuarioRepository
 import ar.com.phm2022.aplicacion.serializadores.UsuarioLogueadoDTO
 import dominio.Credencial
@@ -41,6 +42,10 @@ class UsuarioService {
             usuarioEncontrado.carritoDeCompras.size,
             usuarioEncontrado.foto
         )
+    }
+
+    fun getTotalCarrito(idUsuario: Long): Double {
+        return usuarioRepository.calcularTotalCarrito(idUsuario)
     }
 
 }
