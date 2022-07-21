@@ -8,8 +8,8 @@ export function CompraRow(props){
         <tbody>
             <tr className="table-tr">
                 <td>{compra.ordenDeCompra}</td>
-                <td>{compra.fechaDeCompra}</td>
-                <td>{compra.cantArticulosComprados}</td>
+                <td>{compra.fechaCompra}</td>
+                <td>{compra.cantArticulos}</td>
                 <td>${compra.importeTotal}</td>
             </tr>
         </tbody>

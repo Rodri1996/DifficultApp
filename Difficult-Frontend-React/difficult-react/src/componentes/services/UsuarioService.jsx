@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { Articulo } from '../../dominio/Articulo'
 import { Compra } from '../../dominio/Compra'
 import { Item } from '../../dominio/Item'
 import { Usuario } from '../../dominio/Usuario'
@@ -30,6 +31,15 @@ class UsuarioService{
         //const usuarioLogueadoJson = await axios.get(`${REST_SERVER_URL}/usuario`,Usuario.toJson(usuario,contraseña))
         const usuarioLogueadoJson = await axios.post('http://localhost:8080/usuario',Usuario.toJson(usuario,contraseña))
         return Usuario.fromJson(usuarioLogueadoJson)
+    }
+
+    async getCarritoPrecioTotal(usuarioId){
+        const carritoPrecioTotal = await axios.get(`http://localhost:8080/totalCarrito/${usuarioId}`)
+        return carritoPrecioTotal
+    }
+
+    async postItem(idUsuario,newItem){
+        await axios.post(`http://localhost:8080/item/${idUsuario}`,Articulo.toJson(newItem))
     }
 }
 

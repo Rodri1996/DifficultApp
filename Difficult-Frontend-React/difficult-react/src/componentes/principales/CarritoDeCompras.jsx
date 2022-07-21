@@ -5,14 +5,24 @@ import { usuarioService } from '../services/UsuarioService'
 export class Carrito extends Component{
 
     state={
-        items:[]
+        items:[],
+        precioTotalDelCarrito:0
     }
 
     async componentDidMount(){
         const usuario=usuarioService.findUser()
-        const items=await usuarioService.getItems(usuario.id)
+        const idUsuario=usuario.id
+        const items=await usuarioService.getItems(idUsuario)
+        const carritoPrecioTotal=await usuarioService.getCarritoPrecioTotal(idUsuario)
         this.setearItems(items)
-        console.info(this.state.items)
+        this.setearCarritoPrecioTotal(carritoPrecioTotal)
+        console.info(this.state.precioTotalDelCarrito)
+    }
+
+    setearCarritoPrecioTotal=(carritoPrecioTotal)=>{
+        this.setState({
+            precioTotalDelCarrito:carritoPrecioTotal.data
+        })
     }
 
     setearItems=(items)=>{
@@ -47,7 +57,7 @@ export class Carrito extends Component{
                         }
                     </table>
                 </section>
-                    <p><b>Total: </b>$ 11.035,00</p>
+                    <p><b>Total: </b>$ {this.state.precioTotalDelCarrito}</p>
                 <section className="bx-item center-x">
                     <button className="button pry-button">Comprar</button>
                     <button className="button snd-button">Limpiar el carrito</button>

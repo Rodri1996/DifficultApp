@@ -4,19 +4,33 @@ import { PropTypes } from 'prop-types'
 import { articuloService } from '../services/ArticuloService'
 import { Articulo } from '../../dominio/Articulo'
 import { LoteRow } from '../secundarios/LoteRow'
+import { usuarioService } from '../services/UsuarioService'
+import { Usuario } from '../../dominio/Usuario'
+import { Item } from '../../dominio/Item'
 
 export class DetalleDelProducto extends Component{
 
     state={
        articulo:new Articulo(),
+       usuario:new Usuario(),
        lotes:[],
-       loteElegido:0
+       loteElegido:0,
+       cantArticulosElegido:0
     }
 
     async componentDidMount(){
+        const usuario=usuarioService.findUser()
         const idArticulo=this.props.match.params.id
         await this.setArticulo(idArticulo)
         await this.setItems(idArticulo)
+        this.setUsuario(usuario)
+    }
+
+
+    setUsuario=(usuario)=>{
+        this.setState({
+            usuario:usuario
+        })
     }
 
     async setArticulo(idArticulo){
@@ -31,9 +45,32 @@ export class DetalleDelProducto extends Component{
         this.setState({
             lotes:lotes
         })
-        console.log(this.state.lotes)
+    }
+
+    cambiarValorInput=(event)=>{
+        const cantidad = event.target.value
+        this.setContraseñaUsuario(cantidad)
     }
    
+    setContraseñaUsuario=(cantidad)=>{
+        this.setState({
+            cantArticulosElegido:cantidad
+        })
+    }
+
+    sumarAlCarrito=async()=>{
+        const idUsuario=this.state.usuario.id
+        const newItem=this.crearNewItem()
+        await usuarioService.postItem(idUsuario,newItem)
+    }
+
+    crearNewItem(){
+        const newItem=new Item()
+        newItem.articulo=this.state.articulo.id
+        newItem.cantidad=this.state.cantArticulosElegido
+        return newItem
+    }
+
     render(){     
         const articulo=this.state.articulo
         return(
@@ -84,9 +121,9 @@ export class DetalleDelProducto extends Component{
                         <section className="bx-item column detalle-cantidad">
                         <div className="label-input detalle-input">
                             <label>Cantidad</label>
-                            <input className="input"></input>
+                            <input className="input" onChange={this.cambiarValorInput}></input>
                         </div>
-                            <button className="button pry-button">Agregar al carrito</button>
+                            <button className="button pry-button" onClick={this.sumarAlCarrito}>Agregar al carrito</button>
                         </section>
                     </section>
                 </section>

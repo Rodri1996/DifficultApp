@@ -16,6 +16,7 @@ export class PerfilDeUsuario extends Component{
         const compras= await usuarioService.getComprasHechas(usuario.id)
         this.setUsuario(usuario)
         this.setItems(compras)
+        console.info(this.state.compras)
     }
 
     setUsuario=(usuario)=>{
@@ -66,8 +67,8 @@ export class PerfilDeUsuario extends Component{
                             this.state.compras.map(
                                 (compra)=>
                                     <CompraRow
-                                        key={compra.id}
-                                        item={compra}
+                                        key={compra.ordenDeCompra}
+                                        compra={compra}
                                     />
                             )
                         }    
