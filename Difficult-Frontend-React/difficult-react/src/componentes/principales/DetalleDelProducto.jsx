@@ -15,17 +15,25 @@ export class DetalleDelProducto extends Component{
        usuario:new Usuario(),
        lotes:[],
        loteElegido:0,
-       cantArticulosElegido:0
+       cantArticulosElegido:0,
+       idArticulo:0
     }
 
     async componentDidMount(){
         const usuario=usuarioService.findUser()
-        const idArticulo=this.props.match.params.id
-        await this.setArticulo(idArticulo)
-        await this.setItems(idArticulo)
+        this.setIdArticulo()
+        await this.setArticulo(this.state.idArticulo)
+        await this.setLotes(this.state.idArticulo)
         this.setUsuario(usuario)
     }
 
+
+    setIdArticulo=()=>{
+        const idArticulo=this.props.match.params.id
+        this.setState({
+            idArticulo:idArticulo
+        })
+    }
 
     setUsuario=(usuario)=>{
         this.setState({
@@ -33,15 +41,15 @@ export class DetalleDelProducto extends Component{
         })
     }
 
-    async setArticulo(idArticulo){
-        const articuloTraido=await articuloService.findArticulo(idArticulo)
+    async setArticulo(){
+        const articuloTraido=await articuloService.findArticulo(this.state.idArticulo)
         this.setState({
             articulo:articuloTraido.data
         })
     }
 
-    async setItems(idArticulo){
-        const lotes=await articuloService.findLotes(idArticulo)
+    async setLotes(){
+        const lotes=await articuloService.findLotes(this.state.idArticulo)
         this.setState({
             lotes:lotes
         })
@@ -62,6 +70,7 @@ export class DetalleDelProducto extends Component{
         const idUsuario=this.state.usuario.id
         const newItem=this.crearNewItem()
         await usuarioService.postItem(idUsuario,newItem)
+        this.setLotes()
     }
 
     crearNewItem(){
@@ -69,6 +78,10 @@ export class DetalleDelProducto extends Component{
         newItem.articulo=this.state.articulo.id
         newItem.cantidad=this.state.cantArticulosElegido
         return newItem
+    }
+
+    funcion=(numero)=>{
+        console.log("lote elegido: "+numero)
     }
 
     render(){     
@@ -110,7 +123,7 @@ export class DetalleDelProducto extends Component{
                                                     <LoteRow
                                                         key={lote.numero}
                                                         lote={lote}
-                                                        
+                                                        opcion={this.funcion}
                                                     />
                                             )
                                         }
