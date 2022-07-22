@@ -13,8 +13,10 @@ import org.springframework.stereotype.Service
 class UsuarioService {
 
     val usuarioRepository:UsuarioRepository=UsuarioRepository()
+    val articuloRepository:ArticuloRepository=ArticuloRepository()
 
     fun addItem(item: Item,idUsuario:Long): Usuario {
+        articuloRepository.updateLotes(item)
         return usuarioRepository.addItem(item,idUsuario)
     }
 

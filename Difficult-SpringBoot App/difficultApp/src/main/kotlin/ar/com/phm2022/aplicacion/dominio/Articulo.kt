@@ -18,8 +18,8 @@ abstract class Articulo(){
         lotes.add(lote)
     }
 
-    fun descontarUnidadesDisponibles(numeroLote: Int){
+    fun descontarUnidadesDisponibles(numeroLote: Int,cantidad:Int){
         val loteBuscado=lotes.first { it.numero == numeroLote }
-        loteBuscado.descontarUnidades()
+        loteBuscado.descontarUnidades(cantidad)
     }
 }

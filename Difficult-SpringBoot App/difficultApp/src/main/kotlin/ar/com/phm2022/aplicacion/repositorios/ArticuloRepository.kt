@@ -1,6 +1,7 @@
 package ar.com.phm2022.aplicacion.repositorios
 
 import ar.com.phm2022.aplicacion.dominio.Articulo
+import ar.com.phm2022.aplicacion.dominio.Item
 import dominio.*
 import java.time.LocalDate
 
@@ -9,7 +10,7 @@ class ArticuloRepository{
 
     val articulos:MutableList<Articulo> = mutableListOf()
     var idAsignado:Long=0
-    var lote1=Lote(LocalDate.now(),3).apply {
+    var loteAcmeBeteado1=Lote(LocalDate.now(),3).apply {
         numero=1234
     }
 
@@ -50,7 +51,7 @@ class ArticuloRepository{
             terminacion="satinado"
             imagen="https://http2.mlstatic.com/D_NQ_NP_735549-MLA47349243915_092021-O.webp"
         }
-        piso3.agregarLote(lote1)
+        piso3.agregarLote(loteAcmeBeteado1)
         guardar(piso1)
         guardar(piso2)
         guardar(piso3)
@@ -78,5 +79,11 @@ class ArticuloRepository{
     fun allLotes(idArticulo: Long): MutableList<Lote> {
         var articulo=find(idArticulo)
         return articulo.lotes
+    }
+
+    fun updateLotes(item: Item) {
+        var articulo=find(item.idArticulo)
+        println(articulo)
+        articulo.descontarUnidadesDisponibles(item.loteElegido,item.cantidad)
     }
 }
