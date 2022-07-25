@@ -3,24 +3,60 @@ import React, { Component } from 'react'
 import { PropTypes } from 'prop-types'
 import { articuloService } from '../services/ArticuloService'
 import { Articulo } from '../../dominio/Articulo'
+import { LoteRow } from '../secundarios/LoteRow'
+import { Item } from '../../dominio/Item'
 
 export class DetalleDelProducto extends Component{
     
     state={
-        articulo:new Articulo()
+        articulo:new Articulo(),
+        lotes:[],
+        cantidadElegida:0,
     }
 
     async componentDidMount(){
-        const idArticulo=this.props.match.params.id
+        const idArticulo=this.getId()
         const articuloEncontrado=await articuloService.findArticulo(idArticulo)
+        this.getLotesArticulo(idArticulo)
         this.updateArticulo(articuloEncontrado)
         // console.log(this.state.articulo.data)
     }
-
+    
+    getId(){
+        return this.props.match.params.id
+    }
+    
+    async getLotesArticulo(idArticulo){
+        const lotesDelArticulo=await articuloService.findLotes(idArticulo)
+        this.setState({
+            lotes:lotesDelArticulo
+        })
+    }
+    
     updateArticulo(articuloEncontrado){
         this.setState({
             articulo:articuloEncontrado.data
         })
+    }
+
+
+    updateCantidadElegida=(event)=>{
+        const cantidad=event.target.value
+        this.setStateCantidad(cantidad)
+    }
+    
+    setStateCantidad(cantidad){
+        this.setState({
+            cantidadElegida:cantidad
+        })
+    }
+
+    sumarAlCarrito=()=>{
+        const itemNuevo=new Item()
+        itemNuevo.articulo=this.getId()
+        itemNuevo.cantidad=this.state.cantidadElegida
+        this.setStateCantidad(0)
+        console.log(itemNuevo)
     }
 
     render(){     
@@ -55,16 +91,15 @@ export class DetalleDelProducto extends Component{
                                             <th>Seleccion</th>
                                         </tr>
                                     </thead>
-                                        {/* {
+                                        {
                                             this.state.lotes.map(
                                                 (lote)=>
                                                     <LoteRow
                                                         key={lote.numero}
                                                         lote={lote}
-                                                        opcion={this.funcion}
                                                     />
                                             )
-                                        } */}
+                                        }
                                     
                                 </table>
                             </section>
@@ -72,7 +107,7 @@ export class DetalleDelProducto extends Component{
                         <section className="bx-item column detalle-cantidad">
                         <div className="label-input detalle-input">
                             <label>Cantidad</label>
-                            <input className="input"></input>
+                            <input className="input" onChange={this.updateCantidadElegida} value={this.state.cantidadElegida}></input>
                         </div>
                             <button className="button pry-button" onClick={this.sumarAlCarrito}>Agregar al carrito</button>
                         </section>
