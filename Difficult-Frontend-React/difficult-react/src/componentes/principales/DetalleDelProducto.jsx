@@ -5,6 +5,7 @@ import { articuloService } from '../services/ArticuloService'
 import { Articulo } from '../../dominio/Articulo'
 import { LoteRow } from '../secundarios/LoteRow'
 import { Item } from '../../dominio/Item'
+import { usuarioService } from '../services/UsuarioService'
 
 export class DetalleDelProducto extends Component{
     
@@ -51,12 +52,20 @@ export class DetalleDelProducto extends Component{
         })
     }
 
-    sumarAlCarrito=()=>{
+    sumarAlCarrito=async()=>{
+        let itemNuevo=this.crearItemNuevo()
+        const usuario=usuarioService.findUser()
+        this.setStateCantidad(0)
+        console.log(itemNuevo)
+        await usuarioService.postItem(usuario.id,itemNuevo)
+    }
+    
+    crearItemNuevo(){
         const itemNuevo=new Item()
         itemNuevo.articulo=this.getId()
         itemNuevo.cantidad=this.state.cantidadElegida
-        this.setStateCantidad(0)
-        console.log(itemNuevo)
+        itemNuevo.loteElegido=localStorage.getItem("loteElegido")
+        return itemNuevo
     }
 
     render(){     

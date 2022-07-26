@@ -22,11 +22,4 @@ export class Articulo{
         )
         return articulo
     }
-
-    static toJson(newItem){
-        return {
-            cantidad:newItem.cantidad,
-            loteElegido:1111
-        }
-    }
 }

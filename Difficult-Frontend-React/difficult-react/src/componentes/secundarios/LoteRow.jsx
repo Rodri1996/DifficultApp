@@ -4,9 +4,15 @@ import { Lote } from '../../dominio/Lote'
 
 export function LoteRow(props){
     const lote = props.lote
+    let flag=false
 
     const opcionMarcada=()=>{
-        
+        flag=!flag
+        if(flag){
+            localStorage.setItem("loteElegido",JSON.stringify(lote.numero))
+        }else{
+            localStorage.setItem("loteElegido",JSON.stringify(""))
+        }
     }
 
     return(
@@ -22,5 +28,5 @@ export function LoteRow(props){
 
 LoteRow.propTypes = {
     lote:PropTypes.instanceOf(Lote),
-    opcion: PropTypes.func,
+    // getLoteElegido: PropTypes.func,
 }

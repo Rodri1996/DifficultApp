@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { Articulo } from '../../dominio/Articulo'
 import { Compra } from '../../dominio/Compra'
 import { Item } from '../../dominio/Item'
 import { Usuario } from '../../dominio/Usuario'
@@ -39,7 +38,7 @@ class UsuarioService{
     }
 
     async postItem(idUsuario,newItem){
-        await axios.post(`http://localhost:8080/item/${idUsuario}`,Articulo.toJson(newItem))
+        await axios.post("http://localhost:8080/item/"+idUsuario,Item.toJson(newItem))
     }
 }
 
