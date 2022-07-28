@@ -16,4 +16,25 @@ export class Compra{
         )
         return compra
     }
+
+    static newCompra(cantidadItems,importeTotal){
+        let compra=new Compra()
+        compra.cantArticulos=cantidadItems
+        compra.importeTotal=importeTotal
+        return compra
+    }
+
+    static carritoToJson(carrito){
+        return {
+            cantArticulos:carrito.cantItems,
+            importeTotal:carrito.precioTotal
+        }
+    }
+
+    static compraToJson(compraNueva){
+        return {
+            cantArticulos:compraNueva.cantArticulos,
+            importeTotal:compraNueva.importeTotal
+        }
+    }
 }
