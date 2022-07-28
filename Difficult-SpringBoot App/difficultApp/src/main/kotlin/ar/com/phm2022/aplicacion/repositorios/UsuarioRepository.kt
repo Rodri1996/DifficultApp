@@ -2,13 +2,17 @@ package ar.com.phm2022.aplicacion.repositorios
 
 import ar.com.phm2022.aplicacion.dominio.Compra
 import ar.com.phm2022.aplicacion.dominio.Item
+import dominio.CarritoDTO
 import dominio.Credencial
 import dominio.Usuario
+import java.time.LocalDate
 
 class UsuarioRepository {
 
     var idUsuario:Long=0
     var idItem:Long=0
+    var ordenDeCompra:Long=0
+    var idCompra:Long=0
     val usuariosRegistrados:MutableList<Usuario> = mutableListOf()
 
     constructor(){
@@ -67,9 +71,14 @@ class UsuarioRepository {
         return usuariosRegistrados.first { it.id == idUsuario }
     }
 
-    fun postCompra(idUsuario: Long): Compra {
+    fun postCompra(idUsuario: Long,compra:Compra): Compra {
         var usuario=getUsuario(idUsuario)
-        var compraRealizada=usuario.confirmarCompra()
+        compra.ordenDeCompra=this.ordenDeCompra
+        this.ordenDeCompra+=1
+        compra.fechaCompra= LocalDate.now()
+        compra.id=this.idCompra
+        this.idCompra+=1
+        var compraRealizada=usuario.confirmarCompra(compra)
         return compraRealizada
     }
 
@@ -91,5 +100,10 @@ class UsuarioRepository {
     fun calcularTotalCarrito(idUsuario: Long): Double {
         var usuario=getUsuario(idUsuario)
         return usuario.calcularImporteTotal()
+    }
+
+    fun findCarrito(idUsuario: Long):CarritoDTO{
+        var usuario=getUsuario(idUsuario)
+        return usuario.getCarrito()
     }
 }

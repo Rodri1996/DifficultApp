@@ -24,16 +24,10 @@ class Usuario:Credencial() {
         carritoDeCompras.add(item)
     }
 
-    fun confirmarCompra():Compra{
-        var compraRealizada=Compra().apply {
-            ordenDeCompra+=1
-            fechaCompra= LocalDate.now()
-            cantArticulos=calcularCantidadArticulos()
-            importeTotal=calcularImporteTotal()
-        }
-        comprasHechas.add(compraRealizada)
+    fun confirmarCompra(compra: Compra):Compra{
+        comprasHechas.add(compra)
         carritoDeCompras.clear()
-        return compraRealizada
+        return compra
     }
 
     fun calcularImporteTotal(): Double {
@@ -55,4 +49,15 @@ class Usuario:Credencial() {
         saldo=usuarioActualizado.saldo
         return this
     }
+
+    fun getCarrito(): CarritoDTO{
+        return CarritoDTO(
+                this.carritoDeCompras,
+                this.calcularImporteTotal(),
+                this.calcularCantidadArticulos()
+        )
+    }
+}
+
+class CarritoDTO(var items:Iterable<Item>,var precioTotal:Double,var cantItems:Int){
 }
