@@ -11,7 +11,6 @@ class UsuarioRepository {
 
     var idUsuario:Long=0
     var idItem:Long=0
-    var ordenDeCompra:Long=0
     var idCompra:Long=0
     val usuariosRegistrados:MutableList<Usuario> = mutableListOf()
 
@@ -73,8 +72,6 @@ class UsuarioRepository {
 
     fun postCompra(idUsuario: Long,compra:Compra): Compra {
         var usuario=getUsuario(idUsuario)
-        compra.ordenDeCompra=this.ordenDeCompra
-        this.ordenDeCompra+=1
         compra.fechaCompra= LocalDate.now()
         compra.id=this.idCompra
         this.idCompra+=1

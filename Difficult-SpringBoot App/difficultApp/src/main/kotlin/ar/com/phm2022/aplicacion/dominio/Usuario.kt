@@ -16,7 +16,7 @@ class Usuario:Credencial() {
     var edad:Int=0
     var saldo:Double=0.0
     var foto:String=""
-
+    var ordenDeCompra:Long=0
     val carritoDeCompras:MutableList<Item> = mutableListOf()
     val comprasHechas:MutableList<Compra> = mutableListOf()
 
@@ -25,6 +25,8 @@ class Usuario:Credencial() {
     }
 
     fun confirmarCompra(compra: Compra):Compra{
+        compra.ordenDeCompra=this.ordenDeCompra
+        this.ordenDeCompra+=1
         comprasHechas.add(compra)
         carritoDeCompras.clear()
         return compra
