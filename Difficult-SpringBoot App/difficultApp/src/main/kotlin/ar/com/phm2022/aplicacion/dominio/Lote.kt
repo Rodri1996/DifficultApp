@@ -9,6 +9,6 @@ class Lote (var fechaDeIngreso:LocalDate,var unidadesDisplonibles:Int) {
 
     fun descontarUnidades(cantidad:Int) {
         unidadesDisplonibles=unidadesDisplonibles-cantidad
-        println(unidadesDisplonibles)
+        println("unidades disponibles: "+unidadesDisplonibles)
     }
 }

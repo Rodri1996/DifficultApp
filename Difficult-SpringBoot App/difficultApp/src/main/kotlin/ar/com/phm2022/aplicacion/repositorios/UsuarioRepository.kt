@@ -70,13 +70,13 @@ class UsuarioRepository {
         return usuariosRegistrados.first { it.id == idUsuario }
     }
 
-    fun postCompra(idUsuario: Long,compra:Compra): Compra {
+    fun postCompra(idUsuario: Long,compra:Compra):Iterable<Compra>{
         var usuario=getUsuario(idUsuario)
         compra.fechaCompra= LocalDate.now()
         compra.id=this.idCompra
         this.idCompra+=1
         var compraRealizada=usuario.confirmarCompra(compra)
-        return compraRealizada
+        return mutableListOf()
     }
 
     fun allCompras(idUsuario:Long): Iterable<Compra> {

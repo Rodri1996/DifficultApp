@@ -36,6 +36,11 @@ class ArticulosController {
     @GetMapping("/lotes/{idArticulo}")
     @Operation( summary ="Se traen los lotes de un articulo")
     fun getLotes(@PathVariable idArticulo:Long):MutableList<Lote>{
-        return articuloService.getLotes(idArticulo)
+        var lotes= articuloService.getLotes(idArticulo)
+        var lote=lotes.find { it.numero==2222 }
+        if (lote != null) {
+            println("unidades (controller): "+ lote.unidadesDisplonibles)
+        }
+        return  lotes
     }
 }

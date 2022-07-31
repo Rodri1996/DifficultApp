@@ -10,8 +10,17 @@ class ArticuloRepository{
 
     val articulos:MutableList<Articulo> = mutableListOf()
     var idAsignado:Long=0
-    var loteAcmeBeteado1=Lote(LocalDate.now(),3).apply {
-        numero=1234
+    var loteAcmeBeteado1=Lote(LocalDate.now(),2).apply {
+        numero=2222
+    }
+    var loteAcmeBeteado2=Lote(LocalDate.now(),3).apply {
+        numero=3672
+    }
+    var loteAcmeBeteado3=Lote(LocalDate.now(),2).apply {
+        numero=6543
+    }
+    var loteAcmeBeteado4=Lote(LocalDate.now(),2).apply {
+        numero=2342
     }
 
     constructor(){
@@ -52,6 +61,9 @@ class ArticuloRepository{
             imagen="https://http2.mlstatic.com/D_NQ_NP_735549-MLA47349243915_092021-O.webp"
         }
         piso3.agregarLote(loteAcmeBeteado1)
+        piso3.agregarLote(loteAcmeBeteado2)
+        piso3.agregarLote(loteAcmeBeteado3)
+        piso3.agregarLote(loteAcmeBeteado4)
         guardar(piso1)
         guardar(piso2)
         guardar(piso3)
@@ -83,7 +95,7 @@ class ArticuloRepository{
 
     fun updateLotes(item: Item) {
         var articulo=find(item.idArticulo)
-        println(articulo)
+        println("id del articulo: "+item.idArticulo)
         articulo.descontarUnidadesDisponibles(item.loteElegido,item.cantidad)
     }
 }

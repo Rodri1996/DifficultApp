@@ -25,8 +25,9 @@ class UsuarioService {
         return usuarioRepository.allItems(idUsuario)
     }
 
-    fun postCompraHecha(idUsuario: Long,compra:Compra): Compra {
-        return usuarioRepository.postCompra(idUsuario,compra)
+    fun postCompraHecha(idUsuario: Long,compra:Compra): Iterable<Compra>{
+        usuarioRepository.postCompra(idUsuario,compra)
+        return mutableListOf()
     }
 
     fun getCompras(idUsuario:Long): Iterable<Compra> {

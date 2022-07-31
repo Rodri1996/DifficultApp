@@ -19,7 +19,17 @@ abstract class Articulo(){
     }
 
     fun descontarUnidadesDisponibles(numeroLote: Int,cantidad:Int){
-        val loteBuscado=lotes.first { it.numero == numeroLote }
-        loteBuscado.descontarUnidades(cantidad)
+        var lote = this.findLote(numeroLote)
+        lote.descontarUnidades(cantidad)
+        this.updateLote(lote)
+    }
+
+    fun findLote(numeroLote: Int):Lote{
+        return lotes.first { it.numero == numeroLote }
+    }
+    fun updateLote(loteActualizado:Lote){
+        var loteAEliminar=findLote(loteActualizado.numero)
+        this.lotes.remove(loteAEliminar)
+        this.lotes.add(loteActualizado)
     }
 }

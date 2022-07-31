@@ -45,8 +45,9 @@ class UsuarioController {
 
     @PostMapping("/compras/{idUsuario}")
     @Operation(summary ="Se agrega una compra hecha por un usuario")
-    fun postCompras(@PathVariable idUsuario:Long,@RequestBody compra: Compra):Compra{
-        return usuarioService.postCompraHecha(idUsuario,compra)
+    fun postCompras(@PathVariable idUsuario:Long,@RequestBody compra: Compra):Iterable<Compra>{
+        usuarioService.postCompraHecha(idUsuario,compra)
+        return mutableListOf()
     }
 
     @GetMapping("/compras/{idUsuario}")
