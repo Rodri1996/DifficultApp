@@ -17,21 +17,25 @@ export class DetalleDelProducto extends Component{
 
     async componentDidMount(){
         const idArticulo=this.getId()
-        const articuloEncontrado=await articuloService.findArticulo(idArticulo)
-        this.getLotesArticulo(idArticulo)
-        this.updateArticulo(articuloEncontrado)
-        // console.log(this.state.articulo.data)
+        await this.getArticulo(idArticulo)
+        await this.getLotesArticulo(idArticulo)
     }
     
     getId(){
         return this.props.match.params.id
     }
     
+    async getArticulo(idArticulo){
+        let articuloEncontrado=await articuloService.findArticulo(idArticulo)
+        this.updateArticulo(articuloEncontrado)
+    }
+
     async getLotesArticulo(idArticulo){
         const lotesDelArticulo=await articuloService.findLotes(idArticulo)
         this.setState({
             lotes:lotesDelArticulo
         })
+        console.info(this.state.lotes)
     }
     
     updateArticulo(articuloEncontrado){
@@ -56,7 +60,9 @@ export class DetalleDelProducto extends Component{
         let itemNuevo=this.crearItemNuevo()
         const usuario=usuarioService.findUser()
         this.setStateCantidad(0)
-        console.log(itemNuevo)
+        let idArticulo=this.getId()
+        console.log("id del articulo: "+idArticulo)
+        await this.getArticulo(idArticulo)
         await usuarioService.postItem(usuario.id,itemNuevo)
     }
     

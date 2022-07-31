@@ -45,8 +45,8 @@ export class Carrito extends Component{
         let carrito=this.state.carrito
         let idUsuario=this.getIdUsuarioLogueado()
         let compraNueva=Compra.carritoToJson(carrito)
-        console.info(compraNueva)
         await usuarioService.postCompraNueva(compraNueva,idUsuario)
+        await this.componentDidMount()
     }
 
     render(){

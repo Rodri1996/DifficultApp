@@ -16,6 +16,7 @@ class ArticuloService{
 
     async findLotes(idArticulo){
         const lotesJson=await axios.get(`http://localhost:8080/lotes/${idArticulo}`)
+        console.info(lotesJson)
         return lotesJson.data.map((lote)=> Lote.fromJson(lote))
     }
 }
