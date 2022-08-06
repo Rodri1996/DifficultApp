@@ -1,7 +1,7 @@
 spring:
   #   base de datos posta
   datasource:
-    url: jdbc:mysql://localhost/politics?createDatabaseIfNotExist=true
+    url: jdbc:mysql://localhost/difficultApp?createDatabaseIfNotExist=true
     username: root
     password: River015.
     driver-class-name: com.mysql.cj.jdbc.Driver
