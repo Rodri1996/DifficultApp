@@ -4,9 +4,9 @@ import ar.com.phm2022.aplicacion.dominio.Compra
 import ar.com.phm2022.aplicacion.dominio.Item
 import ar.com.phm2022.aplicacion.serializadores.UsuarioLogueadoDTO
 import ar.com.phm2022.aplicacion.services.UsuarioService
-import dominio.CarritoDTO
-import dominio.Credencial
-import dominio.Usuario
+import ar.com.phm2022.aplicacion.dominio.CarritoDTO
+import ar.com.phm2022.aplicacion.dominio.Credencial
+import ar.com.phm2022.aplicacion.dominio.Usuario
 import io.swagger.v3.oas.annotations.Operation
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
-import java.util.Objects
 
 @RestController
 @CrossOrigin
@@ -25,7 +24,7 @@ class UsuarioController {
 
     @GetMapping("/carrito/{idUsuario}")
     @Operation(summary ="Se trae el carrito de compras con los items, cant articulos y precio total")
-    fun getCarritoCompras(@PathVariable idUsuario:Long):CarritoDTO{
+    fun getCarritoCompras(@PathVariable idUsuario:Long): CarritoDTO {
         return usuarioService.getCarrito(idUsuario)
     }
 
@@ -58,7 +57,7 @@ class UsuarioController {
 
     @PutMapping("/usuario/{idUsuario}")
     @Operation(summary ="Se actualizan todos los datos de un usuario")
-    fun putUsuario(@PathVariable idUsuario:Long,@RequestBody usuarioActualizado:Usuario):Usuario{
+    fun putUsuario(@PathVariable idUsuario:Long,@RequestBody usuarioActualizado: Usuario): Usuario {
         return usuarioService.putUsuario(idUsuario,usuarioActualizado)
     }
 

@@ -5,9 +5,9 @@ import ar.com.phm2022.aplicacion.dominio.Item
 import ar.com.phm2022.aplicacion.repositorios.ArticuloRepository
 import ar.com.phm2022.aplicacion.repositorios.UsuarioRepository
 import ar.com.phm2022.aplicacion.serializadores.UsuarioLogueadoDTO
-import dominio.CarritoDTO
-import dominio.Credencial
-import dominio.Usuario
+import ar.com.phm2022.aplicacion.dominio.CarritoDTO
+import ar.com.phm2022.aplicacion.dominio.Credencial
+import ar.com.phm2022.aplicacion.dominio.Usuario
 import org.springframework.stereotype.Service
 
 @Service
@@ -34,7 +34,7 @@ class UsuarioService {
         return usuarioRepository.allCompras(idUsuario)
     }
 
-    fun putUsuario(idUsuario: Long,usuarioActualizado:Usuario): Usuario {
+    fun putUsuario(idUsuario: Long,usuarioActualizado: Usuario): Usuario {
         return usuarioRepository.updateUsuario(idUsuario,usuarioActualizado)
     }
 
@@ -52,7 +52,7 @@ class UsuarioService {
         return usuarioRepository.calcularTotalCarrito(idUsuario)
     }
 
-    fun getCarrito(idUsuario: Long):CarritoDTO{
+    fun getCarrito(idUsuario: Long): CarritoDTO {
         return usuarioRepository.findCarrito(idUsuario)
     }
 

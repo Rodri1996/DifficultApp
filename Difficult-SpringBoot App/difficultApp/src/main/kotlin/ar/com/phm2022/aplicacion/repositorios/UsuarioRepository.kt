@@ -2,9 +2,9 @@ package ar.com.phm2022.aplicacion.repositorios
 
 import ar.com.phm2022.aplicacion.dominio.Compra
 import ar.com.phm2022.aplicacion.dominio.Item
-import dominio.CarritoDTO
-import dominio.Credencial
-import dominio.Usuario
+import ar.com.phm2022.aplicacion.dominio.CarritoDTO
+import ar.com.phm2022.aplicacion.dominio.Credencial
+import ar.com.phm2022.aplicacion.dominio.Usuario
 import java.time.LocalDate
 
 class UsuarioRepository {
@@ -15,7 +15,7 @@ class UsuarioRepository {
     val usuariosRegistrados:MutableList<Usuario> = mutableListOf()
 
     constructor(){
-        val usuario1=Usuario().apply {
+        val usuario1= Usuario().apply {
             nombre="Rodrigo"
             apellido="Nieto"
             edad=25
@@ -24,7 +24,7 @@ class UsuarioRepository {
             contraseña=""
             foto="https://w7.pngwing.com/pngs/551/362/png-transparent-iron-man-graphics-logo-iron-man-cdr-superhero-logo-thumbnail.png"
         }
-        val usuario2=Usuario().apply {
+        val usuario2= Usuario().apply {
             nombre="Juan"
             apellido="Perez"
             edad=27
@@ -33,7 +33,7 @@ class UsuarioRepository {
             contraseña="1234"
             foto="https://w7.pngwing.com/pngs/946/911/png-transparent-hulk-vision-clint-barton-iron-man-captain-america-hulk-marvel-avengers-assemble-superhero-war-machine-thumbnail.png"
         }
-        val usuario3=Usuario().apply {
+        val usuario3= Usuario().apply {
             nombre="Pedro"
             apellido="Gonzales"
             edad=30
@@ -53,7 +53,7 @@ class UsuarioRepository {
         usuariosRegistrados.add(usuario)
     }
 
-    fun addItem(item: Item,idUsuario:Long):Usuario{
+    fun addItem(item: Item,idUsuario:Long): Usuario {
         var usuario=getUsuario(idUsuario)
         item.id=idItem
         idItem+=1
@@ -66,7 +66,7 @@ class UsuarioRepository {
         return usuario.carritoDeCompras
     }
 
-    private fun getUsuario(idUsuario:Long):Usuario{
+    private fun getUsuario(idUsuario:Long): Usuario {
         return usuariosRegistrados.first { it.id == idUsuario }
     }
 
@@ -84,7 +84,7 @@ class UsuarioRepository {
         return usuario.comprasHechas
     }
 
-    fun updateUsuario(idUsuario: Long,usuarioActualizado:Usuario): Usuario {
+    fun updateUsuario(idUsuario: Long,usuarioActualizado: Usuario): Usuario {
         var usuario=getUsuario(idUsuario)
         var usuarioPostActualizacion=usuario.update(usuarioActualizado)
         return usuarioPostActualizacion
@@ -99,7 +99,7 @@ class UsuarioRepository {
         return usuario.calcularImporteTotal()
     }
 
-    fun findCarrito(idUsuario: Long):CarritoDTO{
+    fun findCarrito(idUsuario: Long): CarritoDTO {
         var usuario=getUsuario(idUsuario)
         return usuario.getCarrito()
     }

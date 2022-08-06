@@ -1,9 +1,7 @@
-package dominio
+package ar.com.phm2022.aplicacion.dominio
 
-import ar.com.phm2022.aplicacion.dominio.Compra
-import ar.com.phm2022.aplicacion.dominio.Item
-import java.time.LocalDate
 import javax.persistence.*
+
 
 open class Credencial{
     var usuario:String=""
@@ -11,7 +9,7 @@ open class Credencial{
 }
 
 @Entity
-class Usuario:Credencial() {
+class Usuario: Credencial() {
     @Id
     var id:Long=0
     @Column(length = 50)
@@ -54,7 +52,7 @@ class Usuario:Credencial() {
         return carritoDeCompras.fold(0, { acum, item -> acum + item.cantidad })
     }
 
-    fun update(usuarioActualizado: Usuario):Usuario{
+    fun update(usuarioActualizado: Usuario): Usuario {
         nombre=usuarioActualizado.nombre
         apellido=usuarioActualizado.apellido
         edad=usuarioActualizado.edad
@@ -62,7 +60,7 @@ class Usuario:Credencial() {
         return this
     }
 
-    fun getCarrito(): CarritoDTO{
+    fun getCarrito(): CarritoDTO {
         return CarritoDTO(
                 this.carritoDeCompras,
                 this.calcularImporteTotal(),
