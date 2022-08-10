@@ -1,7 +1,7 @@
 package `tests de dominio`
 
 import dominio.Combo
-import dominio.Lote
+import ar.com.phm2022.aplicacion.dominio.Lote
 import dominio.Piso
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.DisplayName
@@ -23,7 +23,7 @@ class CombosTests {
     @Test
     @DisplayName("Se puede descontar unidades disponibles en uno de sus lotes")
     fun descontarUnidadesDisponiblesEnLote(){
-        val unLote=Lote(LocalDate.now(),1).apply { numero=1111 }
+        val unLote= Lote(LocalDate.now(),1).apply { numero=1111 }
         val unCombo=Combo()
         unCombo.agregarLote(unLote)
         unCombo.descontarUnidadesDisponibles(1111)

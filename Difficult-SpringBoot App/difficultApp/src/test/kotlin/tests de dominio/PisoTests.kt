@@ -1,5 +1,6 @@
 package `tests de dominio`
 
+import ar.com.phm2022.aplicacion.dominio.Lote
 import dominio.*
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.DisplayName

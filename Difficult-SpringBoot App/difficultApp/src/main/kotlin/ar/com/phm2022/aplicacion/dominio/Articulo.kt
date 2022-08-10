@@ -1,12 +1,19 @@
 package ar.com.phm2022.aplicacion.dominio
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import dominio.Lote
+import javax.persistence.Entity
+import javax.persistence.GeneratedValue
+import javax.persistence.Id
+import javax.persistence.OneToMany
 
+@Entity
 abstract class Articulo(){
+    @Id
+    @GeneratedValue
     var id:Long=0
     var paisDeOrigen:String=""
     var puntaje:Int=0
+    @OneToMany()
     var lotes:MutableList<Lote> = mutableListOf()
     var imagen=""
 
@@ -24,10 +31,10 @@ abstract class Articulo(){
         this.updateLote(lote)
     }
 
-    fun findLote(numeroLote: Int):Lote{
+    fun findLote(numeroLote: Int): Lote {
         return lotes.first { it.numero == numeroLote }
     }
-    fun updateLote(loteActualizado:Lote){
+    fun updateLote(loteActualizado: Lote){
         var loteAEliminar=findLote(loteActualizado.numero)
         this.lotes.remove(loteAEliminar)
         this.lotes.add(loteActualizado)

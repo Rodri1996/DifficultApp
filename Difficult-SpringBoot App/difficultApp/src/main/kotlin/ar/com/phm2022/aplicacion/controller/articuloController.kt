@@ -1,26 +1,26 @@
 package ar.com.phm2022.aplicacion.controller
 
 import ar.com.phm2022.aplicacion.dominio.Articulo
-import dominio.Lote
+import ar.com.phm2022.aplicacion.dominio.Lote
 import io.swagger.v3.oas.annotations.Operation
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RestController
-import services.ArticuloService
+import ar.com.phm2022.aplicacion.services.ArticuloService
 
 @RestController
 @CrossOrigin
 class ArticulosController {
 
-    val articuloService : ArticuloService=ArticuloService()
-
+    @Autowired lateinit var articuloService: ArticuloService
     @GetMapping("/articulos")
     @Operation( summary ="Traemos todos los articulos registrados")
     fun getArticulos():Iterable<Articulo>{
         return articuloService.getArticulos()
     }
-
+/*
     @GetMapping("/articulos/{puntaje}")
     @Operation( summary ="Traemos todos los articulos registrados con cierto nivel de puntuacion")
     fun getArticulosConCiertaPuntuacion(@PathVariable puntaje:Int):Iterable<Articulo>{
@@ -43,4 +43,5 @@ class ArticulosController {
         }
         return  lotes
     }
+ */
 }

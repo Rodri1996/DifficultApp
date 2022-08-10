@@ -2,6 +2,7 @@ package ar.com.phm2022.aplicacion.repositorios
 
 import ar.com.phm2022.aplicacion.dominio.Articulo
 import ar.com.phm2022.aplicacion.dominio.Item
+import ar.com.phm2022.aplicacion.dominio.Lote
 import dominio.*
 import java.time.LocalDate
 
@@ -10,16 +11,16 @@ class ArticuloRepository{
 
     val articulos:MutableList<Articulo> = mutableListOf()
     var idAsignado:Long=0
-    var loteAcmeBeteado1=Lote(LocalDate.now(),2).apply {
+    var loteAcmeBeteado1= Lote(LocalDate.now(),2).apply {
         numero=2222
     }
-    var loteAcmeBeteado2=Lote(LocalDate.now(),3).apply {
+    var loteAcmeBeteado2= Lote(LocalDate.now(),3).apply {
         numero=3672
     }
-    var loteAcmeBeteado3=Lote(LocalDate.now(),2).apply {
+    var loteAcmeBeteado3= Lote(LocalDate.now(),2).apply {
         numero=6543
     }
-    var loteAcmeBeteado4=Lote(LocalDate.now(),2).apply {
+    var loteAcmeBeteado4= Lote(LocalDate.now(),2).apply {
         numero=2342
     }
 

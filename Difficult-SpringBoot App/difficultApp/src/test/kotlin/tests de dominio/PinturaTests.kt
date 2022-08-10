@@ -1,7 +1,6 @@
 package `tests de dominio`
 
-import dominio.Combo
-import dominio.Lote
+import ar.com.phm2022.aplicacion.dominio.Lote
 import dominio.Pintura
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.DisplayName
@@ -41,7 +40,7 @@ class PinturaTests {
     @Test
     @DisplayName("Se puede descontar unidades disponibles en uno de sus lotes")
     fun descontarUnidadesDisponiblesEnLote(){
-        val unLote=Lote(LocalDate.now(),1).apply { numero=1111 }
+        val unLote= Lote(LocalDate.now(),1).apply { numero=1111 }
         val unaPintura= Pintura(100.00)
         unaPintura.agregarLote(unLote)
         unaPintura.descontarUnidadesDisponibles(1111)
