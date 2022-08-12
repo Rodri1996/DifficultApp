@@ -1,9 +1,6 @@
 package ar.com.phm2022.aplicacion.repositorios
 
-import ar.com.phm2022.aplicacion.dominio.Articulo
-import ar.com.phm2022.aplicacion.dominio.Item
-import ar.com.phm2022.aplicacion.dominio.Lote
-import dominio.*
+import ar.com.phm2022.aplicacion.dominio.*
 import java.time.LocalDate
 
 
@@ -26,7 +23,7 @@ class ArticuloRepository{
 
     constructor(){
         //Instancias
-        val piso1=Piso(2536.55).apply {
+        val piso1= Piso(2536.55).apply {
             nombre="Acme rustico"
             descripcion="Porcelanato rustico marca Acme "
             medidas = "36x36"
@@ -36,7 +33,7 @@ class ArticuloRepository{
             terminacion="semi satinado"
             imagen="https://http2.mlstatic.com/D_NQ_NP_683356-MLA40823382226_022020-O.webp"
         }
-        val piso2=Piso(1987.37).apply {
+        val piso2= Piso(1987.37).apply {
             nombre="Acme arena"
             descripcion="Porcelanato arena marca Acme "
             puntaje=3
@@ -45,14 +42,14 @@ class ArticuloRepository{
             terminacion="semi satinado"
             imagen="https://http2.mlstatic.com/D_NQ_NP_781266-MLA43542325744_092020-O.webp"
         }
-        val pintura1=Pintura(8836.77).apply {
+        val pintura1= Pintura(8836.77).apply {
             nombre="Adla blanco"
             descripcion="Pintura para interiores color rojo marla adla con volumen (lts): "
             puntaje=4
             litros=20
             imagen="https://http2.mlstatic.com/D_NQ_NP_994199-MLA32710382980_102019-O.webp"
         }
-        val piso3=Piso(2996.99).apply {
+        val piso3= Piso(2996.99).apply {
             nombre="Acme beteado"
             descripcion="Porcelanato beteado marca Acme "
             puntaje=3

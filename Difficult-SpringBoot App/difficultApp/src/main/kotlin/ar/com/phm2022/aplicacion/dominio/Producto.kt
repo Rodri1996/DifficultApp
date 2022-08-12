@@ -3,8 +3,7 @@ package ar.com.phm2022.aplicacion.dominio
 import java.time.LocalDate
 
 abstract class Producto (var precioBase: Double): Articulo() {
-    var nombre:String=""
-    var descripcion:String=""
+
 
     //Ver cómo hacer en las clases Piso y Pintura para NO usar el super.precio()
     override fun precio()=precioBase*this.aplicaDescuento()

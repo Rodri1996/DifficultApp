@@ -1,7 +1,9 @@
 package `tests de dominio`
 
+import ar.com.phm2022.aplicacion.dominio.AltoTransito
 import ar.com.phm2022.aplicacion.dominio.Lote
-import dominio.*
+import ar.com.phm2022.aplicacion.dominio.Piso
+import ar.com.phm2022.aplicacion.dominio.TransitoNormal
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test

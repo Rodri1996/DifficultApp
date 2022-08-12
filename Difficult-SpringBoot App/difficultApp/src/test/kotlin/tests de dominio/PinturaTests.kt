@@ -1,7 +1,7 @@
 package `tests de dominio`
 
 import ar.com.phm2022.aplicacion.dominio.Lote
-import dominio.Pintura
+import ar.com.phm2022.aplicacion.dominio.Pintura
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -13,7 +13,7 @@ class PinturaTests {
     @Test
     @DisplayName("Su precio final es su precio base + un incremento porque su rendimiento supera un valor esperado")
     fun precioPinturaConBuenRendimiento(){
-        val pinturaConRendimiento=Pintura(precioBase = 100.00)
+        val pinturaConRendimiento= Pintura(precioBase = 100.00)
         pinturaConRendimiento.rendimiento=9
         Assertions.assertEquals(125.00,pinturaConRendimiento.precio())
     }
@@ -21,7 +21,7 @@ class PinturaTests {
     @Test
     @DisplayName("Su precio final es su precio base porque su rendimiento no supera un valor esperado")
     fun precioPinturaSinRendimiento(){
-        val pinturaSinRendimiento=Pintura(precioBase = 100.00)
+        val pinturaSinRendimiento= Pintura(precioBase = 100.00)
         pinturaSinRendimiento.rendimiento=8
         Assertions.assertEquals(100.00,pinturaSinRendimiento.precio())
     }

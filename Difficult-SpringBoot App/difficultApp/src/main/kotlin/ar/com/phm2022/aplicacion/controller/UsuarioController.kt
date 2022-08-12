@@ -22,6 +22,7 @@ class UsuarioController {
 
     val usuarioService: UsuarioService = UsuarioService()
 
+    /*
     @GetMapping("/carrito/{idUsuario}")
     @Operation(summary ="Se trae el carrito de compras con los items, cant articulos y precio total")
     fun getCarritoCompras(@PathVariable idUsuario:Long): CarritoDTO {
@@ -60,6 +61,8 @@ class UsuarioController {
     fun putUsuario(@PathVariable idUsuario:Long,@RequestBody usuarioActualizado: Usuario): Usuario {
         return usuarioService.putUsuario(idUsuario,usuarioActualizado)
     }
+
+     */
 
     //TODO: cambiar a POST en lugar de GET. Averiguar si esto es realmente POST o GET
     @PostMapping("/usuario")

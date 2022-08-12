@@ -2,6 +2,7 @@ package ar.com.phm2022.aplicacion.controller
 
 import ar.com.phm2022.aplicacion.dominio.Articulo
 import ar.com.phm2022.aplicacion.dominio.Lote
+import ar.com.phm2022.aplicacion.serializadores.ArticuloHomeDTO
 import io.swagger.v3.oas.annotations.Operation
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.CrossOrigin
@@ -15,10 +16,21 @@ import ar.com.phm2022.aplicacion.services.ArticuloService
 class ArticulosController {
 
     @Autowired lateinit var articuloService: ArticuloService
+
     @GetMapping("/articulos")
     @Operation( summary ="Traemos todos los articulos registrados")
-    fun getArticulos():Iterable<Articulo>{
-        return articuloService.getArticulos()
+    fun getArticulos():Iterable<ArticuloHomeDTO>{
+        var articulos = articuloService.getArticulos()
+        return articulos.map {
+            articulo -> ArticuloHomeDTO().apply {
+                idArticulo=articulo.id
+                descripcion=articulo.descripcion
+                nombre=articulo.nombre
+                origen=articulo.paisDeOrigen
+                precio=articulo.precio()
+                puntaje=articulo.puntaje
+            }
+        }
     }
 /*
     @GetMapping("/articulos/{puntaje}")

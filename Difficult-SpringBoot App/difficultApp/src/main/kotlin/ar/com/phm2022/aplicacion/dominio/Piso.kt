@@ -1,9 +1,8 @@
-package dominio
-
-import ar.com.phm2022.aplicacion.dominio.Producto
+package ar.com.phm2022.aplicacion.dominio
 
 class Piso(precioBase: Double) : Producto(precioBase) {
-    var tipo:TipoPiso=TransitoNormal()
+    //TODO:Buscar como mapear la herencia
+    var tipo: TipoPiso = TransitoNormal()
     var medidas=""
     var terminacion=""
 
@@ -18,12 +17,12 @@ interface TipoPiso{
     fun incremento(precioBase: Double):Double
 }
 
-class TransitoNormal:TipoPiso{
+class TransitoNormal: TipoPiso {
 
     override fun incremento(precioBase: Double): Double = 0.00
 }
 
-class AltoTransito:TipoPiso{
+class AltoTransito: TipoPiso {
 
     override fun incremento(precioBase: Double): Double = precioBase*0.2
 

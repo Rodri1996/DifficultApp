@@ -2,7 +2,7 @@ package `tests de dominio`
 
 import dominio.Combo
 import ar.com.phm2022.aplicacion.dominio.Lote
-import dominio.Piso
+import ar.com.phm2022.aplicacion.dominio.Piso
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -15,7 +15,7 @@ class CombosTests {
     @DisplayName("Podemos calcular su precio como la sumatoria de precios de cada producto que contiene")
     fun calcularPrecioDeCombo(){
         val combo1= Combo()
-        val producto1=Piso(100.00)
+        val producto1= Piso(100.00)
         combo1.productos.add(producto1)
         Assertions.assertEquals(102.00,combo1.precio())
     }

@@ -8,6 +8,7 @@ import javax.persistence.OneToMany
 
 @Entity
 abstract class Articulo(){
+    //TODO:Usar un ArticuloDTO para solucionar el problema de la inicializacion peresoza
     @Id
     @GeneratedValue
     var id:Long=0
@@ -16,6 +17,8 @@ abstract class Articulo(){
     @OneToMany()
     var lotes:MutableList<Lote> = mutableListOf()
     var imagen=""
+    var nombre:String=""
+    var descripcion:String=""
 
     @JsonProperty
     abstract fun precio():Double
