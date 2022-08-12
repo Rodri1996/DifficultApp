@@ -8,14 +8,17 @@ import ar.com.phm2022.aplicacion.serializadores.UsuarioLogueadoDTO
 import ar.com.phm2022.aplicacion.dominio.CarritoDTO
 import ar.com.phm2022.aplicacion.dominio.Credencial
 import ar.com.phm2022.aplicacion.dominio.Usuario
+import ar.com.phm2022.aplicacion.repositorios.UsuarioRepositoryV2
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
 class UsuarioService {
 
-    val usuarioRepository:UsuarioRepository=UsuarioRepository()
-    val articuloRepository:ArticuloRepository=ArticuloRepository()
+    @Autowired lateinit var usuarioRepository:UsuarioRepositoryV2
+    //val articuloRepository:ArticuloRepository=ArticuloRepository()
 
+    /*
     fun addItem(item: Item,idUsuario:Long): Usuario {
         articuloRepository.updateLotes(item)
         return usuarioRepository.addItem(item,idUsuario)
@@ -38,16 +41,6 @@ class UsuarioService {
         return usuarioRepository.updateUsuario(idUsuario,usuarioActualizado)
     }
 
-    fun getUsuarioRegistrado(credenciales: Credencial): UsuarioLogueadoDTO {
-        var usuarioEncontrado= usuarioRepository.findUser(credenciales)
-        return UsuarioLogueadoDTO(
-            usuarioEncontrado.id,
-            usuarioEncontrado.nombre,
-            usuarioEncontrado.carritoDeCompras.size,
-            usuarioEncontrado.foto
-        )
-    }
-
     fun getTotalCarrito(idUsuario: Long): Double {
         return usuarioRepository.calcularTotalCarrito(idUsuario)
     }
@@ -56,4 +49,15 @@ class UsuarioService {
         return usuarioRepository.findCarrito(idUsuario)
     }
 
+    fun getUsuarioRegistrado(credenciales: Credencial): UsuarioLogueadoDTO {
+        var usuarioEncontrado= usuarioRepository.findUser(credenciales)
+        return UsuarioLogueadoDTO(
+                usuarioEncontrado.id,
+                usuarioEncontrado.nombre,
+                usuarioEncontrado.carritoDeCompras.size,
+                usuarioEncontrado.foto
+        )
+    }
+
+     */
 }

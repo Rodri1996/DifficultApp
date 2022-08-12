@@ -8,6 +8,7 @@ import ar.com.phm2022.aplicacion.dominio.CarritoDTO
 import ar.com.phm2022.aplicacion.dominio.Credencial
 import ar.com.phm2022.aplicacion.dominio.Usuario
 import io.swagger.v3.oas.annotations.Operation
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -20,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController
 @CrossOrigin
 class UsuarioController {
 
-    val usuarioService: UsuarioService = UsuarioService()
+    @Autowired lateinit var usuarioService: UsuarioService
 
     /*
     @GetMapping("/carrito/{idUsuario}")
@@ -62,19 +63,19 @@ class UsuarioController {
         return usuarioService.putUsuario(idUsuario,usuarioActualizado)
     }
 
-     */
+    @GetMapping("/totalCarrito/{idUsuario}")
+    @Operation(summary ="Se trae el precio total de la posible compra del carrito")
+    fun getTotalCarrito(@PathVariable idUsuario: Long):Double{
+        return usuarioService.getTotalCarrito(idUsuario)
+    }
 
-    //TODO: cambiar a POST en lugar de GET. Averiguar si esto es realmente POST o GET
+    //TODO: Averiguar cómo generar una query para el metodo findUser(credenciales: Credencial) en UsuarioRepository
     @PostMapping("/usuario")
     @Operation(summary ="Se verifica que el usuario esta registrado y se lo trae")
     fun getUsuarioRegistrado(@RequestBody credenciales: Credencial):UsuarioLogueadoDTO{
         return usuarioService.getUsuarioRegistrado(credenciales)
     }
 
-    @GetMapping("/totalCarrito/{idUsuario}")
-    @Operation(summary ="Se trae el precio total de la posible compra del carrito")
-    fun getTotalCarrito(@PathVariable idUsuario: Long):Double{
-        return usuarioService.getTotalCarrito(idUsuario)
-    }
+     */
 }
 
