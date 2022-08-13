@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RestController
 import ar.com.phm2022.aplicacion.services.ArticuloService
+import java.util.*
 
 @RestController
 @CrossOrigin
@@ -32,17 +33,17 @@ class ArticulosController {
             }
         }
     }
+
+    @GetMapping("/articulo/{idArticulo}")
+    @Operation( summary ="Se trae un articulo registrado")
+    fun getArticulo(@PathVariable idArticulo:Long): Optional<Articulo> {
+        return articuloService.getArticulo(idArticulo)
+    }
 /*
     @GetMapping("/articulos/{puntaje}")
     @Operation( summary ="Traemos todos los articulos registrados con cierto nivel de puntuacion")
     fun getArticulosConCiertaPuntuacion(@PathVariable puntaje:Int):Iterable<Articulo>{
         return articuloService.filtrarArticulosPorPuntuacion(puntaje)
-    }
-
-    @GetMapping("/articulo/{idArticulo}")
-    @Operation( summary ="Se trae un articulo registrado")
-    fun getArticulo(@PathVariable idArticulo:Long):Articulo{
-        return articuloService.getArticulo(idArticulo)
     }
 
     @GetMapping("/lotes/{idArticulo}")

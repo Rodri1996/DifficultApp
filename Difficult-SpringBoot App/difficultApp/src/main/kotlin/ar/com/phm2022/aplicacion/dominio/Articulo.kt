@@ -8,12 +8,13 @@ import javax.persistence.OneToMany
 
 @Entity
 abstract class Articulo(){
-    //TODO:Usar un ArticuloDTO para solucionar el problema de la inicializacion peresoza
     @Id
     @GeneratedValue
     var id:Long=0
     var paisDeOrigen:String=""
     var puntaje:Int=0
+    //TODO: ver cómo solucionar la Inicializacion Peresoza y que cuando hayan objetos del dominio que usen los lotes,
+    // la aplicacion no rompa
     @OneToMany()
     var lotes:MutableList<Lote> = mutableListOf()
     var imagen=""
