@@ -21,6 +21,7 @@ class ArticuloRepository{
         numero=2342
     }
 
+    /*
     constructor(){
         //Instancias
         val piso1= Piso(2536.55).apply {
@@ -67,7 +68,7 @@ class ArticuloRepository{
         guardar(piso3)
         guardar(pintura1)
     }
-
+*/
     fun findAll():Iterable<Articulo>{
         return this.articulos
     }

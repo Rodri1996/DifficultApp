@@ -1,15 +1,20 @@
 package ar.com.phm2022.aplicacion.dominio
 
+import javax.persistence.Entity
+
+@Entity
 class Piso(precioBase: Double) : Producto(precioBase) {
     //TODO:Buscar como mapear la herencia
-    var tipo: TipoPiso = TransitoNormal()
+    //var tipo: TipoPiso = TransitoNormal()
     var medidas=""
     var terminacion=""
 
     override fun precio() = super.precio() + incremento()
 
+
     override fun incremento():Double{
-        return tipo.incremento(this.precioBase)
+        //return tipo.incremento(this.precioBase)
+        return 0.00
     }
 }
 
