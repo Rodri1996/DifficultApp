@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue
 import javax.persistence.Id
 import javax.persistence.OneToMany
 
+//TODO: Mapear la herencia
 @Entity
 abstract class Articulo(){
     @Id

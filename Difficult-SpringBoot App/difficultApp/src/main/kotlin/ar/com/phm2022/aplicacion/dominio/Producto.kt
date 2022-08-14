@@ -1,7 +1,9 @@
 package ar.com.phm2022.aplicacion.dominio
 
 import java.time.LocalDate
+import javax.persistence.Entity
 
+@Entity
 abstract class Producto (var precioBase: Double): Articulo() {
 
 

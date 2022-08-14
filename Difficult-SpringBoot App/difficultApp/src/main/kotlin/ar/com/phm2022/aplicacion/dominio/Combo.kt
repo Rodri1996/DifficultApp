@@ -1,10 +1,12 @@
-package dominio
+package ar.com.phm2022.aplicacion.dominio
 
-import ar.com.phm2022.aplicacion.dominio.Articulo
-import ar.com.phm2022.aplicacion.dominio.Producto
+import javax.persistence.Entity
+import javax.persistence.OneToMany
 
+@Entity
 class Combo: Articulo() {
     val PORCT_DESCUENTO=15.00
+    @OneToMany()
     val productos:MutableList<Producto> = mutableListOf()
 
     override fun precio()= (sumaDePreciosDeProductos() + valorPorCadaProducto())*descuento()

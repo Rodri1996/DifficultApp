@@ -11,6 +11,7 @@ open class Credencial{
 @Entity
 class Usuario: Credencial() {
     @Id
+    @GeneratedValue
     var id:Long=0
     @Column(length = 50)
     var nombre:String=""
