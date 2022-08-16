@@ -1,8 +1,16 @@
 package ar.com.phm2022.aplicacion.dominio
 
+import com.fasterxml.jackson.annotation.JsonSubTypes
 import java.time.LocalDate
 import javax.persistence.Entity
+import javax.persistence.Inheritance
+import javax.persistence.InheritanceType
 
+@JsonSubTypes(
+        JsonSubTypes.Type(value = Piso::class, name = "PISO"),
+        JsonSubTypes.Type(value = Pintura::class, name = "PINT")
+)
+@Inheritance(strategy= InheritanceType.JOINED)
 @Entity
 abstract class Producto (var precioBase: Double): Articulo() {
 

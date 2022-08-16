@@ -1,12 +1,21 @@
 package ar.com.phm2022.aplicacion.dominio
 
 import com.fasterxml.jackson.annotation.JsonProperty
+import com.fasterxml.jackson.annotation.JsonSubTypes
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
+import javax.persistence.Inheritance
+import javax.persistence.InheritanceType
 import javax.persistence.OneToMany
 
 //TODO: Mapear la herencia
+
+@JsonSubTypes(
+        JsonSubTypes.Type(value = Producto::class, name = "PRO"),
+        JsonSubTypes.Type(value = Combo::class, name = "COM")
+)
+@Inheritance(strategy= InheritanceType.JOINED)
 @Entity
 abstract class Articulo(){
     @Id
