@@ -22,9 +22,10 @@ class ArticuloService {
     fun filtrarArticulosPorPuntuacion(puntaje: Int): Iterable<Articulo> {
         return articuloRepository.buscarArticulos(puntaje)
     }
-
-    fun getLotes(idArticulo: Long): MutableList<Lote> {
-        return articuloRepository.allLotes(idArticulo)
-    }
 */
+    fun getLotes(idArticulo: Long): Iterable<Lote> {
+        var articulo= articuloRepository.findById(idArticulo)
+        return articulo.get().lotes
+    }
+
 }

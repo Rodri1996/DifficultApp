@@ -45,16 +45,10 @@ class ArticulosController {
     fun getArticulosConCiertaPuntuacion(@PathVariable puntaje:Int):Iterable<Articulo>{
         return articuloService.filtrarArticulosPorPuntuacion(puntaje)
     }
-
+*/
     @GetMapping("/lotes/{idArticulo}")
     @Operation( summary ="Se traen los lotes de un articulo")
-    fun getLotes(@PathVariable idArticulo:Long):MutableList<Lote>{
-        var lotes= articuloService.getLotes(idArticulo)
-        var lote=lotes.find { it.numero==2222 }
-        if (lote != null) {
-            println("unidades (controller): "+ lote.unidadesDisplonibles)
-        }
-        return  lotes
+    fun getLotes(@PathVariable idArticulo:Long):Iterable<Lote>{
+        return articuloService.getLotes(idArticulo)
     }
- */
 }
