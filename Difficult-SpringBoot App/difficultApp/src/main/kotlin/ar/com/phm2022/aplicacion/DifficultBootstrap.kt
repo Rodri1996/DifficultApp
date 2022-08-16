@@ -24,7 +24,11 @@ class DifficultBootstrap:InitializingBean{
     //Combos:
     lateinit var combo1: Combo
     //Lotes:
-    lateinit var loteAcmeBeteado:Lote
+    lateinit var loteAcmeBeteado1:Lote
+    lateinit var loteAcmeArena1:Lote
+    lateinit var loteAcmeRustico1:Lote
+    lateinit var loteAldaBlanco1:Lote
+    lateinit var loteAldaBlanco2:Lote
     //Usuarios:
     lateinit var usuario1:Usuario
     lateinit var usuario2:Usuario
@@ -33,11 +37,21 @@ class DifficultBootstrap:InitializingBean{
         println("************************************************************************")
         println("Running initialization")
         println("************************************************************************")
+        this.initLotes()
         this.initPinturas()
         this.initPisos()
         this.initCombos()
         this.initUsuarios()
     }
+
+    private fun initLotes(){
+        loteAcmeBeteado1=Lote(LocalDate.now(),3)
+        loteAcmeArena1=Lote(LocalDate.now(),4)
+        loteAcmeRustico1=Lote(LocalDate.now(),1)
+        loteAldaBlanco1=Lote(LocalDate.now(),2)
+        loteAldaBlanco2=Lote(LocalDate.now(),3)
+    }
+
     private fun initUsuarios(){
         usuario1=Usuario().apply {
             nombre="Rodrigo"
@@ -99,6 +113,12 @@ class DifficultBootstrap:InitializingBean{
             medidas="56x56"
             terminacion="satinado"
         }
+
+        acmeBeteado.lotes.add(loteAcmeBeteado1)
+
+        acmeRustico.lotes.add(loteAcmeRustico1)
+        acmeArena.lotes.add(loteAcmeArena1)
+
         this.articuloRepository.save(acmeRustico)
         this.articuloRepository.save(acmeArena)
         this.articuloRepository.save(acmeBeteado)
@@ -124,6 +144,11 @@ class DifficultBootstrap:InitializingBean{
             litros=20
             rendimiento=6
         }
+        aldaBlanco1.lotes.add(loteAldaBlanco1)
+        aldaBlanco2.lotes.add(loteAldaBlanco2)
+        /*
+        aldaBlanco2.lotes.add(loteAldaBlanco1)
+         */
         articuloRepository.save(aldaBlanco1)
         articuloRepository.save(aldaBlanco2)
     }
