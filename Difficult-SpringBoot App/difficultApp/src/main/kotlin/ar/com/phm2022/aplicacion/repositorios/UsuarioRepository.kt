@@ -101,6 +101,6 @@ class UsuarioRepository {
 
     fun findCarrito(idUsuario: Long): CarritoDTO {
         var usuario=getUsuario(idUsuario)
-        return usuario.getCarritoDTO()
+        return usuario.getCompraRealizada()
     }
 }

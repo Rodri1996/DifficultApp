@@ -29,6 +29,7 @@ class Usuario: Credencial() {
     @OneToMany(fetch = FetchType.LAZY)
     val comprasHechas:MutableList<Compra> = mutableListOf()
 
+
     fun sumarAlCarrito(item: Item) {
         carritoDeCompras.add(item)
     }
@@ -61,7 +62,7 @@ class Usuario: Credencial() {
         return this
     }
 
-    fun getCarritoDTO(): CarritoDTO {
+    fun getCompraRealizada(): CarritoDTO {
         return CarritoDTO(
                 this.carritoDeCompras,
                 this.calcularImporteTotal(),

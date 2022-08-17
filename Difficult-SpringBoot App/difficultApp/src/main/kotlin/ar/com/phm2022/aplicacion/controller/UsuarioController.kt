@@ -3,12 +3,15 @@ package ar.com.phm2022.aplicacion.controller
 import ar.com.phm2022.aplicacion.dominio.Item
 import ar.com.phm2022.aplicacion.services.UsuarioService
 import ar.com.phm2022.aplicacion.dominio.CarritoDTO
+import ar.com.phm2022.aplicacion.dominio.Compra
+import ar.com.phm2022.aplicacion.dominio.Usuario
 import io.swagger.v3.oas.annotations.Operation
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 
@@ -19,6 +22,7 @@ class UsuarioController {
     @Autowired lateinit var usuarioService: UsuarioService
 
 
+    //TODO:Revisar si esta bien hecho este requerimiento
     @GetMapping("/carrito/{idUsuario}")
     @Operation(summary ="Se trae el carrito de compras con los items, cant articulos y precio total")
     fun getCarritoCompras(@PathVariable idUsuario:Long): CarritoDTO {
@@ -30,19 +34,17 @@ class UsuarioController {
     fun addItem(@RequestBody item: Item, @PathVariable idUsuario:Long):Iterable<Item>{
         return usuarioService.agregarItemAlCarrito(item,idUsuario)
     }
-/*
+
     @GetMapping("/items/{idUsuario}")
     @Operation(summary ="Se traen los items del carrito de compras de un usuario")
-    fun addItem(@PathVariable idUsuario:Long):Iterable<Item>{
+    fun getItems(@PathVariable idUsuario:Long):Iterable<Item>{
         var items=usuarioService.getItems(idUsuario)
         return items
     }
-
-    @PostMapping("/compras/{idUsuario}")
+    @PostMapping("/compra/{idUsuario}")
     @Operation(summary ="Se agrega una compra hecha por un usuario")
     fun postCompras(@PathVariable idUsuario:Long,@RequestBody compra: Compra):Iterable<Compra>{
-        usuarioService.postCompraHecha(idUsuario,compra)
-        return mutableListOf()
+        return usuarioService.postCompraHecha(idUsuario,compra)
     }
 
     @GetMapping("/compras/{idUsuario}")
@@ -50,13 +52,15 @@ class UsuarioController {
     fun getCompras(@PathVariable idUsuario:Long):Iterable<Compra>{
         return usuarioService.getCompras(idUsuario)
     }
-
+/*
     @PutMapping("/usuario/{idUsuario}")
     @Operation(summary ="Se actualizan todos los datos de un usuario")
     fun putUsuario(@PathVariable idUsuario:Long,@RequestBody usuarioActualizado: Usuario): Usuario {
         return usuarioService.putUsuario(idUsuario,usuarioActualizado)
     }
-
+    
+ */
+/*
     @GetMapping("/totalCarrito/{idUsuario}")
     @Operation(summary ="Se trae el precio total de la posible compra del carrito")
     fun getTotalCarrito(@PathVariable idUsuario: Long):Double{

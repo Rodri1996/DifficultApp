@@ -1,15 +1,18 @@
 package ar.com.phm2022.aplicacion.services
 
 import ar.com.phm2022.aplicacion.dominio.CarritoDTO
+import ar.com.phm2022.aplicacion.dominio.Compra
 import ar.com.phm2022.aplicacion.dominio.Item
 import ar.com.phm2022.aplicacion.dominio.Usuario
 import ar.com.phm2022.aplicacion.repositorios.UsuarioRepositoryV2
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import java.time.LocalDate
 
 @Service
 class UsuarioService {
 
+    var idCompra:Long=0
     @Autowired lateinit var usuarioRepository:UsuarioRepositoryV2
     //val articuloRepository:ArticuloRepository=ArticuloRepository()
 
@@ -19,42 +22,62 @@ class UsuarioService {
         usuario.sumarAlCarrito(item)
         return usuario.carritoDeCompras
     }
+
+    fun getItems(idUsuario: Long): Iterable<Item> {
+        var usuario=usuarioRepository.findById(idUsuario).get()
+        return usuario.carritoDeCompras
+    }
+
+    fun postCompraHecha(idUsuario: Long,compra:Compra): Iterable<Compra>{
+        var usuario=usuarioRepository.findById(idUsuario).get()
+        this.actualizarCompra(compra)
+        usuario.confirmarCompra(compra)
+        return usuario.comprasHechas
+     }
+
+    private fun actualizarCompra(compra:Compra){
+        compra.fechaCompra= LocalDate.now()
+        this.asignarId(compra)
+    }
+
+    private fun asignarId(compra: Compra) {
+        compra.id=this.idCompra
+        this.idCompra+=1
+    }
+
+
+    fun getCompras(idUsuario:Long): Iterable<Compra> {
+        var usuario=usuarioRepository.findById(idUsuario).get()
+        return usuario.comprasHechas
+    }
+
+    /* TODO: Cuidado,uno no siempre quiere actualizar todos los datos
+    fun putUsuario(idUsuario: Long,bodyUsuario: Usuario): Usuario {
+        var usuarioEncontrado=usuarioRepository.findById(idUsuario)
+        var usuarioActualizado=usuarioEncontrado.actualizar(bodyUsuario)
+        return usuarioRepository.save(usuarioActualizado)
+    }
+
+     */
+
     /*
-        fun getItems(idUsuario: Long): Iterable<Item> {
-            return usuarioRepository.allItems(idUsuario)
-        }
+    fun getTotalCarrito(idUsuario: Long): Double {
+        return usuarioRepository.calcularTotalCarrito(idUsuario)
+     }
 
-        fun postCompraHecha(idUsuario: Long,compra:Compra): Iterable<Compra>{
-            usuarioRepository.postCompra(idUsuario,compra)
-            return mutableListOf()
-        }
-
-        fun getCompras(idUsuario:Long): Iterable<Compra> {
-            return usuarioRepository.allCompras(idUsuario)
-        }
-
-        fun putUsuario(idUsuario: Long,usuarioActualizado: Usuario): Usuario {
-            return usuarioRepository.updateUsuario(idUsuario,usuarioActualizado)
-        }
-
-        fun getTotalCarrito(idUsuario: Long): Double {
-            return usuarioRepository.calcularTotalCarrito(idUsuario)
-        }
-
-        fun getUsuarioRegistrado(credenciales: Credencial): UsuarioLogueadoDTO {
-            var nombreUsuario=credenciales.usuario
-            var contraseña=credenciales.contraseña
-            var usuarioEncontrado= usuarioRepository.findByUsuarioAndContraseña(nombreUsuario,contraseña)
-            return UsuarioLogueadoDTO(
-                    usuarioEncontrado.id,
-                    usuarioEncontrado.nombre,
-                    usuarioEncontrado.carritoDeCompras.size,
-                    usuarioEncontrado.foto
-            )
-        }
-    */
+     fun getUsuarioRegistrado(credenciales: Credencial): UsuarioLogueadoDTO {
+         var nombreUsuario=credenciales.usuario
+         var contraseña=credenciales.contraseña
+         var usuarioEncontrado= usuarioRepository.findByUsuarioAndContraseña(nombreUsuario,contraseña)
+         return UsuarioLogueadoDTO(
+            usuarioEncontrado.id,
+            usuarioEncontrado.nombre,
+            usuarioEncontrado.carritoDeCompras.size,
+            usuarioEncontrado.foto
+         )}
+                */
     fun getCarrito(idUsuario: Long): CarritoDTO {
         var usuario=usuarioRepository.findById(idUsuario)
-        return usuario.get().getCarritoDTO()
+        return usuario.get().getCompraRealizada()
     }
 }
