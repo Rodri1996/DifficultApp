@@ -1,19 +1,14 @@
 package ar.com.phm2022.aplicacion.controller
 
-import ar.com.phm2022.aplicacion.dominio.Compra
 import ar.com.phm2022.aplicacion.dominio.Item
-import ar.com.phm2022.aplicacion.serializadores.UsuarioLogueadoDTO
 import ar.com.phm2022.aplicacion.services.UsuarioService
 import ar.com.phm2022.aplicacion.dominio.CarritoDTO
-import ar.com.phm2022.aplicacion.dominio.Credencial
-import ar.com.phm2022.aplicacion.dominio.Usuario
 import io.swagger.v3.oas.annotations.Operation
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 
@@ -29,14 +24,13 @@ class UsuarioController {
     fun getCarritoCompras(@PathVariable idUsuario:Long): CarritoDTO {
         return usuarioService.getCarrito(idUsuario)
     }
-/*
+
     @PostMapping("/item/{idUsuario}")
     @Operation(summary ="Se quiere sumar un item al carrito de compras de un usuario")
     fun addItem(@RequestBody item: Item, @PathVariable idUsuario:Long):Iterable<Item>{
-        var usuario=usuarioService.addItem(item,idUsuario)
-        return usuario.carritoDeCompras
+        return usuarioService.agregarItemAlCarrito(item,idUsuario)
     }
-
+/*
     @GetMapping("/items/{idUsuario}")
     @Operation(summary ="Se traen los items del carrito de compras de un usuario")
     fun addItem(@PathVariable idUsuario:Long):Iterable<Item>{
