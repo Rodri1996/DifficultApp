@@ -18,11 +18,10 @@ class ArticuloService {
     fun getArticulo(idArticulo: Long): Optional<Articulo> {
         return articuloRepository.findById(idArticulo)
     }
-/*
     fun filtrarArticulosPorPuntuacion(puntaje: Int): Iterable<Articulo> {
-        return articuloRepository.buscarArticulos(puntaje)
+        return articuloRepository.findByPuntaje(puntaje)
     }
-*/
+
     fun getLotes(idArticulo: Long): Iterable<Lote> {
         var articulo= articuloRepository.findById(idArticulo)
         return articulo.get().lotes

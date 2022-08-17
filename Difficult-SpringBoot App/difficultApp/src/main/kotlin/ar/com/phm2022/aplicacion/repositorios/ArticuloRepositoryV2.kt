@@ -6,4 +6,5 @@ import org.springframework.data.repository.CrudRepository
 
 interface ArticuloRepositoryV2:CrudRepository<Articulo,Long> {
 
+    fun findByPuntaje(puntaje:Int):Iterable<Articulo>
 }

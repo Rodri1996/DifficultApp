@@ -39,13 +39,13 @@ class ArticulosController {
     fun getArticulo(@PathVariable idArticulo:Long): Optional<Articulo> {
         return articuloService.getArticulo(idArticulo)
     }
-/*
+
     @GetMapping("/articulos/{puntaje}")
     @Operation( summary ="Traemos todos los articulos registrados con cierto nivel de puntuacion")
     fun getArticulosConCiertaPuntuacion(@PathVariable puntaje:Int):Iterable<Articulo>{
         return articuloService.filtrarArticulosPorPuntuacion(puntaje)
     }
-*/
+
     @GetMapping("/lotes/{idArticulo}")
     @Operation( summary ="Se traen los lotes de un articulo")
     fun getLotes(@PathVariable idArticulo:Long):Iterable<Lote>{
