@@ -23,13 +23,13 @@ class UsuarioController {
 
     @Autowired lateinit var usuarioService: UsuarioService
 
-    /*
+
     @GetMapping("/carrito/{idUsuario}")
     @Operation(summary ="Se trae el carrito de compras con los items, cant articulos y precio total")
     fun getCarritoCompras(@PathVariable idUsuario:Long): CarritoDTO {
         return usuarioService.getCarrito(idUsuario)
     }
-
+/*
     @PostMapping("/item/{idUsuario}")
     @Operation(summary ="Se quiere sumar un item al carrito de compras de un usuario")
     fun addItem(@RequestBody item: Item, @PathVariable idUsuario:Long):Iterable<Item>{
@@ -70,12 +70,12 @@ class UsuarioController {
     }
 
     //TODO: Averiguar cómo generar una query para el metodo findUser(credenciales: Credencial) en UsuarioRepository
-    @PostMapping("/usuario")
+    @GetMapping("/usuario")
     @Operation(summary ="Se verifica que el usuario esta registrado y se lo trae")
     fun getUsuarioRegistrado(@RequestBody credenciales: Credencial):UsuarioLogueadoDTO{
         return usuarioService.getUsuarioRegistrado(credenciales)
     }
+*/
 
-     */
 }
 

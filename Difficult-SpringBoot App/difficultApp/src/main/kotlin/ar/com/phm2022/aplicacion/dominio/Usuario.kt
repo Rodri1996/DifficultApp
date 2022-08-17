@@ -61,7 +61,7 @@ class Usuario: Credencial() {
         return this
     }
 
-    fun getCarrito(): CarritoDTO {
+    fun getCarritoDTO(): CarritoDTO {
         return CarritoDTO(
                 this.carritoDeCompras,
                 this.calcularImporteTotal(),

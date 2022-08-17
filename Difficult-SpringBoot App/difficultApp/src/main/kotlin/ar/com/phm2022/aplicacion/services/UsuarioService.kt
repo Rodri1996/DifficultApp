@@ -1,13 +1,6 @@
 package ar.com.phm2022.aplicacion.services
 
-import ar.com.phm2022.aplicacion.dominio.Compra
-import ar.com.phm2022.aplicacion.dominio.Item
-import ar.com.phm2022.aplicacion.repositorios.ArticuloRepository
-import ar.com.phm2022.aplicacion.repositorios.UsuarioRepository
-import ar.com.phm2022.aplicacion.serializadores.UsuarioLogueadoDTO
 import ar.com.phm2022.aplicacion.dominio.CarritoDTO
-import ar.com.phm2022.aplicacion.dominio.Credencial
-import ar.com.phm2022.aplicacion.dominio.Usuario
 import ar.com.phm2022.aplicacion.repositorios.UsuarioRepositoryV2
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -45,12 +38,10 @@ class UsuarioService {
         return usuarioRepository.calcularTotalCarrito(idUsuario)
     }
 
-    fun getCarrito(idUsuario: Long): CarritoDTO {
-        return usuarioRepository.findCarrito(idUsuario)
-    }
-
     fun getUsuarioRegistrado(credenciales: Credencial): UsuarioLogueadoDTO {
-        var usuarioEncontrado= usuarioRepository.findUser(credenciales)
+        var nombreUsuario=credenciales.usuario
+        var contraseña=credenciales.contraseña
+        var usuarioEncontrado= usuarioRepository.findByUsuarioAndContraseña(nombreUsuario,contraseña)
         return UsuarioLogueadoDTO(
                 usuarioEncontrado.id,
                 usuarioEncontrado.nombre,
@@ -58,6 +49,9 @@ class UsuarioService {
                 usuarioEncontrado.foto
         )
     }
-
-     */
+*/
+    fun getCarrito(idUsuario: Long): CarritoDTO {
+        var usuario=usuarioRepository.findById(idUsuario)
+        return usuario.get().getCarritoDTO()
+    }
 }
