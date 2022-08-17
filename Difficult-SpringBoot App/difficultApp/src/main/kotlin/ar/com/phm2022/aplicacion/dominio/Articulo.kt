@@ -2,13 +2,7 @@ package ar.com.phm2022.aplicacion.dominio
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.annotation.JsonSubTypes
-import javax.persistence.CascadeType
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.Id
-import javax.persistence.Inheritance
-import javax.persistence.InheritanceType
-import javax.persistence.OneToMany
+import javax.persistence.*
 
 //TODO: Mapear la herencia
 
@@ -27,7 +21,7 @@ abstract class Articulo(){
     //TODO: ver cómo solucionar la Inicializacion Peresoza y que cuando hayan objetos del dominio que usen los lotes,
     // la aplicacion no rompa
     //TODO: ver por que usando el CascadeType.ALL se soluciona el problema de "object references an unsaved transient instance - save the transient instance before flushing: ar.com.phm2022.aplicacion.dominio.Lote"
-    @OneToMany(cascade = [CascadeType.ALL])
+    @OneToMany(cascade = [CascadeType.ALL],fetch = FetchType.LAZY)
     var lotes:MutableList<Lote> = mutableListOf()
     var imagen=""
     var nombre:String=""

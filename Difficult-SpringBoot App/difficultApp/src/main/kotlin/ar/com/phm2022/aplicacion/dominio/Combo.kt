@@ -1,12 +1,13 @@
 package ar.com.phm2022.aplicacion.dominio
 
 import javax.persistence.Entity
+import javax.persistence.FetchType
 import javax.persistence.OneToMany
 
 @Entity
 class Combo: Articulo() {
     val PORCT_DESCUENTO=15.00
-    @OneToMany()
+    @OneToMany(fetch = FetchType.LAZY)
     val productos:MutableList<Producto> = mutableListOf()
 
     override fun precio()= (sumaDePreciosDeProductos() + valorPorCadaProducto())*descuento()
