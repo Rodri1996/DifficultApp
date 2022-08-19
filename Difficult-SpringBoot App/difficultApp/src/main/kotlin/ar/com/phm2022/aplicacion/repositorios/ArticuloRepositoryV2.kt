@@ -8,9 +8,10 @@ import java.util.*
 
 interface ArticuloRepositoryV2:CrudRepository<Articulo,Long> {
 
+    @EntityGraph(attributePaths = ["lotes"])
     fun findByPuntaje(puntaje:Int):Iterable<Articulo>
 
-    @EntityGraph(attributePaths = ["lotes","Combo.productos"])
+    @EntityGraph(attributePaths = ["lotes"])
     override fun findAll(): MutableIterable<Articulo>
 
     @EntityGraph(attributePaths = ["lotes"])
