@@ -18,8 +18,7 @@ abstract class Articulo(){
     var id:Long=0
     var paisDeOrigen:String=""
     var puntaje:Int=0
-    //TODO: ver cómo solucionar la Inicializacion Peresoza y que cuando hayan objetos del dominio que usen los lotes,
-    // la aplicacion no rompa
+    //TODO: cómo hacer para que los productos de un combo se puedan agregar al @EntityGraph del metodo findAll()
     //TODO: ver por que usando el CascadeType.ALL se soluciona el problema de "object references an unsaved transient instance - save the transient instance before flushing: ar.com.phm2022.aplicacion.dominio.Lote"
     @OneToMany(cascade = [CascadeType.ALL],fetch = FetchType.LAZY)
     var lotes:MutableList<Lote> = mutableListOf()

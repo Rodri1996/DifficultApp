@@ -7,12 +7,14 @@ import ar.com.phm2022.aplicacion.dominio.Lote
 import ar.com.phm2022.aplicacion.repositorios.ArticuloRepositoryV2
 import org.springframework.beans.factory.annotation.Autowired
 import java.util.*
+import org.springframework.transaction.annotation.Transactional
 
 @Service
 class ArticuloService {
 
     @Autowired lateinit var articuloRepository: ArticuloRepositoryV2
 
+    @Transactional(readOnly = true)
     fun getArticulos(): Iterable<Articulo> = articuloRepository.findAll()
 
     fun getArticulo(idArticulo: Long): Optional<Articulo> {
