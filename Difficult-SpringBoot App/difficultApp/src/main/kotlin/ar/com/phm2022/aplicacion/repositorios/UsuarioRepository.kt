@@ -3,7 +3,6 @@ package ar.com.phm2022.aplicacion.repositorios
 import ar.com.phm2022.aplicacion.dominio.Compra
 import ar.com.phm2022.aplicacion.dominio.Item
 import ar.com.phm2022.aplicacion.dominio.CarritoDTO
-import ar.com.phm2022.aplicacion.dominio.Credencial
 import ar.com.phm2022.aplicacion.dominio.Usuario
 import java.time.LocalDate
 
@@ -90,7 +89,7 @@ class UsuarioRepository {
         return usuarioPostActualizacion
     }
 
-    fun findUser(credenciales: Credencial): Usuario {
+    fun findUser(credenciales: Usuario): Usuario {
         return usuariosRegistrados.first { it.usuario == credenciales.usuario && it.contraseña==credenciales.contraseña}
     }
 

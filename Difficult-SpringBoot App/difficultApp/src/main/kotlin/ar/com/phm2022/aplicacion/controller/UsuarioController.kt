@@ -1,10 +1,8 @@
 package ar.com.phm2022.aplicacion.controller
 
-import ar.com.phm2022.aplicacion.dominio.Item
+import ar.com.phm2022.aplicacion.dominio.*
+import ar.com.phm2022.aplicacion.serializadores.UsuarioLogueadoDTO
 import ar.com.phm2022.aplicacion.services.UsuarioService
-import ar.com.phm2022.aplicacion.dominio.CarritoDTO
-import ar.com.phm2022.aplicacion.dominio.Compra
-import ar.com.phm2022.aplicacion.dominio.Usuario
 import io.swagger.v3.oas.annotations.Operation
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.CrossOrigin
@@ -52,26 +50,25 @@ class UsuarioController {
     fun getCompras(@PathVariable idUsuario:Long):Iterable<Compra>{
         return usuarioService.getCompras(idUsuario)
     }
+
+    //TODO: Averiguar cómo generar una query para el metodo findUser(credenciales: Credencial) en UsuarioRepository
+    @PostMapping("/usuario")
+    @Operation(summary ="Se verifica que el usuario esta registrado y se lo trae")
+    fun getUsuarioRegistrado(@RequestBody credenciales: Credencial):UsuarioLogueadoDTO{
+        return usuarioService.getUsuarioRegistrado(credenciales)
+    }
 /*
     @PutMapping("/usuario/{idUsuario}")
     @Operation(summary ="Se actualizan todos los datos de un usuario")
     fun putUsuario(@PathVariable idUsuario:Long,@RequestBody usuarioActualizado: Usuario): Usuario {
         return usuarioService.putUsuario(idUsuario,usuarioActualizado)
     }
-    
- */
-/*
+
+
     @GetMapping("/totalCarrito/{idUsuario}")
     @Operation(summary ="Se trae el precio total de la posible compra del carrito")
     fun getTotalCarrito(@PathVariable idUsuario: Long):Double{
         return usuarioService.getTotalCarrito(idUsuario)
-    }
-
-    //TODO: Averiguar cómo generar una query para el metodo findUser(credenciales: Credencial) en UsuarioRepository
-    @GetMapping("/usuario")
-    @Operation(summary ="Se verifica que el usuario esta registrado y se lo trae")
-    fun getUsuarioRegistrado(@RequestBody credenciales: Credencial):UsuarioLogueadoDTO{
-        return usuarioService.getUsuarioRegistrado(credenciales)
     }
 */
 

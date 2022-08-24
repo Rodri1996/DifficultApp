@@ -56,6 +56,8 @@ class DifficultBootstrap:InitializingBean{
         usuario1=Usuario().apply {
             nombre="Rodrigo"
             apellido="Nieto"
+            usuario="Rodri1996"
+            contraseña="1234"
             edad=25
             saldo=5500.00
             usuario=""
@@ -65,6 +67,8 @@ class DifficultBootstrap:InitializingBean{
         usuario2=Usuario().apply {
             nombre="Juan"
             apellido="Perez"
+            usuario="juan123"
+            contraseña="123"
             edad=27
             saldo=3450.00
             usuario="Juan123"
@@ -74,6 +78,8 @@ class DifficultBootstrap:InitializingBean{
         usuario3=Usuario().apply {
             nombre="Pedro"
             apellido="Gonzales"
+            usuario="peter"
+            contraseña="spiderman"
             edad=30
             saldo=6050.00
             usuario="peter"

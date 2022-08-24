@@ -9,7 +9,7 @@ open class Credencial{
 }
 
 @Entity
-class Usuario: Credencial() {
+class Usuario{
     @Id
     @GeneratedValue
     var id:Long=0
@@ -17,6 +17,8 @@ class Usuario: Credencial() {
     var nombre:String=""
     @Column(length = 50)
     var apellido:String=""
+    var usuario:String=""
+    var contraseña:String=""
     @Column(length = 3)
     var edad:Int=0
     @Column(length = 8)
@@ -25,13 +27,14 @@ class Usuario: Credencial() {
     @Column(length = 5)
     var ordenDeCompra:Long=0
     @OneToMany(fetch = FetchType.LAZY)
-    val carritoDeCompras:MutableList<Item> = mutableListOf()
+    val carritoDeCompras:MutableSet<Item> = mutableSetOf()
     @OneToMany(fetch = FetchType.LAZY)
-    val comprasHechas:MutableList<Compra> = mutableListOf()
+    val comprasHechas:MutableSet<Compra> = mutableSetOf()
 
 
-    fun sumarAlCarrito(item: Item) {
+    fun sumarAlCarrito(item: Item):Iterable<Item> {
         carritoDeCompras.add(item)
+        return this.carritoDeCompras
     }
 
     fun confirmarCompra(compra: Compra):Compra{

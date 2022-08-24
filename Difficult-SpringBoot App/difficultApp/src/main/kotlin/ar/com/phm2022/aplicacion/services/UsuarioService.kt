@@ -1,10 +1,8 @@
 package ar.com.phm2022.aplicacion.services
 
-import ar.com.phm2022.aplicacion.dominio.CarritoDTO
-import ar.com.phm2022.aplicacion.dominio.Compra
-import ar.com.phm2022.aplicacion.dominio.Item
-import ar.com.phm2022.aplicacion.dominio.Usuario
+import ar.com.phm2022.aplicacion.dominio.*
 import ar.com.phm2022.aplicacion.repositorios.UsuarioRepositoryV2
+import ar.com.phm2022.aplicacion.serializadores.UsuarioLogueadoDTO
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.time.LocalDate
@@ -13,14 +11,21 @@ import java.time.LocalDate
 class UsuarioService {
 
     var idCompra:Long=0
+    var idItem:Long=0
     @Autowired lateinit var usuarioRepository:UsuarioRepositoryV2
     //val articuloRepository:ArticuloRepository=ArticuloRepository()
 
     fun agregarItemAlCarrito(item: Item, idUsuario:Long): Iterable<Item> {
         //articuloRepository.updateLotes(item)
         var usuario=usuarioRepository.findById(idUsuario).get()
-        usuario.sumarAlCarrito(item)
-        return usuario.carritoDeCompras
+        var  itemIdentificado=this.identificarItem(item)
+        return usuario.sumarAlCarrito(itemIdentificado)
+    }
+
+    private fun identificarItem(item:Item):Item{
+        item.id=this.idItem
+        this.idItem=this.idItem+1
+        return item
     }
 
     fun getItems(idUsuario: Long): Iterable<Item> {
@@ -64,20 +69,20 @@ class UsuarioService {
     fun getTotalCarrito(idUsuario: Long): Double {
         return usuarioRepository.calcularTotalCarrito(idUsuario)
      }
-
+*/
      fun getUsuarioRegistrado(credenciales: Credencial): UsuarioLogueadoDTO {
          var nombreUsuario=credenciales.usuario
          var contraseña=credenciales.contraseña
-         var usuarioEncontrado= usuarioRepository.findByUsuarioAndContraseña(nombreUsuario,contraseña)
+         var usuarioEncontrado= usuarioRepository.findByUsuarioAndContraseña(nombreUsuario,contraseña).get()
          return UsuarioLogueadoDTO(
             usuarioEncontrado.id,
             usuarioEncontrado.nombre,
             usuarioEncontrado.carritoDeCompras.size,
             usuarioEncontrado.foto
          )}
-                */
+
     fun getCarrito(idUsuario: Long): CarritoDTO {
-        var usuario=usuarioRepository.findById(idUsuario)
-        return usuario.get().getCompraRealizada()
+        var usuario=usuarioRepository.findById(idUsuario).get()
+        return usuario.getCompraRealizada()
     }
 }
