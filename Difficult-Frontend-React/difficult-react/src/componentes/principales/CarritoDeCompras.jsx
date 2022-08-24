@@ -28,7 +28,8 @@ export class Carrito extends Component{
 
     async componentDidMount(){
         const idUsuario= this.getIdUsuarioLogueado()
-        let carrito = await usuarioService.getCarritoCompras(idUsuario)
+        // let carrito = await usuarioService.getCarritoCompras(idUsuario)
+        let carrito = await usuarioService.getItems(idUsuario)
         this.setCarritoDeCompras(carrito)
     }
 
