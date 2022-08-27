@@ -22,6 +22,8 @@ abstract class Articulo(){
     //TODO: ver por que usando el CascadeType.ALL se soluciona el problema de "object references an unsaved transient instance - save the transient instance before flushing: ar.com.phm2022.aplicacion.dominio.Lote"
     @OneToMany(cascade = [CascadeType.ALL],fetch = FetchType.LAZY)
     var lotes:MutableList<Lote> = mutableListOf()
+    @OneToMany(fetch = FetchType.LAZY)
+    val productos:MutableSet<Producto> = mutableSetOf()
     var imagen=""
     var nombre:String=""
     var descripcion:String=""

@@ -7,8 +7,7 @@ import javax.persistence.OneToMany
 @Entity
 class Combo: Articulo() {
     val PORCT_DESCUENTO=15.00
-    @OneToMany(fetch = FetchType.LAZY)
-    val productos:MutableList<Producto> = mutableListOf()
+
 
     override fun precio()= (sumaDePreciosDeProductos() + valorPorCadaProducto())*descuento()
 
@@ -21,6 +20,6 @@ class Combo: Articulo() {
     }
 
     private fun sumaDePreciosDeProductos():Double{
-        return productos.fold(0.00, { acum, producto -> acum + producto.precio() })
+        return productos.fold(0.00) { acum, producto -> acum + producto.precio() }
     }
 }

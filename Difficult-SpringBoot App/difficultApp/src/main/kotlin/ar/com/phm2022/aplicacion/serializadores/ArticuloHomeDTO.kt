@@ -7,4 +7,5 @@ class ArticuloHomeDTO {
     var precio:Double = 0.00
     var origen:String = ""
     var descripcion:String =""
+    var imagen:String=""
 }

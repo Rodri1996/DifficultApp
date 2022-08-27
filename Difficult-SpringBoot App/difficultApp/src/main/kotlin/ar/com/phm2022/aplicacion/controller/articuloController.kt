@@ -30,6 +30,7 @@ class ArticulosController {
                 origen=articulo.paisDeOrigen
                 precio=articulo.precio()
                 puntaje=articulo.puntaje
+                imagen=articulo.imagen
             }
         }
     }

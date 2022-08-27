@@ -8,12 +8,13 @@ import java.util.*
 
 interface ArticuloRepositoryV2:CrudRepository<Articulo,Long> {
 
-    @EntityGraph(attributePaths = ["lotes"])
+    @EntityGraph(attributePaths = ["lotes","productos"])
     fun findByPuntaje(puntaje:Int):Iterable<Articulo>
 
-    @EntityGraph(attributePaths = ["lotes"])
+    @EntityGraph(attributePaths = ["lotes","productos"])
+    //TODO: Ver como se hace para que no rompa por los productos del combo
     override fun findAll(): MutableIterable<Articulo>
 
-    @EntityGraph(attributePaths = ["lotes"])
+    @EntityGraph(attributePaths = ["lotes","productos"])
     override fun findById(id: Long): Optional<Articulo>
 }
