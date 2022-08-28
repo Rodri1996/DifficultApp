@@ -19,6 +19,7 @@ export class DetalleDelProducto extends Component{
         const idArticulo=this.getId()
         await this.getArticulo(idArticulo)
         await this.getLotesArticulo(idArticulo)
+        console.info(this.state.articulo)
     }
     
     getId(){
@@ -60,9 +61,9 @@ export class DetalleDelProducto extends Component{
         let itemNuevo=this.crearItemNuevo()
         const usuario=usuarioService.findUser()
         this.setStateCantidad(0)
-        let idArticulo=this.getId()
-        console.log("id del articulo: "+idArticulo)
-        await this.getArticulo(idArticulo)
+        // let idArticulo=this.getId()
+        // console.log("id del articulo: "+idArticulo)
+        // await this.getArticulo(idArticulo)
         await usuarioService.postItem(usuario.id,itemNuevo)
     }
     
@@ -93,8 +94,10 @@ export class DetalleDelProducto extends Component{
                             <section className="bx-item column detalle-info">
                                 <p className="margin-p"><b>Origen: </b>{articuloPosta.paisDeOrigen}</p>
                                 {/* <p className="margin-p"><b>Tipo: </b>{articulo.tipo}</p> */}
-                                <p className="margin-p"><b>Medidas: </b>{articuloPosta.medidas}</p>
-                                <p className="margin-p"><b>Terminacion: </b>{articuloPosta.terminacion}</p>
+                                <p className={`margin-p ${articuloPosta.medidas}`}><b>Medidas: </b>{articuloPosta.medidas} cm</p>
+                                <p className={`margin-p ${articuloPosta.terminacion}`}><b>Terminacion: </b>{articuloPosta.terminacion}</p>
+                                <p className={`margin-p ${articuloPosta.litros}`}><b>Litros: </b>{articuloPosta.litros} lts</p>
+                                <p className={`margin-p ${articuloPosta.rendimiento}`}><b>Litros: </b>{articuloPosta.rendimiento}</p>
                             </section>
                             
                             <section className="table-container detalle-info">

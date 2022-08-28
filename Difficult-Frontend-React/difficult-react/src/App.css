@@ -158,6 +158,10 @@ table{
   max-height: 200px;
 }
 
+.undefined{
+  display: none;
+}
+
 .margin-p{
   margin: 5px;
 }

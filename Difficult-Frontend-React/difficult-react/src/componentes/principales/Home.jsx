@@ -40,7 +40,7 @@ export class Home extends Component{
                     {
                         this.state.articulos.map(
                             (articulo)=>
-                                <Card articulo={articulo} key={articulo.idArticulo}/>
+                                <Card articulo={articulo} key={articulo.id}/>
                         )
                     } 
                       
