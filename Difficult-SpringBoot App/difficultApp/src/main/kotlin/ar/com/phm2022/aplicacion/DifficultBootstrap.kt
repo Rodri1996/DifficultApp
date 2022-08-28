@@ -161,6 +161,11 @@ class DifficultBootstrap:InitializingBean{
 
     private fun initCombos(){
         combo1= Combo().apply {
+            paisDeOrigen="EEUU"
+            puntaje=4
+            imagen="https://thumbs.dreamstime.com/z/combo-black-stamp-white-background-sign-label-sticker-combo-black-stamp-123579066.jpg"
+            nombre="Combo 1"
+            descripcion="combo de la pu** madre"
             productos.add(aldaBlanco1)
             productos.add(acmeArena)
         }
