@@ -2,7 +2,7 @@ export class Item{
 
     constructor(){
         this.id=0
-        this.articulo=0
+        this.idArticulo=0
         this.cantidad=0
         this.loteElegido=0
     }

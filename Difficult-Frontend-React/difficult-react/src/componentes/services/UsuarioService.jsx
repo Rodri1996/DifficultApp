@@ -2,7 +2,7 @@ import axios from 'axios'
 import { Compra } from '../../dominio/Compra'
 import { Item } from '../../dominio/Item'
 import { Usuario } from '../../dominio/Usuario'
-// import { CarritoCompra } from '../principales/CarritoDeCompras'
+import { CarritoCompra } from '../principales/CarritoDeCompras'
 
 //const REST_SERVER_URL = 'http://localhost:8080'
 
@@ -17,10 +17,10 @@ class UsuarioService{
         return this.usuario
     }
 
-    // async getCarritoCompras(idUsuario){
-    //     const carritoCompras=await axios.get(`http://localhost:8080/carrito/${idUsuario}`)
-    //     return CarritoCompra.fromJson(carritoCompras.data)
-    // }
+    async getCarritoCompras(idUsuario){
+        const carritoCompras=await axios.get(`http://localhost:8080/carrito/${idUsuario}`)
+        return CarritoCompra.fromJson(carritoCompras.data)
+    }
 
     async getComprasHechas(idUsuario){
         const comprasJson = await axios.get(`http://localhost:8080/compras/${idUsuario}`)

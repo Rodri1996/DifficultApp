@@ -28,18 +28,16 @@ export class Carrito extends Component{
 
     async componentDidMount(){
         const idUsuario= this.getIdUsuarioLogueado()
-        // let carrito = await usuarioService.getCarritoCompras(idUsuario)
-        let carrito = await usuarioService.getItems(idUsuario)
-        this.setCarritoDeCompras(carrito)
+        let carrito = await usuarioService.getCarritoCompras(idUsuario)
+        // let carrito = await usuarioService.getItems(idUsuario)
+        this.setState({
+            carrito
+        })
     }
 
     getIdUsuarioLogueado(){
         let usuarioLoegueado=usuarioService.findUser()
         return usuarioLoegueado.id
-    }
-  
-    setCarritoDeCompras(carritoDeCompras){
-        this.setState({carrito:carritoDeCompras})
     }
 
     comprar=async()=>{
@@ -51,7 +49,7 @@ export class Carrito extends Component{
     }
 
     render(){
-        const itemsCarrito=this.state.carrito.items
+        {console.info(this.state.carrito.items)}
         const precioTotalCarrito=this.state.carrito.precioTotal
         return(
             <section className="bx-item column carrito">
@@ -68,7 +66,7 @@ export class Carrito extends Component{
                             </tr>
                         </thead>
                         {
-                            itemsCarrito.map(
+                            this.state.carrito.items.map(
                                 (item)=>
                                     <ItemRow
                                         key={item.id}
