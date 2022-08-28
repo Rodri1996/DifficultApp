@@ -45,6 +45,7 @@ class UsuarioService{
     }
 
     async postItem(idUsuario,newItem){
+        console.log(idUsuario)
         await axios.post("http://localhost:8080/item/"+idUsuario,Item.toJson(newItem))
     }
 

@@ -62,7 +62,6 @@ export class DetalleDelProducto extends Component{
         const usuario=usuarioService.findUser()
         this.setStateCantidad(0)
         // let idArticulo=this.getId()
-        // console.log("id del articulo: "+idArticulo)
         // await this.getArticulo(idArticulo)
         await usuarioService.postItem(usuario.id,itemNuevo)
     }
