@@ -72,8 +72,8 @@ class UsuarioService {
 */
      fun getUsuarioRegistrado(credenciales: Credencial): UsuarioLogueadoDTO {
          var nombreUsuario=credenciales.usuario
-         var contraseña=credenciales.contraseña
-         var usuarioEncontrado= usuarioRepository.findByUsuarioAndContraseña(nombreUsuario,contraseña).get()
+         var contrasenia=credenciales.contraseña
+         var usuarioEncontrado= usuarioRepository.findByUsuario(nombreUsuario).get()
          return UsuarioLogueadoDTO(
             usuarioEncontrado.id,
             usuarioEncontrado.nombre,

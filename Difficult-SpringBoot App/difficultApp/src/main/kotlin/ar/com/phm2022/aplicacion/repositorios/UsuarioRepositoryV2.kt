@@ -7,7 +7,9 @@ import java.util.*
 
 interface UsuarioRepositoryV2: CrudRepository<Usuario,Long> {
 
-    fun findByUsuarioAndContraseña(usuario:String, contraseña:String):Optional<Usuario>
+    //TODO:Hacer que busque a un usuario por usuario y contrasenia
+    @EntityGraph(attributePaths = ["carritoDeCompras"])
+    fun findByUsuario(usuario:String):Optional<Usuario>
 
     //TODO:Solucionar el nuevo error que figura aca
     @EntityGraph(attributePaths = ["comprasHechas","carritoDeCompras"])

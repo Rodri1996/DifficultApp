@@ -57,33 +57,27 @@ class DifficultBootstrap:InitializingBean{
             nombre="Rodrigo"
             apellido="Nieto"
             usuario="Rodri1996"
-            contraseña="1234"
+            contrasenia="1234"
             edad=25
             saldo=5500.00
-            usuario=""
-            contraseña=""
             foto="https://w7.pngwing.com/pngs/551/362/png-transparent-iron-man-graphics-logo-iron-man-cdr-superhero-logo-thumbnail.png"
         }
         usuario2=Usuario().apply {
             nombre="Juan"
             apellido="Perez"
             usuario="juan123"
-            contraseña="123"
+            contrasenia="123"
             edad=27
             saldo=3450.00
-            usuario="Juan123"
-            contraseña="1234"
             foto="https://w7.pngwing.com/pngs/946/911/png-transparent-hulk-vision-clint-barton-iron-man-captain-america-hulk-marvel-avengers-assemble-superhero-war-machine-thumbnail.png"
         }
         usuario3=Usuario().apply {
             nombre="Pedro"
             apellido="Gonzales"
             usuario="peter"
-            contraseña="spiderman"
+            contrasenia="spiderman"
             edad=30
             saldo=6050.00
-            usuario="peter"
-            contraseña="321"
             foto="https://w7.pngwing.com/pngs/552/173/png-transparent-captain-america-iron-man-spider-man-cartoon-chibi-captain-america-captain-america-illustration-comics-avengers-heroes-thumbnail.png"
         }
         usuarioRepository.save(usuario1)

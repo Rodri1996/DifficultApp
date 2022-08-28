@@ -18,7 +18,7 @@ class Usuario{
     @Column(length = 50)
     var apellido:String=""
     var usuario:String=""
-    var contraseña:String=""
+    var contrasenia:String=""
     @Column(length = 3)
     var edad:Int=0
     @Column(length = 8)

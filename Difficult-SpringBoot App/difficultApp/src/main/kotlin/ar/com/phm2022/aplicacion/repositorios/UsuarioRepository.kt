@@ -20,7 +20,7 @@ class UsuarioRepository {
             edad=25
             saldo=5500.00
             usuario=""
-            contraseña=""
+            contrasenia=""
             foto="https://w7.pngwing.com/pngs/551/362/png-transparent-iron-man-graphics-logo-iron-man-cdr-superhero-logo-thumbnail.png"
         }
         val usuario2= Usuario().apply {
@@ -29,7 +29,7 @@ class UsuarioRepository {
             edad=27
             saldo=3450.00
             usuario="Juan123"
-            contraseña="1234"
+            contrasenia="1234"
             foto="https://w7.pngwing.com/pngs/946/911/png-transparent-hulk-vision-clint-barton-iron-man-captain-america-hulk-marvel-avengers-assemble-superhero-war-machine-thumbnail.png"
         }
         val usuario3= Usuario().apply {
@@ -38,7 +38,7 @@ class UsuarioRepository {
             edad=30
             saldo=6050.00
             usuario="peter"
-            contraseña="321"
+            contrasenia="321"
             foto="https://w7.pngwing.com/pngs/552/173/png-transparent-captain-america-iron-man-spider-man-cartoon-chibi-captain-america-captain-america-illustration-comics-avengers-heroes-thumbnail.png"
         }
         guardar(usuario1)
@@ -90,7 +90,7 @@ class UsuarioRepository {
     }
 
     fun findUser(credenciales: Usuario): Usuario {
-        return usuariosRegistrados.first { it.usuario == credenciales.usuario && it.contraseña==credenciales.contraseña}
+        return usuariosRegistrados.first { it.usuario == credenciales.usuario && it.contrasenia==credenciales.contrasenia}
     }
 
     fun calcularTotalCarrito(idUsuario: Long): Double {
