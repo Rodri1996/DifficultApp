@@ -1,11 +1,13 @@
 package ar.com.phm2022.aplicacion.services
 
 import ar.com.phm2022.aplicacion.dominio.*
+import ar.com.phm2022.aplicacion.repositorios.ItemRepository
 import ar.com.phm2022.aplicacion.repositorios.UsuarioRepositoryV2
 import ar.com.phm2022.aplicacion.serializadores.UsuarioLogueadoDTO
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.time.LocalDate
+import javax.transaction.Transactional
 
 @Service
 class UsuarioService {
@@ -13,13 +15,17 @@ class UsuarioService {
     var idCompra:Long=0
     var idItem:Long=0
     @Autowired lateinit var usuarioRepository:UsuarioRepositoryV2
+    @Autowired lateinit var itemRepository:ItemRepository
     //val articuloRepository:ArticuloRepository=ArticuloRepository()
 
-    fun agregarItemAlCarrito(item: Item, idUsuario:Long): Iterable<Item> {
+    @Transactional
+    fun agregarItemAlCarrito(item: Item, idUsuario:Long){
         //articuloRepository.updateLotes(item)
+        itemRepository.save(item)
         var usuario=usuarioRepository.findById(idUsuario).get()
-        var  itemIdentificado=this.identificarItem(item)
-        return usuario.sumarAlCarrito(itemIdentificado)
+        //var  itemIdentificado=this.identificarItem(item)
+        usuario.sumarAlCarrito(item)
+        this.usuarioRepository.save(usuario)
     }
 
     private fun identificarItem(item:Item):Item{

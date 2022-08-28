@@ -27,14 +27,13 @@ class Usuario{
     @Column(length = 5)
     var ordenDeCompra:Long=0
     @OneToMany(fetch = FetchType.LAZY)
-    val carritoDeCompras:MutableSet<Item> = mutableSetOf()
+    val carritoDeCompras:MutableList<Item> = mutableListOf()
     @OneToMany(fetch = FetchType.LAZY)
-    val comprasHechas:MutableSet<Compra> = mutableSetOf()
+    val comprasHechas:MutableList<Compra> = mutableListOf()
 
 
-    fun sumarAlCarrito(item: Item):Iterable<Item> {
+    fun sumarAlCarrito(item: Item){
         carritoDeCompras.add(item)
-        return this.carritoDeCompras
     }
 
     fun confirmarCompra(compra: Compra):Compra{

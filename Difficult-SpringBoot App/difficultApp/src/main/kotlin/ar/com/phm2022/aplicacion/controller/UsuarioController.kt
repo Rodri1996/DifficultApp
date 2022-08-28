@@ -29,7 +29,7 @@ class UsuarioController {
 
     @PostMapping("/item/{idUsuario}")
     @Operation(summary ="Se quiere sumar un item al carrito de compras de un usuario")
-    fun addItem(@RequestBody item: Item, @PathVariable idUsuario:Long):Iterable<Item>{
+    fun addItem(@RequestBody item: Item, @PathVariable idUsuario:Long){
         return usuarioService.agregarItemAlCarrito(item,idUsuario)
     }
 
