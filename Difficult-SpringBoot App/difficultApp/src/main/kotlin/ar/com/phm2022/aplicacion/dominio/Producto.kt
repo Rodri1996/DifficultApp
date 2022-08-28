@@ -1,5 +1,6 @@
 package ar.com.phm2022.aplicacion.dominio
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonSubTypes
 import java.time.LocalDate
 import javax.persistence.Entity
@@ -12,7 +13,7 @@ import javax.persistence.InheritanceType
 )
 @Inheritance(strategy= InheritanceType.JOINED)
 @Entity
-abstract class Producto (var precioBase: Double): Articulo() {
+abstract class Producto (@JsonIgnore var precioBase: Double): Articulo() {
 
 
     //Ver cómo hacer en las clases Piso y Pintura para NO usar el super.precio()

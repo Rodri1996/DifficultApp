@@ -1,5 +1,6 @@
 package ar.com.phm2022.aplicacion.dominio
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.annotation.JsonSubTypes
 import javax.persistence.*
@@ -21,6 +22,7 @@ abstract class Articulo(){
     //TODO: cómo hacer para que los productos de un combo se puedan agregar al @EntityGraph del metodo findAll()
     //TODO: ver por que usando el CascadeType.ALL se soluciona el problema de "object references an unsaved transient instance - save the transient instance before flushing: ar.com.phm2022.aplicacion.dominio.Lote"
     @OneToMany(cascade = [CascadeType.ALL],fetch = FetchType.LAZY)
+    @JsonIgnore
     var lotes:MutableList<Lote> = mutableListOf()
     @OneToMany(fetch = FetchType.LAZY)
     val productos:MutableSet<Producto> = mutableSetOf()
@@ -30,7 +32,9 @@ abstract class Articulo(){
 
     @JsonProperty
     abstract fun precio():Double
-
+    fun traerLotes():Iterable<Lote>{
+        return this.lotes
+    }
     fun agregarLote(lote: Lote){
         lote.id+=1
         lotes.add(lote)

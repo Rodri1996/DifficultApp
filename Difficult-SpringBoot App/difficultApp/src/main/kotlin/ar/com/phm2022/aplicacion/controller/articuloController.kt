@@ -20,19 +20,9 @@ class ArticulosController {
 
     @GetMapping("/articulos")
     @Operation( summary ="Traemos todos los articulos registrados")
-    fun getArticulos():Iterable<ArticuloHomeDTO>{
-        var articulos = articuloService.getArticulos()
-        return articulos.map {
-            articulo -> ArticuloHomeDTO().apply {
-                idArticulo=articulo.id
-                descripcion=articulo.descripcion
-                nombre=articulo.nombre
-                origen=articulo.paisDeOrigen
-                precio=articulo.precio()
-                puntaje=articulo.puntaje
-                imagen=articulo.imagen
-            }
-        }
+    fun getArticulos():Iterable<Articulo>{
+        return articuloService.getArticulos()
+
     }
 
     @GetMapping("/articulo/{idArticulo}")
