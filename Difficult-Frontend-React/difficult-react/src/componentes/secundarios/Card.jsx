@@ -17,7 +17,7 @@ export function Card(props){
             <img className="img center-y" src={articulo.imagen}></img>
             <div className="bx-item bg-terciario"><span className="margin-p">{articulo.nombre}</span></div>
             <h3 className="margin-p"><b>$ {articulo.precio}</b></h3>
-            <p className="margin-p"><b>Origen: {articulo.paisDeOrigen}</b></p>
+            <p className="margin-p"><b>Origen: {articulo.origen}</b></p>
             <span className="margin-p">{articulo.descripcion}</span>
             <button className="button pry-button" onClick={cambiarDeComponente}>Agregar al carrito</button>
         </section> 

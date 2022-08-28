@@ -2,8 +2,8 @@ export class Articulo{
 
     constructor(){
         this.precioBase=0
-        this.id=0
-        this.paisDeOrigen=""
+        this.idArticulo=0
+        this.origen=""
         this.puntaje=0
         this.imagen=""
         this.nombre=""
