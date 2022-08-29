@@ -3,11 +3,13 @@ package ar.com.phm2022.aplicacion.dominio
 import java.time.LocalDate
 import javax.persistence.Column
 import javax.persistence.Entity
+import javax.persistence.GeneratedValue
 import javax.persistence.Id
 
 @Entity
 class Compra {
     @Id
+    @GeneratedValue
     var id:Long=0
     @Column(length = 5)
     var ordenDeCompra:Long=0

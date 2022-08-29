@@ -1,6 +1,7 @@
 package ar.com.phm2022.aplicacion.services
 
 import ar.com.phm2022.aplicacion.dominio.*
+import ar.com.phm2022.aplicacion.repositorios.CompraRepository
 import ar.com.phm2022.aplicacion.repositorios.ItemRepository
 import ar.com.phm2022.aplicacion.repositorios.UsuarioRepositoryV2
 import ar.com.phm2022.aplicacion.serializadores.UsuarioLogueadoDTO
@@ -16,6 +17,7 @@ class UsuarioService {
     var idItem:Long=0
     @Autowired lateinit var usuarioRepository:UsuarioRepositoryV2
     @Autowired lateinit var itemRepository:ItemRepository
+    @Autowired lateinit var compraRepository:CompraRepository
     //val articuloRepository:ArticuloRepository=ArticuloRepository()
 
     @Transactional
@@ -39,16 +41,17 @@ class UsuarioService {
         return usuario.carritoDeCompras
     }
 
-    fun postCompraHecha(idUsuario: Long,compra:Compra): Iterable<Compra>{
+    @Transactional
+    fun postCompraHecha(idUsuario: Long,compra:Compra){
         var usuario=usuarioRepository.findById(idUsuario).get()
-        this.actualizarCompra(compra)
+        this.updateAndSaveCompraHecha(compra)
         usuario.confirmarCompra(compra)
-        return usuario.comprasHechas
+        usuarioRepository.save(usuario)
      }
 
-    private fun actualizarCompra(compra:Compra){
+    private fun updateAndSaveCompraHecha(compra:Compra){
         compra.fechaCompra= LocalDate.now()
-        this.asignarId(compra)
+        this.compraRepository.save(compra)
     }
 
     private fun asignarId(compra: Compra) {

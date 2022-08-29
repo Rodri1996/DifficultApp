@@ -12,6 +12,6 @@ interface UsuarioRepositoryV2: CrudRepository<Usuario,Long> {
     fun findByUsuario(usuario:String):Optional<Usuario>
 
     //TODO:Solucionar el nuevo error que figura aca
-    @EntityGraph(attributePaths = ["carritoDeCompras"])
+    @EntityGraph(attributePaths = ["carritoDeCompras","comprasHechas"])
     override fun findById(id: Long): Optional<Usuario>
 }

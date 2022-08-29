@@ -25,23 +25,22 @@ class Usuario{
     var saldo:Double=0.0
     var foto:String=""
     @Column(length = 5)
-    var ordenDeCompra:Long=0
+    var numeroDeCompra:Long=0
     @OneToMany(fetch = FetchType.LAZY)
     val carritoDeCompras:MutableList<Item> = mutableListOf()
     @OneToMany(fetch = FetchType.LAZY)
-    val comprasHechas:MutableList<Compra> = mutableListOf()
+    val comprasHechas:MutableSet<Compra> = mutableSetOf()
 
 
     fun sumarAlCarrito(item: Item){
         carritoDeCompras.add(item)
     }
 
-    fun confirmarCompra(compra: Compra):Compra{
-        compra.ordenDeCompra=this.ordenDeCompra
-        this.ordenDeCompra+=1
+    fun confirmarCompra(compra: Compra){
+        compra.ordenDeCompra=this.numeroDeCompra
+        this.numeroDeCompra= this.numeroDeCompra + 1
         comprasHechas.add(compra)
         carritoDeCompras.clear()
-        return compra
     }
 
     fun calcularImporteTotal(): Double {
