@@ -52,7 +52,7 @@ class UsuarioService{
     async postCompraNueva(compraNueva,usuarioId){
         console.log(usuarioId)
         console.info(compraNueva)
-        return await axios.post(`http://localhost:8080/compras/${usuarioId}`,Compra.compraToJson(compraNueva))
+        return await axios.post(`http://localhost:8080/compra/${usuarioId}`,Compra.compraToJson(compraNueva))
     }
 }
 
