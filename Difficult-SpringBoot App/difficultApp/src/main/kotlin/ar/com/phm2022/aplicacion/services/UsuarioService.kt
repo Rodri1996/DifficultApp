@@ -10,6 +10,15 @@ import org.springframework.stereotype.Service
 import java.time.LocalDate
 import javax.transaction.Transactional
 
+
+class ItemDTO(){
+    var nombreArticulo:String=""
+    var descripcion:String=""
+    var lote:Int=0
+    var cantidad:Int=0
+    var precio:Double=0.00
+}
+
 @Service
 class UsuarioService {
 
@@ -35,9 +44,21 @@ class UsuarioService {
         return item
     }
 
-    fun getItems(idUsuario: Long): Iterable<Item> {
+    fun getItems(idUsuario: Long): Iterable<ItemDTO> {
         var usuario=usuarioRepository.findById(idUsuario).get()
-        return usuario.carritoDeCompras
+        var items=usuario.carritoDeCompras
+        return items.map{this.createItemDTO(it)}
+    }
+
+    fun createItemDTO(item:Item):ItemDTO{
+        var itemDTO=ItemDTO().apply {
+            nombreArticulo=item.articulo.nombre
+            descripcion=item.articulo.descripcion
+            lote=item.loteElegido
+            cantidad=item.cantidad
+            precio=0.00//item.articulo.precio()
+        }
+        return itemDTO
     }
 
     @Transactional

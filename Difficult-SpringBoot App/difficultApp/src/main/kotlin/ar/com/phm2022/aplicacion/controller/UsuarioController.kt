@@ -2,6 +2,7 @@ package ar.com.phm2022.aplicacion.controller
 
 import ar.com.phm2022.aplicacion.dominio.*
 import ar.com.phm2022.aplicacion.serializadores.UsuarioLogueadoDTO
+import ar.com.phm2022.aplicacion.services.ItemDTO
 import ar.com.phm2022.aplicacion.services.ItemService
 import ar.com.phm2022.aplicacion.services.UsuarioService
 import io.swagger.v3.oas.annotations.Operation
@@ -45,7 +46,7 @@ class UsuarioController {
 
     @GetMapping("/items/{idUsuario}")
     @Operation(summary ="Se traen los items del carrito de compras de un usuario")
-    fun getItems(@PathVariable idUsuario:Long):Iterable<Item>{
+    fun getItems(@PathVariable idUsuario:Long):Iterable<ItemDTO>{
         var items=usuarioService.getItems(idUsuario)
         return items
     }
