@@ -2,6 +2,7 @@ package ar.com.phm2022.aplicacion.controller
 
 import ar.com.phm2022.aplicacion.dominio.*
 import ar.com.phm2022.aplicacion.serializadores.UsuarioLogueadoDTO
+import ar.com.phm2022.aplicacion.services.ItemService
 import ar.com.phm2022.aplicacion.services.UsuarioService
 import io.swagger.v3.oas.annotations.Operation
 import org.springframework.beans.factory.annotation.Autowired
@@ -13,12 +14,19 @@ import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 
+class ItemJson{
+    var idItemJson:Long=0
+    var idArticulo:Long = 0
+    var cantidad:Int = 0
+    var loteElegido:Int = 0
+}
+
 @RestController
 @CrossOrigin
 class UsuarioController {
 
     @Autowired lateinit var usuarioService: UsuarioService
-
+    @Autowired lateinit var itemService:ItemService
 
     //TODO:Revisar si esta bien hecho este requerimiento
     @GetMapping("/carrito/{idUsuario}")
@@ -29,7 +37,9 @@ class UsuarioController {
 
     @PostMapping("/item/{idUsuario}")
     @Operation(summary ="Se quiere sumar un item al carrito de compras de un usuario")
-    fun addItem(@RequestBody item: Item, @PathVariable idUsuario:Long){
+    fun addItem(@RequestBody itemJson: ItemJson, @PathVariable idUsuario:Long){
+        itemService.addItem(itemJson)
+        var item=itemService.getItem(itemJson.idItemJson)
         return usuarioService.agregarItemAlCarrito(item,idUsuario)
     }
 

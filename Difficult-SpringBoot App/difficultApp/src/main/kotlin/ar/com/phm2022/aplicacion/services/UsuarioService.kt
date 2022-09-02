@@ -23,7 +23,6 @@ class UsuarioService {
     @Transactional
     fun agregarItemAlCarrito(item: Item, idUsuario:Long){
         //articuloRepository.updateLotes(item)
-        itemRepository.save(item)
         var usuario=usuarioRepository.findById(idUsuario).get()
         //var  itemIdentificado=this.identificarItem(item)
         usuario.sumarAlCarrito(item)

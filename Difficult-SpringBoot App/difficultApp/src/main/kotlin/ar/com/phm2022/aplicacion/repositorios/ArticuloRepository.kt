@@ -92,9 +92,12 @@ class ArticuloRepository{
         return articulo.lotes
     }
 
+    /*
     fun updateLotes(item: Item) {
         var articulo=find(item.idArticulo)
         println("id del articulo: "+item.idArticulo)
         articulo.descontarUnidadesDisponibles(item.loteElegido,item.cantidad)
     }
+
+     */
 }
