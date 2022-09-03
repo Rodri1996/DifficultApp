@@ -3,27 +3,30 @@ import { Compra } from '../../dominio/Compra'
 import { ItemRow } from '../secundarios/ItemRow'
 import { usuarioService } from '../services/UsuarioService'
 
-export class CarritoCompra{
-    constructor(){
-        this.items=[]
-        this.cantItems=0
-        this.precioTotal=0
-    }
+// export class CarritoCompra{
+//     constructor(){
+//         this.idItem=0
+//         this.nombreArticulo=""
+//         this.descripcion=""
+//         this.lote=0
+//         this.cantidad=0
+//         this.precio=0
+//     }
 
-    static fromJson(carritoJson){
-        let carrito=Object.assign(
-            new CarritoCompra(),
-            carritoJson,
-            {}
-        )
-        return carrito
-    }
-}
+//     static fromJson(carritoJson){
+//         let carrito=Object.assign(
+//             new CarritoCompra(),
+//             carritoJson,
+//             {}
+//         )
+//         return carrito
+//     }
+// }
 
 export class Carrito extends Component{
 
     state={
-        carrito:new CarritoCompra()
+        items:[]
     }
 
     async componentDidMount(){
@@ -31,8 +34,9 @@ export class Carrito extends Component{
         let carrito = await usuarioService.getCarritoCompras(idUsuario)
         // let carrito = await usuarioService.getItems(idUsuario)
         this.setState({
-            carrito
+            items:carrito
         })
+        console.info(this.state.items)
     }
 
     getIdUsuarioLogueado(){
@@ -41,7 +45,7 @@ export class Carrito extends Component{
     }
 
     comprar=async()=>{
-        let carrito=this.state.carrito
+        let carrito=this.state.items
         let idUsuario=this.getIdUsuarioLogueado()
         let compraNueva=Compra.carritoToJson(carrito)
         await usuarioService.postCompraNueva(compraNueva,idUsuario)
@@ -49,8 +53,7 @@ export class Carrito extends Component{
     }
 
     render(){
-        {console.info(this.state.carrito.items)}
-        const precioTotalCarrito=this.state.carrito.precioTotal
+        const precioTotalCarrito=this.state.items.precioTotal
         return(
             <section className="bx-item column carrito">
                 <h1>Carrito de compras</h1>
@@ -66,10 +69,10 @@ export class Carrito extends Component{
                             </tr>
                         </thead>
                         {
-                            this.state.carrito.items.map(
+                            this.state.items.map(
                                 (item)=>
                                     <ItemRow
-                                        key={item.id}
+                                        key={item.idItem}
                                         item={item}
                                     />
                             )

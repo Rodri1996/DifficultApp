@@ -2,7 +2,7 @@ import axios from 'axios'
 import { Compra } from '../../dominio/Compra'
 import { Item } from '../../dominio/Item'
 import { Usuario } from '../../dominio/Usuario'
-import { CarritoCompra } from '../principales/CarritoDeCompras'
+import { itemService } from './ItemService'
 
 //const REST_SERVER_URL = 'http://localhost:8080'
 
@@ -11,6 +11,7 @@ class UsuarioService{
     constructor(){
         const usuarioString=localStorage.getItem("usuarioLogeado")
         this.usuario = Usuario.fromJson(JSON.parse(usuarioString))
+        this.itemService=itemService
     }
 
     findUser(){
@@ -18,8 +19,9 @@ class UsuarioService{
     }
 
     async getCarritoCompras(idUsuario){
-        const carritoCompras=await axios.get(`http://localhost:8080/carrito/${idUsuario}`)
-        return CarritoCompra.fromJson(carritoCompras.data)
+        const carritoCompras=await axios.get(`http://localhost:8080/items/${idUsuario}`)
+        console.info(carritoCompras.data)
+        return carritoCompras.data.map((item)=>Item.fromJson(item))
     }
 
     async getComprasHechas(idUsuario){
@@ -45,7 +47,6 @@ class UsuarioService{
     }
 
     async postItem(idUsuario,newItem){
-        console.log(idUsuario)
         await axios.post("http://localhost:8080/item/"+idUsuario,Item.toJson(newItem))
     }
 

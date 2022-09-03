@@ -1,10 +1,12 @@
 export class Item{
 
     constructor(){
-        this.id=0
-        this.idArticulo=0
+        this.idItem=0
+        this.nombreArticulo=""
+        this.descripcion=""
+        this.lote=0
         this.cantidad=0
-        this.loteElegido=0
+        this.precio=0
     }
 
     static fromJson(itemJson){

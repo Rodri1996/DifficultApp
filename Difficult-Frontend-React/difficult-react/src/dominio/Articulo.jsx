@@ -1,19 +1,19 @@
 export class Articulo{
 
     constructor(){
-        this.precioBase=0
         this.id=0
         this.paisDeOrigen=""
         this.puntaje=0
         this.imagen=""
+        this.precioBase=0
         this.nombre=""
         this.descripcion=""
+        this.rendimiento=0
+        this.litros=0
         this.tipo=""
+        this.precio=0
         this.medidas=""
         this.terminacion=""
-        this.precio=0
-        this.litros=0
-        this.rendimiento=0
     }
 
     static fromJson(articuloJson){
