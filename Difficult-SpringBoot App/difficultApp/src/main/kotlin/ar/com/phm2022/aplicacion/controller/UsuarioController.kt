@@ -39,8 +39,8 @@ class UsuarioController {
     @PostMapping("/item/{idUsuario}")
     @Operation(summary ="Se quiere sumar un item al carrito de compras de un usuario")
     fun addItem(@RequestBody itemJson: ItemJson, @PathVariable idUsuario:Long){
-        itemService.addItem(itemJson)
-        var item=itemService.getItem(itemJson.idItemJson)
+        var idItemAsignado=itemService.addItem(itemJson)
+        var item=itemService.getItem(idItemAsignado)
         return usuarioService.agregarItemAlCarrito(item,idUsuario)
     }
 

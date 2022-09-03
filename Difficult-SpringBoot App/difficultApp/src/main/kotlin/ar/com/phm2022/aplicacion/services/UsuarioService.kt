@@ -12,6 +12,7 @@ import javax.transaction.Transactional
 
 
 class ItemDTO(){
+    var idItem:Long=0
     var nombreArticulo:String=""
     var descripcion:String=""
     var lote:Int=0
@@ -52,6 +53,7 @@ class UsuarioService {
 
     fun createItemDTO(item:Item):ItemDTO{
         var itemDTO=ItemDTO().apply {
+            idItem=item.id
             nombreArticulo=item.articulo.nombre
             descripcion=item.articulo.descripcion
             lote=item.loteElegido

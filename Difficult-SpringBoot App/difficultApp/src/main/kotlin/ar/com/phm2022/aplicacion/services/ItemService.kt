@@ -13,10 +13,12 @@ class ItemService {
     @Autowired lateinit var itemRepository:ItemRepository
     var contador:Long=0
 
-    fun addItem(itemJson:ItemJson){
+    fun addItem(itemJson:ItemJson):Long{
         var articulo=articuloService.getArticulo(itemJson.idArticulo).get()
-        var item=Item(itemJson.idItemJson,articulo,itemJson.cantidad,itemJson.loteElegido)
+        var item=Item(contador,articulo,itemJson.cantidad,itemJson.loteElegido)
+        contador=contador+1
         itemRepository.save(item)
+        return item.id
     }
 
     fun getItem(idItem:Long):Item{
