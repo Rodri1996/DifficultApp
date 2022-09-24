@@ -6,9 +6,12 @@ import ar.com.phm2022.aplicacion.repositorios.ItemRepository
 import ar.com.phm2022.aplicacion.repositorios.UsuarioRepositoryV2
 import ar.com.phm2022.aplicacion.serializadores.UsuarioLogueadoDTO
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
+import org.springframework.web.server.ResponseStatusException
 import java.time.LocalDate
 import javax.transaction.Transactional
+
 
 
 class ItemDTO(){
@@ -116,7 +119,9 @@ class UsuarioService {
      fun getUsuarioRegistrado(credenciales: Credencial): UsuarioLogueadoDTO {
          var nombreUsuario=credenciales.usuario
          var contrasenia=credenciales.contraseña
-         var usuarioEncontrado= usuarioRepository.findByUsuario(nombreUsuario).get()
+         var usuarioEncontrado= usuarioRepository.findByUsuario(nombreUsuario).orElseThrow {
+             ResponseStatusException(HttpStatus.NOT_FOUND, "El usuario con nombre $nombreUsuario no existe")
+         }
          return UsuarioLogueadoDTO(
             usuarioEncontrado.id,
             usuarioEncontrado.nombre,
