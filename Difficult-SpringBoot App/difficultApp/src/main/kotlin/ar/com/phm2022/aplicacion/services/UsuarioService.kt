@@ -23,11 +23,12 @@ class ItemDTO(){
 @Service
 class UsuarioService {
 
-    var idCompra:Long=0
+    var compra:Long=0
     var idItem:Long=0
     @Autowired lateinit var usuarioRepository:UsuarioRepositoryV2
     @Autowired lateinit var itemRepository:ItemRepository
     @Autowired lateinit var compraRepository:CompraRepository
+    var numeroDeCompra:Long=0
     //val articuloRepository:ArticuloRepository=ArticuloRepository()
 
     @Transactional
@@ -64,10 +65,21 @@ class UsuarioService {
     }
 
     @Transactional
-    fun postCompraHecha(idUsuario: Long,compra:Compra){
+    fun postCompraHecha(idUsuario: Long){
         var usuario=usuarioRepository.findById(idUsuario).get()
-        this.updateAndSaveCompraHecha(compra)
-        usuario.confirmarCompra(compra)
+        var compra=Compra().apply {
+            id=compra
+            ordenDeCompra=numeroDeCompra
+            fechaCompra=LocalDate.now()
+            cantArticulos=usuario.carritoDeCompras.size
+            importeTotal=usuario.carritoDeCompras.map { it.precioTotalArticulo() }.fold(0.00, { acum, precioTotal -> acum + precioTotal})
+        }
+        this.numeroDeCompra= this.numeroDeCompra + 1
+        this.compra=this.compra+1
+        var idCompra=compra.id
+        compraRepository.save(compra)
+        var compraPersistida=compraRepository.findById(idCompra).get()
+        usuario.confirmarCompra(compraPersistida)
         usuarioRepository.save(usuario)
      }
 
@@ -77,8 +89,8 @@ class UsuarioService {
     }
 
     private fun asignarId(compra: Compra) {
-        compra.id=this.idCompra
-        this.idCompra+=1
+        compra.id=this.compra
+        this.compra+=1
     }
 
 
@@ -112,8 +124,4 @@ class UsuarioService {
             usuarioEncontrado.foto
          )}
 
-    fun getCarrito(idUsuario: Long): CarritoDTO {
-        var usuario=usuarioRepository.findById(idUsuario).get()
-        return usuario.getCompraRealizada()
-    }
 }

@@ -69,14 +69,6 @@ class UsuarioRepository {
         return usuariosRegistrados.first { it.id == idUsuario }
     }
 
-    fun postCompra(idUsuario: Long,compra:Compra):Iterable<Compra>{
-        var usuario=getUsuario(idUsuario)
-        compra.fechaCompra= LocalDate.now()
-        compra.id=this.idCompra
-        this.idCompra+=1
-        var compraRealizada=usuario.confirmarCompra(compra)
-        return mutableListOf()
-    }
 
     fun allCompras(idUsuario:Long): Iterable<Compra> {
         var usuario=getUsuario(idUsuario)
@@ -93,13 +85,4 @@ class UsuarioRepository {
         return usuariosRegistrados.first { it.usuario == credenciales.usuario && it.contrasenia==credenciales.contrasenia}
     }
 
-    fun calcularTotalCarrito(idUsuario: Long): Double {
-        var usuario=getUsuario(idUsuario)
-        return usuario.calcularImporteTotal()
-    }
-
-    fun findCarrito(idUsuario: Long): CarritoDTO {
-        var usuario=getUsuario(idUsuario)
-        return usuario.getCompraRealizada()
-    }
 }

@@ -9,7 +9,6 @@ import javax.persistence.Id
 @Entity
 class Compra {
     @Id
-    @GeneratedValue
     var id:Long=0
     @Column(length = 5)
     var ordenDeCompra:Long=0

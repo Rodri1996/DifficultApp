@@ -19,10 +19,8 @@ class Item (@Id var id: Long,@OneToOne var articulo:Articulo, @Column(length = 5
     //val articuloRepository: ArticuloRepository = ArticuloRepository()
 
 
-    fun precioArticulo():Double{
-      //  var articulo=articuloRepository.find(idArticulo)
-      //  return articulo.precio()
-        return 0.00
+    fun precioTotalArticulo():Double{
+      return articulo.precio()*cantidad
     }
 
 }

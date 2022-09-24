@@ -29,13 +29,6 @@ class UsuarioController {
     @Autowired lateinit var usuarioService: UsuarioService
     @Autowired lateinit var itemService:ItemService
 
-    //TODO:Revisar si esta bien hecho este requerimiento
-    @GetMapping("/carrito/{idUsuario}")
-    @Operation(summary ="Se trae el carrito de compras con los items, cant articulos y precio total")
-    fun getCarritoCompras(@PathVariable idUsuario:Long): CarritoDTO {
-        return usuarioService.getCarrito(idUsuario)
-    }
-
     @PostMapping("/item/{idUsuario}")
     @Operation(summary ="Se quiere sumar un item al carrito de compras de un usuario")
     fun addItem(@RequestBody itemJson: ItemJson, @PathVariable idUsuario:Long){
@@ -52,8 +45,8 @@ class UsuarioController {
     }
     @PostMapping("/compra/{idUsuario}")
     @Operation(summary ="Se agrega una compra hecha por un usuario")
-    fun postCompras(@PathVariable idUsuario:Long,@RequestBody compra: Compra){
-        usuarioService.postCompraHecha(idUsuario,compra)
+    fun postCompras(@PathVariable idUsuario:Long){
+        usuarioService.postCompraHecha(idUsuario)
     }
 
     @GetMapping("/compras/{idUsuario}")
