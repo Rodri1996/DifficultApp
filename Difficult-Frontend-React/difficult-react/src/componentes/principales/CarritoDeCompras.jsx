@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Compra } from '../../dominio/Compra'
 import { ItemRow } from '../secundarios/ItemRow'
 import { usuarioService } from '../services/UsuarioService'
 
@@ -45,10 +44,10 @@ export class Carrito extends Component{
     }
 
     comprar=async()=>{
-        let carrito=this.state.items
+        // let carrito=this.state.items
         let idUsuario=this.getIdUsuarioLogueado()
-        let compraNueva=Compra.carritoToJson(carrito)
-        await usuarioService.postCompraNueva(compraNueva,idUsuario)
+        // let compraNueva=Compra.carritoToJson(carrito)
+        await usuarioService.postCompraNueva(idUsuario)
         await this.componentDidMount()
     }
 

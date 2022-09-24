@@ -24,12 +24,12 @@ export class Compra{
         return compra
     }
 
-    static carritoToJson(carrito){
-        return {
-            cantArticulos:carrito.cantItems,
-            importeTotal:carrito.precioTotal
-        }
-    }
+    // static carritoToJson(carrito){
+    //     return {
+    //         cantArticulos:carrito.cantItems,
+    //         importeTotal:carrito.precioTotal
+    //     }
+    // }
 
     static compraToJson(compraNueva){
         return {
