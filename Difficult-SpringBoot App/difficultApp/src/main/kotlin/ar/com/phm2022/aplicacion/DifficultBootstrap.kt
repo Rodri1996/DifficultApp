@@ -2,6 +2,7 @@ package ar.com.phm2022.aplicacion
 
 import ar.com.phm2022.aplicacion.dominio.*
 import ar.com.phm2022.aplicacion.repositorios.ArticuloRepositoryV2
+import ar.com.phm2022.aplicacion.repositorios.LoteRepository
 import ar.com.phm2022.aplicacion.repositorios.UsuarioRepositoryV2
 import org.springframework.beans.factory.InitializingBean
 import org.springframework.beans.factory.annotation.Autowired
@@ -14,6 +15,7 @@ class DifficultBootstrap:InitializingBean{
     //Repositorios:
     @Autowired lateinit var articuloRepository:ArticuloRepositoryV2
     @Autowired lateinit var usuarioRepository:UsuarioRepositoryV2
+    @Autowired lateinit var loteRepository:LoteRepository
     //Pinturas:
     lateinit var aldaBlanco1: Pintura
     lateinit var aldaBlanco2: Pintura
@@ -50,6 +52,11 @@ class DifficultBootstrap:InitializingBean{
         loteAcmeRustico1=Lote(LocalDate.now(),1)
         loteAldaBlanco1=Lote(LocalDate.now(),2)
         loteAldaBlanco2=Lote(LocalDate.now(),3)
+        loteRepository.save(loteAcmeBeteado1)
+        loteRepository.save(loteAcmeArena1)
+        loteRepository.save(loteAcmeRustico1)
+        loteRepository.save(loteAldaBlanco1)
+        loteRepository.save(loteAldaBlanco2)
     }
 
     private fun initUsuarios(){

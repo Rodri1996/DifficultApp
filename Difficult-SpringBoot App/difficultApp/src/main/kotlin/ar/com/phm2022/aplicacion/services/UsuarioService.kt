@@ -3,6 +3,7 @@ package ar.com.phm2022.aplicacion.services
 import ar.com.phm2022.aplicacion.dominio.*
 import ar.com.phm2022.aplicacion.repositorios.CompraRepository
 import ar.com.phm2022.aplicacion.repositorios.ItemRepository
+import ar.com.phm2022.aplicacion.repositorios.LoteRepository
 import ar.com.phm2022.aplicacion.repositorios.UsuarioRepositoryV2
 import ar.com.phm2022.aplicacion.serializadores.UsuarioLogueadoDTO
 import org.springframework.beans.factory.annotation.Autowired
@@ -19,7 +20,7 @@ class ItemDTO(){
     var idItem:Long=0
     var nombreArticulo:String=""
     var descripcion:String=""
-    var lote:Int=0
+    var lote:Long=0
     var cantidad:Int=0
     var precio:Double=0.00
 }
@@ -32,16 +33,21 @@ class UsuarioService {
     @Autowired lateinit var usuarioRepository:UsuarioRepositoryV2
     @Autowired lateinit var itemRepository:ItemRepository
     @Autowired lateinit var compraRepository:CompraRepository
+    @Autowired lateinit var loteRepository:LoteRepository
     var numeroDeCompra:Long=0
     //val articuloRepository:ArticuloRepository=ArticuloRepository()
 
     @Transactional
     fun agregarItemAlCarrito(item: Item, idUsuario:Long){
-        //articuloRepository.updateLotes(item)
+        //loteRepository.findById()
         var usuario=usuarioRepository.findById(idUsuario).get()
-        //var  itemIdentificado=this.identificarItem(item)
         usuario.sumarAlCarrito(item)
         this.usuarioRepository.save(usuario)
+        var lote=loteRepository.findById(item.loteElegido).orElseThrow {
+            ResponseStatusException(HttpStatus.NOT_FOUND, "No existe ese lote.Seleccione otro como reemplazo")
+        }
+        lote.descontarUnidades(item.cantidad)
+        loteRepository.save(lote)
     }
 
     private fun identificarItem(item:Item):Item{
@@ -125,9 +131,5 @@ class UsuarioService {
          }
         return UsuarioLogueadoDTO(usuarioEncontrado.id, usuarioEncontrado.nombre, usuarioEncontrado.carritoDeCompras.size, usuarioEncontrado.foto)
      }
-
-}
-@ResponseStatus(HttpStatus.NOT_FOUND)
-class NotFoundException(mensaje:String):RuntimeException(mensaje){
 
 }

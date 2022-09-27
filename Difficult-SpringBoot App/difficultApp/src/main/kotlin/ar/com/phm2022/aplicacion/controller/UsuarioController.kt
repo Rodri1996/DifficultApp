@@ -19,7 +19,7 @@ class ItemJson{
     var idItemJson:Long=0
     var idArticulo:Long = 0
     var cantidad:Int = 0
-    var loteElegido:Int = 0
+    var loteElegido:Long = 0
 }
 
 @RestController

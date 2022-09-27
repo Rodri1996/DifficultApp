@@ -14,7 +14,7 @@ class ItemService {
     var contador:Long=0
 
     fun addItem(itemJson:ItemJson):Long{
-        var articulo=articuloService.getArticulo(itemJson.idArticulo).get()
+        var articulo=articuloService.getArticulo(itemJson.idArticulo)
         var item=Item(contador,articulo,itemJson.cantidad,itemJson.loteElegido)
         contador=contador+1
         itemRepository.save(item)

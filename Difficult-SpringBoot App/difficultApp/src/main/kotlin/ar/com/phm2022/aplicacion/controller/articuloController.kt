@@ -27,7 +27,7 @@ class ArticulosController {
 
     @GetMapping("/articulo/{idArticulo}")
     @Operation( summary ="Se trae un articulo registrado")
-    fun getArticulo(@PathVariable idArticulo:Long): Optional<Articulo> {
+    fun getArticulo(@PathVariable idArticulo:Long): Articulo {
         return articuloService.getArticulo(idArticulo)
     }
 

@@ -21,7 +21,7 @@ abstract class Articulo(){
     var puntaje:Int=0
     //TODO: cómo hacer para que los productos de un combo se puedan agregar al @EntityGraph del metodo findAll()
     //TODO: ver por que usando el CascadeType.ALL se soluciona el problema de "object references an unsaved transient instance - save the transient instance before flushing: ar.com.phm2022.aplicacion.dominio.Lote"
-    @OneToMany(cascade = [CascadeType.ALL],fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY)
     @JsonIgnore
     var lotes:MutableList<Lote> = mutableListOf()
     @OneToMany(fetch = FetchType.LAZY)
@@ -36,17 +36,16 @@ abstract class Articulo(){
         return this.lotes
     }
     fun agregarLote(lote: Lote){
-        lote.id+=1
         lotes.add(lote)
     }
 
-    fun descontarUnidadesDisponibles(numeroLote: Int,cantidad:Int){
+    fun descontarUnidadesDisponibles(numeroLote: Long,cantidad:Int){
         var lote = this.findLote(numeroLote)
         lote.descontarUnidades(cantidad)
         this.updateLote(lote)
     }
 
-    fun findLote(numeroLote: Int): Lote {
+    fun findLote(numeroLote: Long): Lote {
         return lotes.first { it.numero == numeroLote }
     }
     fun updateLote(loteActualizado: Lote){
