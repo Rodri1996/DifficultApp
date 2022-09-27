@@ -56,9 +56,9 @@ class UsuarioController {
     }
 
     //TODO: Averiguar cómo generar una query para el metodo findUser(credenciales: Credencial) en UsuarioRepository
-    @PostMapping("/usuario")
-    @Operation(summary ="Se verifica que el usuario esta registrado y se lo trae")
-    fun getUsuarioRegistrado(@RequestBody credenciales: Credencial):UsuarioLogueadoDTO{
+    @GetMapping("/usuario")
+    @Operation(summary ="Se trae un usuario si este esta registrado")
+    fun getUsuarioRegistrado(@RequestBody credenciales: Credencial): UsuarioLogueadoDTO{
         return usuarioService.getUsuarioRegistrado(credenciales)
     }
 /*

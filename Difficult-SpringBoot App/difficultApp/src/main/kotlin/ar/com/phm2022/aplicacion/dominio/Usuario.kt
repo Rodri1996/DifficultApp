@@ -6,7 +6,7 @@ import javax.persistence.*
 
 open class Credencial{
     var usuario:String=""
-    var contraseña:String=""
+    var contrasenia:String=""
 }
 
 @Entity

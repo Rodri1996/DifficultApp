@@ -8,6 +8,7 @@ import ar.com.phm2022.aplicacion.serializadores.UsuarioLogueadoDTO
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
+import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.server.ResponseStatusException
 import java.time.LocalDate
 import javax.transaction.Transactional
@@ -116,17 +117,17 @@ class UsuarioService {
         return usuarioRepository.calcularTotalCarrito(idUsuario)
      }
 */
-     fun getUsuarioRegistrado(credenciales: Credencial): UsuarioLogueadoDTO {
+     fun getUsuarioRegistrado(credenciales: Credencial):UsuarioLogueadoDTO {
          var nombreUsuario=credenciales.usuario
-         var contrasenia=credenciales.contraseña
-         var usuarioEncontrado= usuarioRepository.findByUsuario(nombreUsuario).orElseThrow {
-             ResponseStatusException(HttpStatus.NOT_FOUND, "El usuario con nombre $nombreUsuario no existe")
+         var contrasenia=credenciales.contrasenia
+         var usuarioEncontrado= usuarioRepository.findByUsuarioAndContrasenia(nombreUsuario,contrasenia).orElseThrow {
+             ResponseStatusException(HttpStatus.NOT_FOUND, "No existe un usuario registrado con esas credenciales")
          }
-         return UsuarioLogueadoDTO(
-            usuarioEncontrado.id,
-            usuarioEncontrado.nombre,
-            usuarioEncontrado.carritoDeCompras.size,
-            usuarioEncontrado.foto
-         )}
+        return UsuarioLogueadoDTO(usuarioEncontrado.id, usuarioEncontrado.nombre, usuarioEncontrado.carritoDeCompras.size, usuarioEncontrado.foto)
+     }
+
+}
+@ResponseStatus(HttpStatus.NOT_FOUND)
+class NotFoundException(mensaje:String):RuntimeException(mensaje){
 
 }
