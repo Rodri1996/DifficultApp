@@ -9,7 +9,6 @@ import ar.com.phm2022.aplicacion.serializadores.UsuarioLogueadoDTO
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
-import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.server.ResponseStatusException
 import java.time.LocalDate
 import javax.transaction.Transactional
@@ -28,7 +27,7 @@ class ItemDTO(){
 @Service
 class UsuarioService {
 
-    var compra:Long=0
+    var identificador:Long=0
     var idItem:Long=0
     @Autowired lateinit var usuarioRepository:UsuarioRepositoryV2
     @Autowired lateinit var itemRepository:ItemRepository
@@ -37,10 +36,12 @@ class UsuarioService {
     var numeroDeCompra:Long=0
     //val articuloRepository:ArticuloRepository=ArticuloRepository()
 
+    private fun getUsuario(idUsuario:Long):Usuario{
+        return usuarioRepository.findById(idUsuario).get()
+    }
     @Transactional
     fun agregarItemAlCarrito(item: Item, idUsuario:Long){
-        //loteRepository.findById()
-        var usuario=usuarioRepository.findById(idUsuario).get()
+        var usuario=this.getUsuario(idUsuario)
         usuario.sumarAlCarrito(item)
         this.usuarioRepository.save(usuario)
         var lote=loteRepository.findById(item.loteElegido).orElseThrow {
@@ -49,15 +50,8 @@ class UsuarioService {
         lote.descontarUnidades(item.cantidad)
         loteRepository.save(lote)
     }
-
-    private fun identificarItem(item:Item):Item{
-        item.id=this.idItem
-        this.idItem=this.idItem+1
-        return item
-    }
-
     fun getItems(idUsuario: Long): Iterable<ItemDTO> {
-        var usuario=usuarioRepository.findById(idUsuario).get()
+        var usuario=getUsuario(idUsuario)
         var items=usuario.carritoDeCompras
         return items.map{this.createItemDTO(it)}
     }
@@ -75,37 +69,33 @@ class UsuarioService {
     }
 
     @Transactional
-    fun postCompraHecha(idUsuario: Long){
-        var usuario=usuarioRepository.findById(idUsuario).get()
-        var compra=Compra().apply {
-            id=compra
-            ordenDeCompra=numeroDeCompra
-            fechaCompra=LocalDate.now()
-            cantArticulos=usuario.carritoDeCompras.size
-            importeTotal=usuario.carritoDeCompras.map { it.precioTotalArticulo() }.fold(0.00, { acum, precioTotal -> acum + precioTotal})
-        }
-        this.numeroDeCompra= this.numeroDeCompra + 1
-        this.compra=this.compra+1
-        var idCompra=compra.id
+    fun postCompra(idUsuario: Long){
+        var usuario=this.getUsuario(idUsuario)
+        var compra=this.modelarCompra(usuario)
         compraRepository.save(compra)
-        var compraPersistida=compraRepository.findById(idCompra).get()
+        var compraPersistida=compraRepository.findById(compra.id).get()
         usuario.confirmarCompra(compraPersistida)
         usuarioRepository.save(usuario)
      }
 
-    private fun updateAndSaveCompraHecha(compra:Compra){
-        compra.fechaCompra= LocalDate.now()
-        this.compraRepository.save(compra)
+    private fun modelarCompra(usuario: Usuario):Compra{
+        var compra=Compra().apply {
+            id=identificador
+            ordenDeCompra=numeroDeCompra
+            fechaCompra=LocalDate.now()
+            cantArticulos=usuario.carritoDeCompras.map { it.cantidad }.fold(0, { acum, precioTotal -> acum + precioTotal})
+            importeTotal=usuario.carritoDeCompras.map { it.precioTotalArticulo() }.fold(0.00, { acum, precioTotal -> acum + precioTotal})
+        }
+        this.incrementarContadores()
+        return compra
     }
 
-    private fun asignarId(compra: Compra) {
-        compra.id=this.compra
-        this.compra+=1
+    private fun incrementarContadores(){
+        this.numeroDeCompra=this.numeroDeCompra+1
+        this.identificador=this.identificador+1
     }
-
-
     fun getCompras(idUsuario:Long): Iterable<Compra> {
-        var usuario=usuarioRepository.findById(idUsuario).get()
+        var usuario=this.getUsuario(idUsuario)
         return usuario.comprasHechas
     }
 
@@ -117,12 +107,6 @@ class UsuarioService {
     }
 
      */
-
-    /*
-    fun getTotalCarrito(idUsuario: Long): Double {
-        return usuarioRepository.calcularTotalCarrito(idUsuario)
-     }
-*/
      fun getUsuarioRegistrado(credenciales: Credencial):UsuarioLogueadoDTO {
          var nombreUsuario=credenciales.usuario
          var contrasenia=credenciales.contrasenia
