@@ -4,7 +4,7 @@ import java.time.LocalDate
 import javax.persistence.*
 
 
-open class Credencial{
+class Credencial{
     var usuario:String=""
     var contrasenia:String=""
 }

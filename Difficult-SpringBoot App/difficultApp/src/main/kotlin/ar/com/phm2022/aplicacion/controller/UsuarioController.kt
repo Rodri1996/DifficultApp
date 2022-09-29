@@ -47,14 +47,11 @@ class UsuarioController {
     fun postCompra(@PathVariable idUsuario:Long){
         usuarioService.postCompra(idUsuario)
     }
-
     @GetMapping("/compras/{idUsuario}")
     @Operation(summary ="Se traen las compras hechas por un usuario")
     fun getCompras(@PathVariable idUsuario:Long):Iterable<Compra>{
         return usuarioService.getCompras(idUsuario)
     }
-
-    //TODO: Averiguar cómo generar una query para el metodo findUser(credenciales: Credencial) en UsuarioRepository
     @GetMapping("/usuario")
     @Operation(summary ="Se trae un usuario si este esta registrado")
     fun getUsuarioRegistrado(@RequestBody credenciales: Credencial): UsuarioLogueadoDTO{
@@ -65,13 +62,6 @@ class UsuarioController {
     @Operation(summary ="Se actualizan todos los datos de un usuario")
     fun putUsuario(@PathVariable idUsuario:Long,@RequestBody usuarioActualizado: Usuario): Usuario {
         return usuarioService.putUsuario(idUsuario,usuarioActualizado)
-    }
-
-
-    @GetMapping("/totalCarrito/{idUsuario}")
-    @Operation(summary ="Se trae el precio total de la posible compra del carrito")
-    fun getTotalCarrito(@PathVariable idUsuario: Long):Double{
-        return usuarioService.getTotalCarrito(idUsuario)
     }
 */
 
