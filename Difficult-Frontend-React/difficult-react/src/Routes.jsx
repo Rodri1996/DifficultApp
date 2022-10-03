@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { BrowserRouter, Route } from 'react-router-dom'
 import { Carrito } from './componentes/principales/CarritoDeCompras'
 import { DetalleDelProducto } from './componentes/principales/DetalleDelProducto'

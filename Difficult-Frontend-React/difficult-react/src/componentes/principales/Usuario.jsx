@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 import { Usuario } from '../../dominio/Usuario'
 import { CompraRow } from '../secundarios/TableRow'
 import { usuarioService } from '../services/UsuarioService'

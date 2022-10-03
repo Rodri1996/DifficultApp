@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 import { Card } from "../secundarios/Card"
 import { articuloService } from "../services/ArticuloService"
 

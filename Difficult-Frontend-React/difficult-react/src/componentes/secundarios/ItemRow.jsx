@@ -1,5 +1,5 @@
 import { PropTypes } from 'prop-types'
-import React from 'react'
+
 import { Item } from '../../dominio/Item'
 
 export function ItemRow(props){
