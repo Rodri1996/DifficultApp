@@ -6,7 +6,7 @@ export class Usuario{
         this.items=0
         this.foto=""
         this.usuario=""
-        this.contraseña=""
+        this.contrasenia=""
     }
 
     static fromJson(usuarioLogueadoJson){
@@ -21,7 +21,7 @@ export class Usuario{
     static toJson(usuario,contraseña){
         return {
             usuario:usuario,
-            contraseña:contraseña
+            contrasenia:contraseña
         }
     }
 }
