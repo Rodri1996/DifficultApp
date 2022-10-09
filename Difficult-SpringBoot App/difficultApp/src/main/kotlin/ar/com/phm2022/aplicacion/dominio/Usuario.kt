@@ -1,13 +1,9 @@
 package ar.com.phm2022.aplicacion.dominio
 
-import java.time.LocalDate
 import javax.persistence.*
 
 
-class Credencial{
-    var usuario:String=""
-    var contrasenia:String=""
-}
+class Credencial(var usuario:String, var contrasenia:String){   }
 
 @Entity
 class Usuario{

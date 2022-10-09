@@ -107,11 +107,11 @@ class UsuarioService {
     }
 
      */
-     fun getUsuarioRegistrado(credenciales: Credencial):UsuarioLogueadoDTO {
-         var nombreUsuario=credenciales.usuario
+     fun findUsuario(credenciales: Credencial):UsuarioLogueadoDTO {
+         var usuario=credenciales.usuario
          var contrasenia=credenciales.contrasenia
-         var usuarioEncontrado= usuarioRepository.findByUsuarioAndContrasenia(nombreUsuario,contrasenia).orElseThrow {
-             ResponseStatusException(HttpStatus.NOT_FOUND, "No existe un usuario registrado con esas credenciales")
+         var usuarioEncontrado= usuarioRepository.findByUsuarioAndContrasenia(usuario,contrasenia).orElseThrow {
+             ResponseStatusException(HttpStatus.NOT_FOUND, "No existe un usuario registrado con esas credenciales. Ingrese credenciales válidas")
          }
         return UsuarioLogueadoDTO(usuarioEncontrado.id, usuarioEncontrado.nombre, usuarioEncontrado.carritoDeCompras.size, usuarioEncontrado.foto)
      }

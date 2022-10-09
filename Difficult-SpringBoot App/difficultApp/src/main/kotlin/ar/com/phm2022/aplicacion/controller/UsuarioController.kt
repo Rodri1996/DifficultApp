@@ -52,10 +52,10 @@ class UsuarioController {
     fun getCompras(@PathVariable idUsuario:Long):Iterable<Compra>{
         return usuarioService.getCompras(idUsuario)
     }
-    @GetMapping("/usuario")
+    @PostMapping("/usuario")
     @Operation(summary ="Se trae un usuario si este esta registrado")
-    fun getUsuarioRegistrado(@RequestBody credenciales: Credencial): UsuarioLogueadoDTO{
-        return usuarioService.getUsuarioRegistrado(credenciales)
+    fun findUsuario(@RequestBody credenciales: Credencial): UsuarioLogueadoDTO{
+        return usuarioService.findUsuario(credenciales)
     }
 /*
     @PutMapping("/usuario/{idUsuario}")
