@@ -36,7 +36,6 @@ class UsuarioService{
     }
 
     async getUsuarioLogueado(usuario,contraseña){
-        //const usuarioLogueadoJson = await axios.get(`${REST_SERVER_URL}/usuario`,Usuario.toJson(usuario,contraseña))
         const usuarioLogueadoJson = await axios.post('http://localhost:8080/usuario',Usuario.toJson(usuario,contraseña))
         return Usuario.fromJson(usuarioLogueadoJson)
     }
