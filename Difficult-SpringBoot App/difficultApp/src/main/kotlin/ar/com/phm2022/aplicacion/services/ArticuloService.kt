@@ -20,7 +20,7 @@ class ArticuloService {
 
     fun getArticulo(idArticulo: Long): Articulo {
         return articuloRepository.findById(idArticulo).orElseThrow {
-            ResponseStatusException(HttpStatus.NOT_FOUND, "No existe ese articulo.Seleccione otro como reemplazo")
+            ResponseStatusException(HttpStatus.NOT_FOUND, "El articulo ya no se encuentra en el repositorio.Seleccione otro como reemplazo")
         }
     }
     fun filtrarArticulosPorPuntuacion(puntaje: Int): Iterable<Articulo> {
@@ -28,8 +28,8 @@ class ArticuloService {
     }
 
     fun getLotes(idArticulo: Long): Iterable<Lote> {
-        var articulo= articuloRepository.findById(idArticulo)
-        return articulo.get().traerLotes()
+        var articulo= this.getArticulo(idArticulo)
+        return articulo.traerLotes()
     }
 
 }
