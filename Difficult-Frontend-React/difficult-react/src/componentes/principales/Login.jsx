@@ -1,23 +1,37 @@
 import { Component } from 'react'
 import { PropTypes } from 'prop-types'
 import { usuarioService } from "../services/UsuarioService"
+import { recuperarMensajeError } from '../../utils/recuperarMensajeError'
 
 export class Login extends Component{
     
     state={
         usuario: '',
-        contraseña: ''
+        contraseña: '',
+        errorMessage:''
     }
 
     getUsuario = async ()=>{
-        const usuario = this.state.usuario
-        const contraseña = this.state.contraseña
-        const usuarioLogueado = await usuarioService.getUsuarioLogueado(usuario,contraseña)
-        console.info(usuarioLogueado)
-        localStorage.setItem("usuarioLogeado",JSON.stringify(usuarioLogueado.data))
-        this.props.history.push('/home')
+        try {
+            const usuario = this.state.usuario
+            const contraseña = this.state.contraseña
+            const usuarioLogueado = await usuarioService.getUsuarioLogueado(usuario,contraseña)
+            console.info(usuarioLogueado)
+            localStorage.setItem("usuarioLogeado",JSON.stringify(usuarioLogueado.data))
+            this.props.history.push('/home')
+        } catch (error) {
+            let errorMessage=recuperarMensajeError(error)
+            console.log(errorMessage)
+            this.setearErrorMessage(errorMessage)
+        }
     }
     
+    setearErrorMessage(message){
+        this.setState({
+            errorMessage:message
+        })
+    }
+
     cambiarNombreDeUsuario = (event) => {
         const nombreUsuario = event.target.value
         this.setNombreUsuario(nombreUsuario)
@@ -65,3 +79,4 @@ export class Login extends Component{
         }
     }
 }
+
