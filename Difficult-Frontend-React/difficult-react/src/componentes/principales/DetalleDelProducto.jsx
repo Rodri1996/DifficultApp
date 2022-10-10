@@ -6,6 +6,7 @@ import { Articulo } from '../../dominio/Articulo'
 import { LoteRow } from '../secundarios/LoteRow'
 import { Item } from '../../dominio/Item'
 import { usuarioService } from '../services/UsuarioService'
+import { recuperarMensajeError } from '../../utils/recuperarMensajeError'
 
 export class DetalleDelProducto extends Component{
     
@@ -13,13 +14,20 @@ export class DetalleDelProducto extends Component{
         articulo:new Articulo(),
         lotes:[],
         cantidadElegida:0,
+        errorMessage:""
     }
 
     async componentDidMount(){
-        const idArticulo=this.getId()
-        await this.getArticulo(idArticulo)
-        await this.getLotesArticulo(idArticulo)
-        console.info(this.state.articulo)
+        try {
+            const idArticulo=this.getId()
+            await this.getArticulo(idArticulo)
+            await this.getLotesArticulo(idArticulo)
+            console.info(this.state.articulo)
+        } catch (error) {
+            let errorEncontrado=recuperarMensajeError(error)
+            console.log(errorEncontrado)
+            this.setearErrorMessage(errorEncontrado)
+        }
     }
     
     getId(){
@@ -29,6 +37,10 @@ export class DetalleDelProducto extends Component{
     async getArticulo(idArticulo){
         let articuloEncontrado=await articuloService.findArticulo(idArticulo)
         this.updateArticulo(articuloEncontrado)
+    }
+
+    setearErrorMessage(message){
+        this.setState({errorMessage:message})
     }
 
     async getLotesArticulo(idArticulo){

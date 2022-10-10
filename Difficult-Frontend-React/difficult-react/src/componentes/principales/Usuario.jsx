@@ -7,16 +7,29 @@ export class PerfilDeUsuario extends Component{
 
     state={
         usuario:new Usuario(),
-        compras:[]
+        compras:[],
+        errorMessage:""
     }
 
     async componentDidMount(){
-        //TODO: Ver que sacar al usuario del local storage se haga una unica vez. Q lo haga el service del usuario
-        const usuario=usuarioService.findUser()
-        const compras= await usuarioService.getComprasHechas(usuario.id)
-        this.setUsuario(usuario)
-        this.setComprasHechas(compras)
-        console.info(this.state.compras)
+        try {
+            //TODO: Ver que sacar al usuario del local storage se haga una unica vez. Q lo haga el service del usuario
+            const usuario=usuarioService.findUser()
+            const compras= await usuarioService.getComprasHechas(usuario.id)
+            this.setUsuario(usuario)
+            this.setComprasHechas(compras)
+            console.info(this.state.compras)
+        } catch (error) {
+            let errorEncontrado=recuperarMensajeError(error)
+            console.log(errorEncontrado)
+            this.setearErrorMessage(errorMessage)
+        }
+    }
+
+    setearErrorMessage(message){
+        this.setState({
+            errorMessage:message
+        })
     }
 
     setUsuario=(usuario)=>{

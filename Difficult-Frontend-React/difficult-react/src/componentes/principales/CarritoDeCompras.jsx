@@ -1,41 +1,34 @@
 import { Component } from 'react'
+import { recuperarMensajeError } from '../../utils/recuperarMensajeError'
 import { ItemRow } from '../secundarios/ItemRow'
 import { usuarioService } from '../services/UsuarioService'
-
-// export class CarritoCompra{
-//     constructor(){
-//         this.idItem=0
-//         this.nombreArticulo=""
-//         this.descripcion=""
-//         this.lote=0
-//         this.cantidad=0
-//         this.precio=0
-//     }
-
-//     static fromJson(carritoJson){
-//         let carrito=Object.assign(
-//             new CarritoCompra(),
-//             carritoJson,
-//             {}
-//         )
-//         return carrito
-//     }
-// }
 
 export class Carrito extends Component{
 
     state={
-        items:[]
+        items:[],
+        errorMessage:''
     }
 
     async componentDidMount(){
-        const idUsuario= this.getIdUsuarioLogueado()
-        let carrito = await usuarioService.getCarritoCompras(idUsuario)
-        // let carrito = await usuarioService.getItems(idUsuario)
+        try {
+            const idUsuario= this.getIdUsuarioLogueado()
+            let carrito = await usuarioService.getCarritoCompras(idUsuario)
+            this.setState({
+                items:carrito,
+            })
+            console.info(this.state.items)
+        } catch (error) {
+            let errorEncontrado=recuperarMensajeError(error)
+            console.log(errorEncontrado)
+            this.setearErrorMessage(errorMessage)
+        }
+    }
+
+    setearErrorMessage(message){
         this.setState({
-            items:carrito
+            errorMessage:message
         })
-        console.info(this.state.items)
     }
 
     getIdUsuarioLogueado(){
@@ -44,11 +37,16 @@ export class Carrito extends Component{
     }
 
     comprar=async()=>{
-        // let carrito=this.state.items
-        let idUsuario=this.getIdUsuarioLogueado()
-        // let compraNueva=Compra.carritoToJson(carrito)
-        await usuarioService.postCompraNueva(idUsuario)
-        await this.componentDidMount()
+        //TODO: Hay dos try-catch en este componente.Revisar si se puede simplificar a uno solo cuando se va a buscar al usuario en getIdUsuarioLogueado()
+        try {
+            let idUsuario=this.getIdUsuarioLogueado()
+            await usuarioService.postCompraNueva(idUsuario)
+            this.setState({items:[]})
+        } catch (error) {
+            let errorEncontrado=recuperarMensajeError(error)
+            console.log(errorEncontrado)
+            this.setearErrorMessage(errorMessage)
+        }
     }
 
     render(){
