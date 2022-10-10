@@ -34,10 +34,11 @@ class UsuarioService {
     @Autowired lateinit var compraRepository:CompraRepository
     @Autowired lateinit var loteRepository:LoteRepository
     var numeroDeCompra:Long=0
-    //val articuloRepository:ArticuloRepository=ArticuloRepository()
 
     private fun getUsuario(idUsuario:Long):Usuario{
-        return usuarioRepository.findById(idUsuario).get()
+        return usuarioRepository.findById(idUsuario).orElseThrow {
+            ResponseStatusException(HttpStatus.NOT_FOUND, "El usuario ya no se encuentra en el repositorio.Ingrese con otro usuario y vuelva a iniciar sus compras")
+        }
     }
     @Transactional
     fun agregarItemAlCarrito(item: Item, idUsuario:Long){
