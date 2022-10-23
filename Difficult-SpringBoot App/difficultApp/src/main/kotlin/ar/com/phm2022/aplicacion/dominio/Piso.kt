@@ -5,7 +5,7 @@ import javax.persistence.Entity
 @Entity
 class Piso(precioBase: Double) : Producto(precioBase) {
     //TODO:Buscar como mapear la herencia
-    //var tipo: TipoPiso = TransitoNormal()
+    var tipo: TipoPiso = TransitoNormal()
     var medidas=""
     var terminacion=""
 
