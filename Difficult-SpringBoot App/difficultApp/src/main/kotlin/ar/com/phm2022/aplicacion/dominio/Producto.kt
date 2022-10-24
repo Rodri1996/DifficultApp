@@ -21,7 +21,7 @@ abstract class Producto (@JsonIgnore var precioBase: Double): Articulo() {
 
     private fun aplicaDescuento(): Double{
         var valorRestante=if(this.tieneLoteAntiguo()){
-            this.precioBase*0.9
+            0.9
         }else{
             1.00
         }
