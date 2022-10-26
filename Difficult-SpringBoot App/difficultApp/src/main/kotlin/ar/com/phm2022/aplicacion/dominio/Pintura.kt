@@ -9,9 +9,6 @@ class Pintura(precioBase: Double) : Producto(precioBase) {
     var litros:Int=0
     var color:String=""
 
-    override fun precio(): Double {
-        return super.precio() + this.incremento()
-    }
 
     override fun incremento():Double{
         var valorAIncrementar=if(rendimiento>8){ precioBase*(25.00/100.00) }

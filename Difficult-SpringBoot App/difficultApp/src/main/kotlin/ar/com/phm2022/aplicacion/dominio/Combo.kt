@@ -8,14 +8,14 @@ import javax.persistence.OneToMany
 class Combo: Articulo() {
     val PORCT_DESCUENTO=15.00
 
-
-    override fun precio()= (sumaDePreciosDeProductos() + valorPorCadaProducto())*descuento()
-
+    override fun precioSegunElArticulo(): Double {
+        return sumaDePreciosDeProductos()*valorPorCadaProducto()
+    }
     private fun valorPorCadaProducto(): Double {
         return 20.00*productos.size
     }
 
-    private fun descuento(): Double {
+    override fun descuento(): Double {
         return 1.00-(PORCT_DESCUENTO/100.00)
     }
 

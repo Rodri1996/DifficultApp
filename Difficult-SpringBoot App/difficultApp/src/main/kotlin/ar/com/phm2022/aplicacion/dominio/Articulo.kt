@@ -30,8 +30,17 @@ abstract class Articulo(){
     var nombre:String=""
     var descripcion:String=""
 
+    //Template method
     @JsonProperty
-    abstract fun precio():Double
+    fun precio():Double{
+        return precioSegunElArticulo()*descuento()
+    }
+
+    //Obligamos a cada sub clase que herede de Articulo a sobreescribir este metodo
+    abstract fun precioSegunElArticulo():Double
+
+    //Obligamos a cada sub clase que herede de Articulo a sobreescribir este metodo
+    abstract fun descuento():Double
     fun traerLotes():Iterable<Lote>{
         return this.lotes
     }

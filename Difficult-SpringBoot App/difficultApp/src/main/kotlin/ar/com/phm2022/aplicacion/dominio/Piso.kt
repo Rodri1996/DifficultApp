@@ -9,8 +9,6 @@ class Piso(precioBase: Double) : Producto(precioBase) {
     var medidas=""
     var terminacion=""
 
-    override fun precio() = super.precio() + incremento()
-
 
     override fun incremento():Double{
         //return tipo.incremento(this.precioBase)

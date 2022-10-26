@@ -16,10 +16,12 @@ import javax.persistence.InheritanceType
 abstract class Producto (@JsonIgnore var precioBase: Double): Articulo() {
 
 
-    //Ver cómo hacer en las clases Piso y Pintura para NO usar el super.precio()
-    override fun precio()=precioBase*this.aplicaDescuento()
+    //Template method
+    override fun precioSegunElArticulo(): Double {
+        return precioBase + this.incremento()
+    }
 
-    private fun aplicaDescuento(): Double{
+    override fun descuento():Double{
         var valorRestante=if(this.tieneLoteAntiguo()){
             0.9
         }else{
@@ -32,6 +34,7 @@ abstract class Producto (@JsonIgnore var precioBase: Double): Articulo() {
         return this.lotes.any { it.fechaDeIngreso < LocalDate.now().minusMonths(4)}
     }
 
+    //Obligamos a cada sub clase que herede de Producto a sobreescribir este metodo
     abstract fun incremento():Double
 }
 
