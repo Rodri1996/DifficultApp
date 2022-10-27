@@ -14,14 +14,12 @@ import javax.persistence.InheritanceType
 @Inheritance(strategy= InheritanceType.JOINED)
 @Entity
 abstract class Producto (@JsonIgnore var precioBase: Double): Articulo() {
-
-
     //Template method
-    override fun precioSegunElArticulo(): Double {
-        return precioBase + this.incremento()
+    override fun precio(): Double {
+        return (precioBase + this.incremento())*descuento()
     }
-
-    override fun descuento():Double{
+    abstract fun incremento():Double
+    fun descuento():Double{
         var valorRestante=if(this.tieneLoteAntiguo()){
             0.9
         }else{
@@ -29,12 +27,8 @@ abstract class Producto (@JsonIgnore var precioBase: Double): Articulo() {
         }
         return valorRestante
     }
-
     private fun tieneLoteAntiguo():Boolean{
         return this.lotes.any { it.fechaDeIngreso < LocalDate.now().minusMonths(4)}
     }
-
-    //Obligamos a cada sub clase que herede de Producto a sobreescribir este metodo
-    abstract fun incremento():Double
 }
 
