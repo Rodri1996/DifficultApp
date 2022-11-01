@@ -14,11 +14,15 @@ import javax.persistence.InheritanceType
 @Inheritance(strategy= InheritanceType.JOINED)
 @Entity
 abstract class Producto (@JsonIgnore var precioBase: Double): Articulo() {
+    val MESES_ATRAS:Long=4
+
     //Template method
     override fun precio(): Double {
-        return (precioBase + this.incremento())*descuento()
+        return (precioBase*incremento())*descuento()
     }
     abstract fun incremento():Double
+
+    //TODO: Buscar una alternativa a el if en el metodo descuento()
     fun descuento():Double{
         var valorRestante=if(this.tieneLoteAntiguo()){
             0.9
@@ -28,7 +32,9 @@ abstract class Producto (@JsonIgnore var precioBase: Double): Articulo() {
         return valorRestante
     }
     private fun tieneLoteAntiguo():Boolean{
-        return this.lotes.any { it.fechaDeIngreso < LocalDate.now().minusMonths(4)}
+        return lotes.any { it.fechaDeIngreso < fechaLejana()}
     }
+
+    private fun fechaLejana()=LocalDate.now().minusMonths(MESES_ATRAS)
 }
 

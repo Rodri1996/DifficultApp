@@ -31,8 +31,8 @@ class RendimientoPinturaTest {
     @DisplayName("Si su rendimiento es alto,se le aplica un incremento a su precio base")
     @Test
     fun precioFinalPinturaRendimientoAlto(){
-        val pinturaRendimientoBajo=Pintura(PRECIO_BASE_PINTURA)
-        pinturaRendimientoBajo.rendimiento=9
-        Assertions.assertEquals(125.00,pinturaRendimientoBajo.precio())
+        val pinturaRendimientoAlto=Pintura(PRECIO_BASE_PINTURA)
+        pinturaRendimientoAlto.rendimiento=9
+        Assertions.assertEquals(125.00,pinturaRendimientoAlto.precio())
     }
 }
