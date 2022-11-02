@@ -17,9 +17,7 @@ abstract class Articulo(){
     var paisDeOrigen:String=""
     var puntaje:Int=0
     @OneToMany(fetch = FetchType.LAZY)
-    @JsonIgnore
     var lotes:MutableList<Lote> = mutableListOf()
-    //TODO: La coleccion de productos debe estar en la clase Combo
     @OneToMany(fetch = FetchType.LAZY)
     val productos:MutableSet<Producto> = mutableSetOf()
     var imagen=""
