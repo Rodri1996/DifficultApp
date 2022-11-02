@@ -29,15 +29,13 @@ abstract class Articulo(){
     //Template method
     @JsonProperty
     abstract fun precio():Double
-    fun traerLotes():Iterable<Lote>{
-        return this.lotes
-    }
     fun agregarLote(lote: Lote){
         lotes.add(lote)
     }
-    fun descontarUnidadesDisponibles(numeroLote: Long,cantidad:Int){
+    //TODO:Usar este metodo cuando se realiza una compra
+    fun descontarUnidadesDisponibles(numeroLote: Long, cantidadADescontar:Int){
         var lote = this.findLote(numeroLote)
-        lote.descontarUnidades(cantidad)
+        lote.descontarUnidadesDisponibles(cantidadADescontar)
         this.updateLote(lote)
     }
     fun findLote(numeroLote: Long): Lote {

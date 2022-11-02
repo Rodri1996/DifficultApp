@@ -48,7 +48,7 @@ class UsuarioService {
         var lote=loteRepository.findById(item.loteElegido).orElseThrow {
             ResponseStatusException(HttpStatus.NOT_FOUND, "No existe ese lote.Seleccione otro como reemplazo")
         }
-        lote.descontarUnidades(item.cantidad)
+        lote.descontarUnidadesDisponibles(item.cantidad)
         loteRepository.save(lote)
     }
     fun getItems(idUsuario: Long): Iterable<ItemDTO> {

@@ -29,7 +29,7 @@ class ArticuloService {
 
     fun getLotes(idArticulo: Long): Iterable<Lote> {
         var articulo= this.getArticulo(idArticulo)
-        return articulo.traerLotes()
+        return articulo.lotes
     }
 
 }

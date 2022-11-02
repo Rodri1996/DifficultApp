@@ -11,8 +11,10 @@ class Combo: Articulo() {
         return totalDePreciosDeLosProductos()*valorPorCadaProducto()*descuento()
     }
     private fun valorPorCadaProducto(): Double {
-        return VALOR*productos.size
+        return VALOR*cantidadDeProductos()
     }
+
+    fun cantidadDeProductos()=productos.size
     fun descuento(): Double {
         return 1.00-(PORCT_DESCUENTO/100.00)
     }
