@@ -8,10 +8,7 @@ class Pintura(precioBase: Double) : Producto(precioBase) {
     var rendimiento:Int=0
     var litros:Int=0
     var color:String=""
-    val FACTOR_INCREMENTAL=1.25
-    override fun incremento():Double{
-        return if (esConsiderable()) FACTOR_INCREMENTAL else 1.00
-    }
+    override fun incremento():Double = if (esConsiderable()) 1.25 else 1.00
     fun esConsiderable() = rendimiento > 8
 
 }
