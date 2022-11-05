@@ -8,7 +8,7 @@ class Combo: Articulo() {
     val VALOR=20.00
 
     override fun precio(): Double {
-        return totalDePreciosDeLosProductos()*valorPorCadaProducto()*descuento()
+        return (totalDePreciosDeLosProductos()+valorPorCadaProducto())*descuento()
     }
     private fun valorPorCadaProducto(): Double {
         return VALOR*cantidadDeProductos()
@@ -20,5 +20,9 @@ class Combo: Articulo() {
     }
     private fun totalDePreciosDeLosProductos():Double{
         return productos.fold(0.00) { acum, producto -> acum + producto.precio() }
+    }
+
+    fun agregarProducto(producto: Producto){
+        productos.add(producto)
     }
 }

@@ -12,7 +12,7 @@ class Piso(precioBase: Double) : Producto(precioBase) {
     //TODO:Modificar el metodo incremento para que devuelva un valor razonable el tipo de piso
     override fun incremento():Double{
         //return tipo.incremento(this.precioBase)
-        return 0.00
+        return 1.00
     }
 }
 

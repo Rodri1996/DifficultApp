@@ -2,12 +2,11 @@ package `tests de dominio`
 
 import ar.com.phm2022.aplicacion.dominio.Pintura
 import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
 @DisplayName("Dada una pintura")
-class RendimientoPinturaTest {
+class IncrementoSegunRendimientoTest {
 
     val PRECIO_BASE_PINTURA=100.00
     /*
@@ -24,7 +23,7 @@ class RendimientoPinturaTest {
     @Test
     fun precioFinalPinturaRendimientoBajo(){
         val pinturaRendimientoBajo=Pintura(PRECIO_BASE_PINTURA)
-        pinturaRendimientoBajo.rendimiento=8
+        aplicarRendimiento(pinturaRendimientoBajo,8)
         Assertions.assertEquals(100.00,pinturaRendimientoBajo.precio())
     }
 
@@ -32,7 +31,11 @@ class RendimientoPinturaTest {
     @Test
     fun precioFinalPinturaRendimientoAlto(){
         val pinturaRendimientoAlto=Pintura(PRECIO_BASE_PINTURA)
-        pinturaRendimientoAlto.rendimiento=9
+        aplicarRendimiento(pinturaRendimientoAlto,9)
         Assertions.assertEquals(125.00,pinturaRendimientoAlto.precio())
+    }
+
+    fun aplicarRendimiento(pintura: Pintura,valor:Int){
+        pintura.rendimiento=valor
     }
 }
