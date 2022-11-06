@@ -93,30 +93,31 @@ class DifficultBootstrap:InitializingBean{
     }
     private fun initPisos(){
         //TODO:Agregarle el tipo de piso a c/u
-        acmeRustico=Piso(2536.55).apply {
-            descripcion="Porcelanato rustico marca Acme"
+        acmeRustico=Piso(2536.55,
+            "Acme rustico",
+            "Porcelanato rustico marca Acme",
+            "Argentina",
+            3).apply {
             imagen="https://http2.mlstatic.com/D_NQ_NP_683356-MLA40823382226_022020-O.webp"
-            nombre="Acme rustico"
-            paisDeOrigen="Argentina"
-            puntaje=3
             medidas="36x36"
             terminacion="semi satinado"
         }
-        acmeArena=Piso(1987.37).apply {
-            descripcion="Porcelanato arena marca Acme"
+        acmeArena=Piso(1987.37,
+            "Acme arena",
+            "Porcelanato arena marca Acme",
+            "Argentina",
+            3 ).apply {
             imagen="https://http2.mlstatic.com/D_NQ_NP_781266-MLA43542325744_092020-O.webp"
-            nombre="Acme arena"
-            paisDeOrigen="Argentina"
-            puntaje=3
             medidas="36x36"
             terminacion="semi satinado"
         }
-        acmeBeteado=Piso(2996.99).apply {
-            descripcion="Porcelanato beteado marca Acme"
+        acmeBeteado=Piso(
+            2996.99,
+            "Acme beteado",
+            "Porcelanato beteado marca Acme",
+            "Argentina",
+            3 ).apply {
             imagen="https://http2.mlstatic.com/D_NQ_NP_735549-MLA47349243915_092021-O.webp"
-            nombre="Acme beteado"
-            paisDeOrigen="Argentina"
-            puntaje=3
             medidas="56x56"
             terminacion="satinado"
         }
@@ -131,22 +132,25 @@ class DifficultBootstrap:InitializingBean{
         this.articuloRepository.save(acmeBeteado)
     }
     private fun initPinturas(){
-        aldaBlanco1= Pintura(2356.55).apply {
-            descripcion="Pintura para interiores color "
+        aldaBlanco1= Pintura(
+            2356.55,
+            "Adla blanco",
+            "Pintura para interiores color ",
+            "Argentina",
+            3
+        ).apply {
             imagen="https://http2.mlstatic.com/D_NQ_NP_994199-MLA32710382980_102019-O.webp"
-            nombre="Adla blanco"
-            paisDeOrigen="Argentina"
-            puntaje=3
             color="rojo"
             litros=20
             rendimiento=8
         }
-        aldaBlanco2= Pintura(2500.50).apply {
-            descripcion="Pintura para interiores color "
+        aldaBlanco2= Pintura(
+            2500.50,
+            "Adla",
+            "Pintura para interiores color ",
+            "Uruguay",
+            3 ).apply {
             imagen="https://http2.mlstatic.com/D_NQ_NP_994199-MLA32710382980_102019-O.webp"
-            nombre="Adla "
-            paisDeOrigen="Uruguay"
-            puntaje=3
             color="verde"
             litros=20
             rendimiento=6
@@ -161,12 +165,12 @@ class DifficultBootstrap:InitializingBean{
     }
 
     private fun initCombos(){
-        combo1= Combo().apply {
-            paisDeOrigen="EEUU"
-            puntaje=4
+        combo1= Combo(
+            "Combo 1",
+            "combo de la pu** madre",
+            "EEUU",
+            4 ).apply {
             imagen="https://thumbs.dreamstime.com/z/combo-black-stamp-white-background-sign-label-sticker-combo-black-stamp-123579066.jpg"
-            nombre="Combo 1"
-            descripcion="combo de la pu** madre"
             productos.add(aldaBlanco1)
             productos.add(acmeArena)
         }

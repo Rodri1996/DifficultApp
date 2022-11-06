@@ -11,14 +11,14 @@ class IncrementoSegunTipoPisoTests {
     @DisplayName("Si es de tipo Alto Transito,a su precio base se le hace un incremento")
     @Test
     fun precioConIncremeentoAltoTransito(){
-        val pisoAltoTransito= Piso(100.00)
+        val pisoAltoTransito= Piso(100.00,"","","",0)
         Assertions.assertEquals(120.00,pisoAltoTransito.precio())
     }
 
     @DisplayName("Si es de tipo Transito Normal,a su precio base NO se le hace ningun incremento")
     @Test
     fun precioSinIncrementoTransitoNormal(){
-        val pisoTransitoNormal= Piso(100.00)
+        val pisoTransitoNormal= Piso(100.00,"","","",0)
         Assertions.assertEquals(100.00,pisoTransitoNormal.precio())
     }
 }

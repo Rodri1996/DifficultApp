@@ -10,19 +10,15 @@ import javax.persistence.*
 )
 @Inheritance(strategy= InheritanceType.JOINED)
 @Entity
-abstract class Articulo(){
+abstract class Articulo(var nombre:String,var descripcion:String,var paisDeOrigen:String,var puntaje:Int){
     @Id
     @GeneratedValue
     var id:Long=0
-    var paisDeOrigen:String=""
-    var puntaje:Int=0
     @OneToMany(fetch = FetchType.LAZY)
     var lotes:MutableList<Lote> = mutableListOf()
     @OneToMany(fetch = FetchType.LAZY)
     val productos:MutableSet<Producto> = mutableSetOf()
     var imagen=""
-    var nombre:String=""
-    var descripcion:String=""
 
     //Template method
     @JsonProperty

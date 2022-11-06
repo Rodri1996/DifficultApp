@@ -12,8 +12,8 @@ class PrecioComboTests {
     @DisplayName("Su precio se calcula en base a sus productos")
     @Test
     fun precioComboConProductos(){
-        val comboConProductos = Combo()
-        val unProducto = Pintura(100.00)
+        val comboConProductos = Combo("","","",0)
+        val unProducto = Pintura(100.00,"","","",0)
         comboConProductos.agregarProducto(unProducto)
         Assertions.assertEquals(102.00,comboConProductos.precio())
     }
