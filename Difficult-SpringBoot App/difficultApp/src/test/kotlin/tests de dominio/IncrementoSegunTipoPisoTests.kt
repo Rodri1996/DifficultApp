@@ -1,6 +1,8 @@
 package `tests de dominio`
 
+import ar.com.phm2022.aplicacion.dominio.AltoTransito
 import ar.com.phm2022.aplicacion.dominio.Piso
+import ar.com.phm2022.aplicacion.dominio.TransitoNormal
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -12,6 +14,7 @@ class IncrementoSegunTipoPisoTests {
     @Test
     fun precioConIncremeentoAltoTransito(){
         val pisoAltoTransito= Piso(100.00)
+        pisoAltoTransito.tipo=AltoTransito()
         Assertions.assertEquals(120.00,pisoAltoTransito.precio())
     }
 
@@ -19,6 +22,7 @@ class IncrementoSegunTipoPisoTests {
     @Test
     fun precioSinIncrementoTransitoNormal(){
         val pisoTransitoNormal= Piso(100.00)
+        pisoTransitoNormal.tipo=TransitoNormal()
         Assertions.assertEquals(100.00,pisoTransitoNormal.precio())
     }
 }

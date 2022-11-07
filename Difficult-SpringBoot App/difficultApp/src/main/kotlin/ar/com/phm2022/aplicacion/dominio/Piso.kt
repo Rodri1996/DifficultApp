@@ -5,14 +5,13 @@ import javax.persistence.Entity
 @Entity
 class Piso(precioBase: Double) : Producto(precioBase) {
     //TODO:Buscar como mapear la herencia y agregar al atributo "tipo" como parametro en el constructor de Piso()
-    //var tipo: TipoPiso = TransitoNormal()
+    var tipo: TipoPiso = TransitoNormal()
     var medidas=""
     var terminacion=""
 
     //TODO:Modificar el metodo incremento para que devuelva un valor razonable el tipo de piso
     override fun incremento():Double{
-        //return tipo.incremento(this.precioBase)
-        return 1.00
+        return tipo.incremento(this.precioBase)
     }
 }
 
@@ -22,11 +21,9 @@ interface TipoPiso{
 
 class TransitoNormal: TipoPiso {
 
-    override fun incremento(precioBase: Double): Double = 0.00
+    override fun incremento(precioBase: Double): Double = 1.00
 }
 
 class AltoTransito: TipoPiso {
-
-    override fun incremento(precioBase: Double): Double = precioBase*0.2
-
+    override fun incremento(precioBase: Double): Double = 1.2
 }
