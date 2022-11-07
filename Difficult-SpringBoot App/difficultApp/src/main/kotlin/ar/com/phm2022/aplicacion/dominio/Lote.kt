@@ -10,9 +10,7 @@ class Lote (var fechaDeIngreso:LocalDate,var unidadesDisplonibles:Int) {
     @Id
     @GeneratedValue
     var numero:Long=0
-
-    fun descontarUnidadesDisponibles(cantidad:Int) {
-        unidadesDisplonibles=unidadesDisplonibles-cantidad
-        println("unidades disponibles: "+unidadesDisplonibles)
+    fun descontarUnidadesDisponibles(unidadesDescontadas:Int) {
+        unidadesDisplonibles -= unidadesDescontadas
     }
 }

@@ -10,6 +10,7 @@ class Usuario{
     @Id
     @GeneratedValue
     var id:Long=0
+    //TODO: Ver si es mejor usar el lateinit en lugar de inicializar un atributo
     @Column(length = 50)
     var nombre:String=""
     @Column(length = 50)
