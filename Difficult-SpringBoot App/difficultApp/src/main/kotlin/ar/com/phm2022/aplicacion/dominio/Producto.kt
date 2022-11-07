@@ -13,16 +13,8 @@ import javax.persistence.InheritanceType
 )
 @Inheritance(strategy= InheritanceType.JOINED)
 @Entity
-abstract class Producto (
-    @JsonIgnore var precioBase: Double,
-    nombre: String,
-    descripcion: String,
-    paisDeOrigen: String,
-    puntaje: Int ): Articulo(
-                            nombre,
-                            descripcion,
-                            paisDeOrigen,
-                            puntaje ) {
+abstract class Producto (@JsonIgnore var precioBase: Double): Articulo() {
+
     //Template method
     override fun precio(): Double {
         return (precioBase*incremento())*descuento()

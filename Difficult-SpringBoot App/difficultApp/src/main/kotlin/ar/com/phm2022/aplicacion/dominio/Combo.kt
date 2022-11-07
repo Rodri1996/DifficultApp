@@ -3,15 +3,7 @@ package ar.com.phm2022.aplicacion.dominio
 import javax.persistence.Entity
 
 @Entity
-class Combo(
-    nombre: String,
-    descripcion: String,
-    paisDeOrigen: String,
-    puntaje: Int ) : Articulo(
-                        nombre,
-                        descripcion,
-                        paisDeOrigen,
-                        puntaje ) {
+class Combo() : Articulo() {
     val PORCT_DESCUENTO=15.00
     val VALOR=20.00
 

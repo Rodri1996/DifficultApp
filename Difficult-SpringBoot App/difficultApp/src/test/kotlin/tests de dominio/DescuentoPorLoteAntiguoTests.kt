@@ -18,12 +18,7 @@ class DescuentoPorLoteAntiguoTests {
     @DisplayName("Si es piso y tiene algun lote antiguo,se le aplica un descuento a su precio base")
     @Test
     fun descuentoPiso(){
-        val pisoConLoteAntiguo=Piso(
-            100.00,
-        "",
-        "",
-        "",
-        0)
+        val pisoConLoteAntiguo=Piso(100.00)
         pisoConLoteAntiguo.agregarLote(loteAntiguo)
         Assertions.assertEquals(90.00,pisoConLoteAntiguo.precio())
     }
@@ -31,7 +26,7 @@ class DescuentoPorLoteAntiguoTests {
     @DisplayName("Si es pintura y tiene algun lote antiguo, se le aplica un descuento a su precio base")
     @Test
     fun descuentoPintura(){
-        val pinturaConLoteAntiguo=Pintura(100.00,"","","",0)
+        val pinturaConLoteAntiguo=Pintura(100.00,0)
         pinturaConLoteAntiguo.agregarLote(loteAntiguo)
         Assertions.assertEquals(90.00,pinturaConLoteAntiguo.precio())
     }

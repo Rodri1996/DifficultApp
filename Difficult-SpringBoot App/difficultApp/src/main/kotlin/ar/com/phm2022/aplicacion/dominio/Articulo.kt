@@ -10,10 +10,14 @@ import javax.persistence.*
 )
 @Inheritance(strategy= InheritanceType.JOINED)
 @Entity
-abstract class Articulo(var nombre:String,var descripcion:String,var paisDeOrigen:String,var puntaje:Int){
+abstract class Articulo(){
     @Id
     @GeneratedValue
     var id:Long=0
+    lateinit var nombre: String
+    lateinit var descripcion: String
+    lateinit var paisDeOrigen: String
+    var puntaje: Int = 0
     @OneToMany(fetch = FetchType.LAZY)
     var lotes:MutableList<Lote> = mutableListOf()
     @OneToMany(fetch = FetchType.LAZY)
