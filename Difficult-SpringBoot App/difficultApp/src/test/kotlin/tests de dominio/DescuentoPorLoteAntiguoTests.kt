@@ -3,6 +3,7 @@ package `tests de dominio`
 import ar.com.phm2022.aplicacion.dominio.Lote
 import ar.com.phm2022.aplicacion.dominio.Pintura
 import ar.com.phm2022.aplicacion.dominio.Piso
+import ar.com.phm2022.aplicacion.dominio.TransitoNormal
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -18,7 +19,7 @@ class DescuentoPorLoteAntiguoTests {
     @DisplayName("Si es piso y tiene algun lote antiguo,se le aplica un descuento a su precio base")
     @Test
     fun descuentoPiso(){
-        val pisoConLoteAntiguo=Piso(100.00)
+        val pisoConLoteAntiguo=Piso(100.00,TransitoNormal())
         pisoConLoteAntiguo.agregarLote(loteAntiguo)
         Assertions.assertEquals(90.00,pisoConLoteAntiguo.precio())
     }

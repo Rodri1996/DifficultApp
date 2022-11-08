@@ -3,9 +3,8 @@ package ar.com.phm2022.aplicacion.dominio
 import javax.persistence.Entity
 
 @Entity
-class Piso(precioBase: Double) : Producto(precioBase) {
+class Piso(precioBase: Double,var tipo: TipoPiso) : Producto(precioBase) {
     //TODO:Buscar como mapear la herencia y agregar al atributo "tipo" como parametro en el constructor de Piso()
-    var tipo: TipoPiso = TransitoNormal()
     var medidas=""
     var terminacion=""
 

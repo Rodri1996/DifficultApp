@@ -30,7 +30,6 @@ abstract class Articulo(){
     fun agregarLote(lote: Lote){
         lotes.add(lote)
     }
-    //TODO:Usar este metodo cuando se realiza una compra
     fun descontarUnidadesDisponibles(numeroLote: Long, cantidadADescontar:Int){
         var lote = this.findLote(numeroLote)
         lote.descontarUnidadesDisponibles(cantidadADescontar)

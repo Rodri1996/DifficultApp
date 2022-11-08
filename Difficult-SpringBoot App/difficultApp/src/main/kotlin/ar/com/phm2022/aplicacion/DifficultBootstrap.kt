@@ -93,7 +93,7 @@ class DifficultBootstrap:InitializingBean{
     }
     private fun initPisos(){
         //TODO:Agregarle el tipo de piso a c/u
-        acmeRustico=Piso(2536.55).apply {
+        acmeRustico=Piso(2536.55,TransitoNormal()).apply {
             nombre="Acme rustico"
             descripcion="Porcelanato rustico marca Acme"
             paisDeOrigen="Argentina"
@@ -102,7 +102,7 @@ class DifficultBootstrap:InitializingBean{
             medidas="36x36"
             terminacion="semi satinado"
         }
-        acmeArena=Piso(1987.37).apply {
+        acmeArena=Piso(1987.37,AltoTransito()).apply {
             nombre="Acme arena"
             descripcion="Porcelanato arena marca Acme"
             paisDeOrigen="Argentina"
@@ -111,7 +111,7 @@ class DifficultBootstrap:InitializingBean{
             medidas="36x36"
             terminacion="semi satinado"
         }
-        acmeBeteado=Piso(2996.99).apply {
+        acmeBeteado=Piso(2996.99,TransitoNormal()).apply {
             nombre="Acme beteado"
             descripcion="Porcelanato beteado marca Acme"
             paisDeOrigen="Argentina"
