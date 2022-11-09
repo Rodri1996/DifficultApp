@@ -5,6 +5,7 @@ import ar.com.phm2022.aplicacion.dominio.Pintura
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import java.math.BigDecimal
 
 @DisplayName("Dado un combo con productos")
 class PrecioComboTests {
@@ -13,8 +14,8 @@ class PrecioComboTests {
     @Test
     fun precioComboConProductos(){
         val comboConProductos = Combo()
-        val unProducto = Pintura(100.00,0)
+        val unProducto = Pintura(BigDecimal("100.00"),0)
         comboConProductos.agregarProducto(unProducto)
-        Assertions.assertEquals(102.00,comboConProductos.precio())
+        Assertions.assertEquals(BigDecimal("102.0"),comboConProductos.precio())
     }
 }

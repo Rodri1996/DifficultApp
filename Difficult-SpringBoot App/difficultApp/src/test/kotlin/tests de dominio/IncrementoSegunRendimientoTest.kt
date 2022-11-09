@@ -4,11 +4,12 @@ import ar.com.phm2022.aplicacion.dominio.Pintura
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import java.math.BigDecimal
 
 @DisplayName("Dada una pintura")
 class IncrementoSegunRendimientoTest {
 
-    val PRECIO_BASE_PINTURA=100.00
+    val PRECIO_BASE_PINTURA=BigDecimal("100.00")
     /*
     @BeforeEach
     fun init() {
@@ -24,7 +25,7 @@ class IncrementoSegunRendimientoTest {
     fun precioFinalPinturaRendimientoBajo(){
         val pinturaRendimientoBajo=Pintura(PRECIO_BASE_PINTURA,0)
         aplicarRendimiento(pinturaRendimientoBajo,8)
-        Assertions.assertEquals(100.00,pinturaRendimientoBajo.precio())
+        Assertions.assertEquals(BigDecimal("100.0"),pinturaRendimientoBajo.precio())
     }
 
     @DisplayName("Si su rendimiento es alto,se le aplica un incremento a su precio base")
@@ -32,7 +33,7 @@ class IncrementoSegunRendimientoTest {
     fun precioFinalPinturaRendimientoAlto(){
         val pinturaRendimientoAlto=Pintura(PRECIO_BASE_PINTURA,0)
         aplicarRendimiento(pinturaRendimientoAlto,9)
-        Assertions.assertEquals(125.00,pinturaRendimientoAlto.precio())
+        Assertions.assertEquals(BigDecimal("125.0"),pinturaRendimientoAlto.precio())
     }
 
     fun aplicarRendimiento(pintura: Pintura,valor:Int){

@@ -1,5 +1,6 @@
 package ar.com.phm2022.aplicacion.dominio
 
+import java.math.BigDecimal
 import java.time.LocalDate
 import javax.persistence.Column
 import javax.persistence.Entity
@@ -16,5 +17,5 @@ class Compra {
     @Column(length = 5)
     var cantArticulos:Int=0
     @Column(length = 10)
-    var importeTotal:Double=0.00
+    var importeTotal:BigDecimal= BigDecimal("0.00")
 }

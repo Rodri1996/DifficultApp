@@ -2,6 +2,9 @@ package ar.com.phm2022.aplicacion.dominio
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonSubTypes
+import java.math.BigDecimal
+import java.math.MathContext
+import java.math.RoundingMode
 import java.time.LocalDate
 import javax.persistence.Entity
 import javax.persistence.Inheritance
@@ -13,14 +16,14 @@ import javax.persistence.InheritanceType
 )
 @Inheritance(strategy= InheritanceType.JOINED)
 @Entity
-abstract class Producto (@JsonIgnore var precioBase: Double): Articulo() {
+abstract class Producto (@JsonIgnore var precioBase: BigDecimal): Articulo() {
 
     //Template method
-    override fun precio(): Double {
-        return (precioBase*incremento())*descuento()
+    override fun precio(): BigDecimal {
+        return (precioBase*incremento()*descuento()).setScale(2, RoundingMode.UP);
     }
-    abstract fun incremento():Double
-    fun descuento():Double = if(tieneAlgunLoteAntiguo()) 0.9 else 1.00
+    abstract fun incremento():BigDecimal
+    fun descuento():BigDecimal = if(tieneAlgunLoteAntiguo()) BigDecimal("0.9") else BigDecimal("1.00")
     private fun tieneAlgunLoteAntiguo():Boolean = lotes.any { it.fechaDeIngreso < fechaLimite()}
     private fun fechaLimite()=LocalDate.now().minusMonths(4)
 }

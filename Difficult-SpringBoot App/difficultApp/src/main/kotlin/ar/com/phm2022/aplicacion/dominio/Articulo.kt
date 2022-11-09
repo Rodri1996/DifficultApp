@@ -3,6 +3,7 @@ package ar.com.phm2022.aplicacion.dominio
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.annotation.JsonSubTypes
+import java.math.BigDecimal
 import javax.persistence.*
 @JsonSubTypes(
         JsonSubTypes.Type(value = Producto::class, name = "PRO"),
@@ -26,7 +27,7 @@ abstract class Articulo(){
 
     //Template method
     @JsonProperty
-    abstract fun precio():Double
+    abstract fun precio():BigDecimal
     fun agregarLote(lote: Lote){
         lotes.add(lote)
     }

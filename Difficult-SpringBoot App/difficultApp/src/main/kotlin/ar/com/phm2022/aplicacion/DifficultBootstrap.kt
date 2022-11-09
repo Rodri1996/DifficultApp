@@ -7,6 +7,7 @@ import ar.com.phm2022.aplicacion.repositorios.UsuarioRepositoryV2
 import org.springframework.beans.factory.InitializingBean
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import java.math.BigDecimal
 import java.time.LocalDate
 
 @Service
@@ -92,8 +93,7 @@ class DifficultBootstrap:InitializingBean{
         usuarioRepository.save(usuario3)
     }
     private fun initPisos(){
-        //TODO:Agregarle el tipo de piso a c/u
-        acmeRustico=Piso(2536.55,TransitoNormal()).apply {
+        acmeRustico=Piso(BigDecimal("2536.55"),TransitoNormal()).apply {
             nombre="Acme rustico"
             descripcion="Porcelanato rustico marca Acme"
             paisDeOrigen="Argentina"
@@ -102,7 +102,7 @@ class DifficultBootstrap:InitializingBean{
             medidas="36x36"
             terminacion="semi satinado"
         }
-        acmeArena=Piso(1987.37,AltoTransito()).apply {
+        acmeArena=Piso(BigDecimal("1987.37"),AltoTransito()).apply {
             nombre="Acme arena"
             descripcion="Porcelanato arena marca Acme"
             paisDeOrigen="Argentina"
@@ -111,7 +111,7 @@ class DifficultBootstrap:InitializingBean{
             medidas="36x36"
             terminacion="semi satinado"
         }
-        acmeBeteado=Piso(2996.99,TransitoNormal()).apply {
+        acmeBeteado=Piso(BigDecimal("2996.99"),TransitoNormal()).apply {
             nombre="Acme beteado"
             descripcion="Porcelanato beteado marca Acme"
             paisDeOrigen="Argentina"
@@ -130,7 +130,7 @@ class DifficultBootstrap:InitializingBean{
         this.articuloRepository.save(acmeBeteado)
     }
     private fun initPinturas(){
-        aldaBlanco1= Pintura(2356.55,8).apply {
+        aldaBlanco1= Pintura(BigDecimal("2356.55"),8).apply {
             nombre="Adla blanco"
             descripcion="Pintura para interiores color "
             paisDeOrigen="Argentina"
@@ -139,7 +139,7 @@ class DifficultBootstrap:InitializingBean{
             color="rojo"
             litros=20
         }
-        aldaBlanco2= Pintura(2500.50,6).apply {
+        aldaBlanco2= Pintura(BigDecimal("2500.50"),6).apply {
             nombre="Adla"
             descripcion="Pintura para interiores color "
             paisDeOrigen="Uruguay"

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.web.server.ResponseStatusException
+import java.math.BigDecimal
 import java.time.LocalDate
 import javax.transaction.Transactional
 
@@ -56,7 +57,7 @@ class UsuarioService {
         var items=usuario.carritoDeCompras
         return items.map{this.createItemDTO(it)}
     }
-
+    //TODO: Se hardcodea el precio en el itemDTO porque primero se debe solucionar que la coleccion de productos debe estar en la clase Combo y NO en la clase Articulo
     fun createItemDTO(item:Item):ItemDTO{
         var itemDTO=ItemDTO().apply {
             idItem=item.id
@@ -85,7 +86,8 @@ class UsuarioService {
             ordenDeCompra=numeroDeCompra
             fechaCompra=LocalDate.now()
             cantArticulos=usuario.carritoDeCompras.map { it.cantidad }.fold(0, { acum, precioTotal -> acum + precioTotal})
-            importeTotal=usuario.carritoDeCompras.map { it.precioTotalArticulo() }.fold(0.00, { acum, precioTotal -> acum + precioTotal})
+            //TODO: Ver si modificamos el tipo de dato Double a BigDecimal para las cuentas
+            importeTotal=(usuario.carritoDeCompras.map { it.precioTotalArticulo() }.fold(BigDecimal("0.00"), { acum, precioTotal -> acum + precioTotal}))
         }
         this.incrementarContadores()
         return compra

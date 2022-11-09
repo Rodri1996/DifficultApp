@@ -1,16 +1,15 @@
 package ar.com.phm2022.aplicacion.dominio
 
+import java.math.BigDecimal
 import javax.persistence.Entity
 
 @Entity
-class Piso(precioBase: Double,var tipo: TipoPiso) : Producto(precioBase) {
-    //TODO:Buscar como mapear la herencia y agregar al atributo "tipo" como parametro en el constructor de Piso()
+class Piso(precioBase: BigDecimal,@Transient var tipo: TipoPiso) : Producto(precioBase) {
     var medidas=""
     var terminacion=""
-
-    //TODO:Modificar el metodo incremento para que devuelva un valor razonable el tipo de piso
-    override fun incremento():Double{
-        return tipo.incremento(this.precioBase)
+    //Resolver el error que surge al calcular el incremento segun el tipo de piso
+    override fun incremento():BigDecimal{
+        return BigDecimal("1.00")//tipo.incremento(this.precioBase)
     }
 }
 
