@@ -2,20 +2,16 @@ import axios from 'axios'
 import { Compra } from '../../dominio/Compra'
 import { Item } from '../../dominio/Item'
 import { Usuario } from '../../dominio/Usuario'
-import { itemService } from './ItemService'
-
-//const REST_SERVER_URL = 'http://localhost:8080'
 
 class UsuarioService{
 
     constructor(){
-        const usuarioString=localStorage.getItem("usuarioLogeado")
-        this.usuario = Usuario.fromJson(JSON.parse(usuarioString))
-        this.itemService=itemService
+        this.usuarioTraido = new Usuario 
     }
 
     findUser(){
-        return this.usuario
+        let usuarioLogeado = JSON.parse(localStorage.getItem("usuarioLogeado"))
+        return usuarioLogeado
     }
 
     async getCarritoCompras(idUsuario){
@@ -29,14 +25,16 @@ class UsuarioService{
         return comprasJson.data.map((item)=>Compra.fromJson(item))
     }
 
-    async getItems(idUsuario){
+    async getCantidadItemsCarrito(){
+        let usuario = this.findUser()
+        let idUsuario = usuario.id
         console.log(idUsuario)
-        const itemsJson = await axios.get(`http://localhost:8080/items/${idUsuario}`)
-        return itemsJson.data.map((item)=>Item.fromJson(item))
+        return await axios.get(`http://localhost:8080/cantidadItems/${idUsuario}`)
     }
 
+    // VER UNA MEJOR MANERA DE TRAER AL USUARIO Y GUARDARLO PARA USARLO EN TODA LA APLICACION DESPUES
     async getUsuarioLogueado(usuario,contraseña){
-        const usuarioLogueadoJson = await axios.post('http://localhost:8080/usuario',Usuario.toJson(usuario,contraseña))
+        let usuarioLogueadoJson = await axios.post('http://localhost:8080/usuario',Usuario.toJson(usuario,contraseña))
         return Usuario.fromJson(usuarioLogueadoJson)
     }
 

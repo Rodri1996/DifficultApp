@@ -1,82 +1,56 @@
-import { Component } from 'react'
-import { PropTypes } from 'prop-types'
-import { usuarioService } from "../services/UsuarioService"
-import { recuperarMensajeError } from '../../utils/recuperarMensajeError'
+import { Snackbar } from '@material-ui/core'
+import { Alert } from '@mui/material'
+import React, { useState } from 'react'
+import { useHistory } from "react-router-dom"
+import { usuarioService } from '../services/UsuarioService'
 
-export class Login extends Component{
-    
-    state={
-        usuario: '',
-        contraseña: '',
-        errorMessage:''
-    }
+export const Login =()=> {
+    const [usuario,setUsuario] = useState('')
+    const [password,setPassword] = useState('')
+    const history = useHistory()
+    const [errorMessage, setErrorMessage] = React.useState({
+        open: false,
+        vertical: 'top',
+        horizontal: 'right',
+        message: ""
+    })
+    const { vertical, horizontal, open } = errorMessage
 
-    getUsuario = async ()=>{
+    const iniciarSesion = async () =>{
         try {
-            const usuario = this.state.usuario
-            const contraseña = this.state.contraseña
-            const usuarioLogueado = await usuarioService.getUsuarioLogueado(usuario,contraseña)
-            console.info(usuarioLogueado)
-            localStorage.setItem("usuarioLogeado",JSON.stringify(usuarioLogueado.data))
-            this.props.history.push('/home')
+            let usuarioTraido = await usuarioService.getUsuarioLogueado(usuario,password)
+            localStorage.setItem("usuarioLogeado",JSON.stringify(usuarioTraido.data))
+            history.push('/home')
         } catch (error) {
-            let errorMessage=recuperarMensajeError(error)
-            console.log(errorMessage)
-            this.setearErrorMessage(errorMessage)
+            let message = error.response.data.message
+            if(message!=null){
+                setErrorMessage({open:true, vertical: 'top', horizontal: 'right', message: message})
+            }
         }
     }
-    
-    setearErrorMessage(message){
-        this.setState({
-            errorMessage:message
-        })
+
+    const handleClose = () => {
+        setErrorMessage({ ...errorMessage, open: false })
     }
 
-    cambiarNombreDeUsuario = (event) => {
-        const nombreUsuario = event.target.value
-        this.setNombreUsuario(nombreUsuario)
-    }
-
-    setNombreUsuario=(nombreUsuario)=>{
-        this.setState({
-            usuario:nombreUsuario
-        })
-    }
-
-    cambiarPasswordDeUsuario=(event)=>{
-        const passwordUsuario = event.target.value
-        this.setContraseñaUsuario(passwordUsuario)
-    }
-
-    setContraseñaUsuario=(passwordUsuario)=>{
-        this.setState({
-            contraseña:passwordUsuario
-        })
-    }
-
-    render(){
-        return(
-            <section className="bx-item login column">
+    // PROBAR HACER UNA FORMULARIO DE INICIO DE SESION SACADO DE OTRO FRAMEWORK <> DE BULMA
+    return(
+        <section className="bx-item login column">
+                <Snackbar anchorOrigin={{ vertical, horizontal }} open={open} autoHideDuration={4000} onClose={handleClose}>
+                    <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+                        {errorMessage.message}
+                    </Alert>
+                </Snackbar>
                 <p className="pry-title">Difficult</p>
                 <div className="label-input">
                     <label>Usuario</label>
-                    <input className="input" onChange={this.cambiarNombreDeUsuario}></input>
+                    <input className="input" onChange={(event)=>{setUsuario(event.target.value)}}></input>
                 </div>
                 <div className="label-input">
                     <label>Contraseña</label>
-                    <input className="input" type={"password"} 
-                        onChange={this.cambiarPasswordDeUsuario}></input>
+                    <input className="input" type={"password"} onChange={(event)=>{setPassword(event.target.value)}}></input>
                 </div>
-                <button  className="button pry-button"
-                    onClick={this.getUsuario}>Ingresar</button>
-            </section>
-        )
-    }
-
-    static get propTypes() {
-        return {
-          history: PropTypes.object,
-        }
-    }
+                <button  className="button pry-button" onClick={iniciarSesion}>Ingresar</button>
+        </section>
+    )
 }
-

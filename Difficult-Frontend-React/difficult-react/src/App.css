@@ -8,6 +8,82 @@ html{
   overflow: hidden;
 }
 
+.bx-detalle{
+  margin: 30px;
+}
+
+.overflow-y-scroll{
+  overflow-y: scroll;
+}
+
+.max-height-200{
+  max-height: 200px;
+}
+
+.w-30{
+  width: 30%;
+}
+
+#navbar{
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #3e8ed06e;
+}
+
+.navbar-title{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+}
+
+#myCard{
+  width: 100%;
+  max-width: 250px;
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px;
+}
+
+.home,.detalle{
+  max-height: 450px;
+  margin: 0px 150px;
+}
+
+.detalle-descripcion{
+  width: 30%;
+}
+
+.detalle-datos,.detalle-descripcion{
+  height: 100%;
+}
+
+.card-container,.filtro-container{
+  overflow-x: hidden;
+}
+
+.w-50{
+  width: 50%;
+}
+
+.w-70{
+  width: 70%;
+}
+
+.just-cont-space-around{
+  justify-content: space-around;
+}
+
+.h-100{
+  height: 100%;
+}
+
+.w-100{
+  width: 100%;
+}
+
 table{
   width: 100%;
 }
@@ -19,6 +95,17 @@ table{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.myLogin{
+  width: 300px;
+}
+
+#myHeader{
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .bx-item{
@@ -70,21 +157,16 @@ table{
   justify-content: space-around;
 }
 
-.perfil,.carrito,.detalle,.home{
-  width: 100%;
-  max-width: 1000px;
-}
-
-.detalle{
+/* .detalle{
   gap: 15px;
   background-color: white;
-}
+} */
 
-.home-filtros,.card{
+/* .home-filtros,.card{
   border: 2px solid gray;
-}
+} */
 
-.card{
+/* .card{
     height: 500px;
     width: fit-content;
     max-width: 220px;
@@ -93,7 +175,7 @@ table{
     margin-right: 10px;
     margin-bottom: 10px;
     padding: 5px;
-}
+} */
 
 .card-container{
     padding: 10px;
@@ -215,7 +297,7 @@ table{
     background-color: #ff0000b8;
     display: flex;
   }
-  
+
 .header-nav{
   justify-content: flex-end;
   background-color: inherit;
@@ -239,18 +321,18 @@ table{
   color: blue;
 }
 
-.footer{
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: gray;
-    color: white;
-    font-weight: 500;
+.myFooter{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #3e8ed06e;
+  color: black;
+  font-weight: 500;
 }
 
 .img{

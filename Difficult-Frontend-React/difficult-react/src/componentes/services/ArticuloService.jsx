@@ -11,6 +11,7 @@ class ArticuloService{
 
     async findArticulo(idArticulo){
         const articuloJson= await axios.get(`http://localhost:8080/articulo/${idArticulo}`)
+        console.info(Articulo.fromJson(articuloJson))
         return Articulo.fromJson(articuloJson)
     }
 
