@@ -1,6 +1,6 @@
-import { Snackbar } from '@material-ui/core'
-import { Alert } from '@mui/material'
-import React, { useState } from 'react'
+import React from 'react'
+import { Alert, Snackbar } from '@mui/material'
+import { useState } from 'react'
 import { useHistory } from "react-router-dom"
 import { usuarioService } from '../services/UsuarioService'
 
@@ -20,6 +20,7 @@ export const Login =()=> {
         try {
             let usuarioTraido = await usuarioService.getUsuarioLogueado(usuario,password)
             localStorage.setItem("usuarioLogeado",JSON.stringify(usuarioTraido.data))
+            console.info(history.location.pathname)
             history.push('/home')
         } catch (error) {
             let message = error.response.data.message
@@ -33,24 +34,17 @@ export const Login =()=> {
         setErrorMessage({ ...errorMessage, open: false })
     }
 
-    // PROBAR HACER UNA FORMULARIO DE INICIO DE SESION SACADO DE OTRO FRAMEWORK <> DE BULMA
     return(
-        <section className="bx-item login column">
-                <Snackbar anchorOrigin={{ vertical, horizontal }} open={open} autoHideDuration={4000} onClose={handleClose}>
+        <section className='is-flex is-flex-direction-column box-loguin'>
+            <Snackbar anchorOrigin={{ vertical, horizontal }} open={open} autoHideDuration={4000} onClose={handleClose}>
                     <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
                         {errorMessage.message}
                     </Alert>
                 </Snackbar>
-                <p className="pry-title">Difficult</p>
-                <div className="label-input">
-                    <label>Usuario</label>
-                    <input className="input" onChange={(event)=>{setUsuario(event.target.value)}}></input>
-                </div>
-                <div className="label-input">
-                    <label>Contraseña</label>
-                    <input className="input" type={"password"} onChange={(event)=>{setPassword(event.target.value)}}></input>
-                </div>
-                <button  className="button pry-button" onClick={iniciarSesion}>Ingresar</button>
+            <h1><b>Difficult App</b></h1>
+            <input className="input is-primary" type="text" placeholder="Ingrese su nombre de usuario" onChange={(event)=>{setUsuario(event.target.value)}}></input>
+            <input className="input is-primary" type="password" placeholder="Ingrese su contraseña" onChange={(event)=>{setPassword(event.target.value)}}></input>
+            <button className="button is-primary" onClick={iniciarSesion}><b>Iniciar sesion</b></button>
         </section>
     )
 }
